@@ -1,13 +1,121 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <fts-config xmlns="http://schemas.haulmont.com/cuba/fts.xsd">
     <entities>
-        <entity class="org.mg.mgweb.entity.TblTimbrados">
+        <entity class="org.mg.mgweb.entity.TblMiembrosFamilias">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblAutofacturas">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblMiembrosRelacionesTipos">
             <include re=".*"/>
         </entity>
         <entity class="org.mg.mgweb.entity.TblContribuyentes">
             <include re=".*"/>
         </entity>
+        <entity class="org.mg.mgweb.entity.TblMiembrosRelacionesRoles">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblRoles">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblEntidades">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblMiembrosRelaciones">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblNotasDeCredito">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblTimbradosNotasDeCredito">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblCentrosDeCosto">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblIglesia">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblTimbradosAutofacturas">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblTransferencias">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblFacturas">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblFacturasCompra">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblAportesImporteMensualSaldoAnterior">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblCuentasContables">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblNotasDeCreditoCompras">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblEventoTipos">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblAsientos">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblDatabaseUpdates">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblEventoCuotas">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblMiembrosAlergias">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblTimbradosCompras">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblCategoriasArticulos">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblEventoDetalle">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblEventos">
+            <include re=".*"/>
+        </entity>
         <entity class="org.mg.mgweb.entity.TblMiembrosCategoriasDePago">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblTimbrados">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblUsers">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblCuentasContablesPorDefecto">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblGrupos">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblAsientosTemporales">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblEntidadesHistoricoCategorias">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblFormasDePago">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblAreasServicioEnIglesia">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblRecibos">
+            <include re=".*"/>
+        </entity>
+        <entity class="org.mg.mgweb.entity.TblRecibosCompra">
             <include re=".*"/>
         </entity>
     </entities>

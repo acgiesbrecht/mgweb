@@ -29,7 +29,8 @@
     <!--Application components-->
     <context-param>
         <param-name>appComponents</param-name>
-        <param-value>com.haulmont.cuba com.haulmont.addon.restapi com.haulmont.charts com.haulmont.addon.dashboard com.haulmont.fts com.haulmont.reports</param-value>
+        <param-value>com.haulmont.cuba com.haulmont.charts com.haulmont.fts com.haulmont.reports
+            com.haulmont.addon.restapi com.haulmont.addon.dashboard</param-value>
     </context-param>
 
     <!-- Servlet context listeners that load the application blocks -->

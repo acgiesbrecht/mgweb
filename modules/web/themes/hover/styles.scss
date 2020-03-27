@@ -1,0 +1,11 @@
+@import "hover-defaults";
+@import "org.mg.mgweb/hover-ext-defaults";
+@import "app-components";
+@import "org.mg.mgweb/hover-ext";
+
+.hover {
+  // include auto-generated app components SCSS
+  @include app_components;
+
+  @include org_mg_mgweb-hover-ext;
+}

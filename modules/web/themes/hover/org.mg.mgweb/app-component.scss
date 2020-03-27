@@ -1,0 +1,5 @@
+@import "hover-ext";
+
+@mixin org_mg_mgweb {
+  @include org_mg_mgweb-hover-ext;
+}

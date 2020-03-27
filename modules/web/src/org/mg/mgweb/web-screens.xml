@@ -1,4 +1,131 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <screen-config xmlns="http://schemas.haulmont.com/cuba/screens.xsd">
 
+    <screen id="mgweb_TblMiembrosFamilias.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosfamilias/tbl-miembros-familias-browse.xml"/>
+    <screen id="mgweb_TblAutofacturas.browse" template="/org/mg/mgweb/web/admin/tblautofacturas/tbl-autofacturas-browse.xml"/>
+    <screen id="mgweb_TblMiembrosRelacionesTipos.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosrelacionestipos/tbl-miembros-relaciones-tipos-browse.xml"/>
+    <screen id="mgweb_TblContribuyentes.browse"
+            template="/org/mg/mgweb/web/admin/tblcontribuyentes/tbl-contribuyentes-browse.xml"/>
+    <screen id="mgweb_TblMiembrosRelacionesRoles.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosrelacionesroles/tbl-miembros-relaciones-roles-browse.xml"/>
+    <screen id="mgweb_TblRoles.browse" template="/org/mg/mgweb/web/admin/tblroles/tbl-roles-browse.xml"/>
+    <screen id="mgweb_TblMiembrosRelaciones.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosrelaciones/tbl-miembros-relaciones-browse.xml"/>
+    <screen id="mgweb_TblNotasDeCredito.browse"
+            template="/org/mg/mgweb/web/admin/tblnotasdecredito/tbl-notas-de-credito-browse.xml"/>
+    <screen id="mgweb_TblTimbradosNotasDeCredito.browse"
+            template="/org/mg/mgweb/web/admin/tbltimbradosnotasdecredito/tbl-timbrados-notas-de-credito-browse.xml"/>
+    <screen id="mgweb_TblCentrosDeCosto.browse"
+            template="/org/mg/mgweb/web/admin/tblcentrosdecosto/tbl-centros-de-costo-browse.xml"/>
+    <screen id="mgweb_TblIglesia.browse" template="/org/mg/mgweb/web/admin/tbliglesia/tbl-iglesia-browse.xml"/>
+    <screen id="mgweb_TblTimbradosAutofacturas.browse"
+            template="/org/mg/mgweb/web/admin/tbltimbradosautofacturas/tbl-timbrados-autofacturas-browse.xml"/>
+    <screen id="mgweb_TblTransferencias.browse"
+            template="/org/mg/mgweb/web/admin/tbltransferencias/tbl-transferencias-browse.xml"/>
+    <screen id="mgweb_TblFacturas.browse" template="/org/mg/mgweb/web/admin/tblfacturas/tbl-facturas-browse.xml"/>
+    <screen id="mgweb_TblFacturasCompra.browse"
+            template="/org/mg/mgweb/web/admin/tblfacturascompra/tbl-facturas-compra-browse.xml"/>
+    <screen id="mgweb_TblAportesImporteMensualSaldoAnterior.browse"
+            template="/org/mg/mgweb/web/admin/tblaportesimportemensualsaldoanterior/tbl-aportes-importe-mensual-saldo-anterior-browse.xml"/>
+    <screen id="mgweb_TblCuentasContables.browse"
+            template="/org/mg/mgweb/web/admin/tblcuentascontables/tbl-cuentas-contables-browse.xml"/>
+    <screen id="mgweb_TblNotasDeCreditoCompras.browse"
+            template="/org/mg/mgweb/web/admin/tblnotasdecreditocompras/tbl-notas-de-credito-compras-browse.xml"/>
+    <screen id="mgweb_TblEventoTipos.browse" template="/org/mg/mgweb/web/admin/tbleventotipos/tbl-evento-tipos-browse.xml"/>
+    <screen id="mgweb_TblAsientos.browse" template="/org/mg/mgweb/web/admin/tblasientos/tbl-asientos-browse.xml"/>
+    <screen id="mgweb_TblEventoCuotas.browse" template="/org/mg/mgweb/web/admin/tbleventocuotas/tbl-evento-cuotas-browse.xml"/>
+    <screen id="mgweb_TblMiembrosAlergias.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosalergias/tbl-miembros-alergias-browse.xml"/>
+    <screen id="mgweb_TblTimbradosCompras.browse"
+            template="/org/mg/mgweb/web/admin/tbltimbradoscompras/tbl-timbrados-compras-browse.xml"/>
+    <screen id="mgweb_TblCategoriasArticulos.browse"
+            template="/org/mg/mgweb/web/admin/tblcategoriasarticulos/tbl-categorias-articulos-browse.xml"/>
+    <screen id="mgweb_TblEventoDetalle.browse"
+            template="/org/mg/mgweb/web/admin/tbleventodetalle/tbl-evento-detalle-browse.xml"/>
+    <screen id="mgweb_TblEventos.browse" template="/org/mg/mgweb/web/admin/tbleventos/tbl-eventos-browse.xml"/>
+    <screen id="mgweb_TblMiembrosCategoriasDePago.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembroscategoriasdepago/tbl-miembros-categorias-de-pago-browse.xml"/>
+    <screen id="mgweb_TblTimbrados.browse" template="/org/mg/mgweb/web/admin/tbltimbrados/tbl-timbrados-browse.xml"/>
+    <screen id="mgweb_TblUsers.browse" template="/org/mg/mgweb/web/admin/tblusers/tbl-users-browse.xml"/>
+    <screen id="mgweb_TblCuentasContablesPorDefecto.browse"
+            template="/org/mg/mgweb/web/admin/tblcuentascontablespordefecto/tbl-cuentas-contables-por-defecto-browse.xml"/>
+    <screen id="mgweb_TblGrupos.browse" template="/org/mg/mgweb/web/admin/tblgrupos/tbl-grupos-browse.xml"/>
+    <screen id="mgweb_TblAsientosTemporales.browse"
+            template="/org/mg/mgweb/web/admin/tblasientostemporales/tbl-asientos-temporales-browse.xml"/>
+    <screen id="mgweb_TblEntidadesHistoricoCategorias.browse"
+            template="/org/mg/mgweb/web/admin/tblentidadeshistoricocategorias/tbl-entidades-historico-categorias-browse.xml"/>
+    <screen id="mgweb_TblFormasDePago.browse"
+            template="/org/mg/mgweb/web/admin/tblformasdepago/tbl-formas-de-pago-browse.xml"/>
+    <screen id="mgweb_TblAreasServicioEnIglesia.browse"
+            template="/org/mg/mgweb/web/admin/tblareasservicioeniglesia/tbl-areas-servicio-en-iglesia-browse.xml"/>
+    <screen id="mgweb_TblRecibos.browse" template="/org/mg/mgweb/web/admin/tblrecibos/tbl-recibos-browse.xml"/>
+    <screen id="mgweb_TblRecibosCompra.browse"
+            template="/org/mg/mgweb/web/admin/tblreciboscompra/tbl-recibos-compra-browse.xml"/>
+    <screen id="mgweb_TblMiembrosFamilias.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosfamilias/tbl-miembros-familias-browse.xml"/>
+    <screen id="mgweb_TblAutofacturas.browse" template="/org/mg/mgweb/web/admin/tblautofacturas/tbl-autofacturas-browse.xml"/>
+    <screen id="mgweb_TblMiembrosRelacionesTipos.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosrelacionestipos/tbl-miembros-relaciones-tipos-browse.xml"/>
+    <screen id="mgweb_TblContribuyentes.browse"
+            template="/org/mg/mgweb/web/admin/tblcontribuyentes/tbl-contribuyentes-browse.xml"/>
+    <screen id="mgweb_TblMiembrosRelacionesRoles.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosrelacionesroles/tbl-miembros-relaciones-roles-browse.xml"/>
+    <screen id="mgweb_TblRoles.browse" template="/org/mg/mgweb/web/admin/tblroles/tbl-roles-browse.xml"/>
+    <screen id="mgweb_TblEntidades.browse" template="/org/mg/mgweb/web/admin/tblentidades/tbl-entidades-browse.xml"/>
+    <screen id="mgweb_TblMiembrosRelaciones.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosrelaciones/tbl-miembros-relaciones-browse.xml"/>
+    <screen id="mgweb_TblNotasDeCredito.browse"
+            template="/org/mg/mgweb/web/admin/tblnotasdecredito/tbl-notas-de-credito-browse.xml"/>
+    <screen id="mgweb_TblTimbradosNotasDeCredito.browse"
+            template="/org/mg/mgweb/web/admin/tbltimbradosnotasdecredito/tbl-timbrados-notas-de-credito-browse.xml"/>
+    <screen id="mgweb_TblCentrosDeCosto.browse"
+            template="/org/mg/mgweb/web/admin/tblcentrosdecosto/tbl-centros-de-costo-browse.xml"/>
+    <screen id="mgweb_TblIglesia.browse" template="/org/mg/mgweb/web/admin/tbliglesia/tbl-iglesia-browse.xml"/>
+    <screen id="mgweb_TblTimbradosAutofacturas.browse"
+            template="/org/mg/mgweb/web/admin/tbltimbradosautofacturas/tbl-timbrados-autofacturas-browse.xml"/>
+    <screen id="mgweb_TblTransferencias.browse"
+            template="/org/mg/mgweb/web/admin/tbltransferencias/tbl-transferencias-browse.xml"/>
+    <screen id="mgweb_TblFacturas.browse" template="/org/mg/mgweb/web/admin/tblfacturas/tbl-facturas-browse.xml"/>
+    <screen id="mgweb_TblFacturasCompra.browse"
+            template="/org/mg/mgweb/web/admin/tblfacturascompra/tbl-facturas-compra-browse.xml"/>
+    <screen id="mgweb_TblAportesImporteMensualSaldoAnterior.browse"
+            template="/org/mg/mgweb/web/admin/tblaportesimportemensualsaldoanterior/tbl-aportes-importe-mensual-saldo-anterior-browse.xml"/>
+    <screen id="mgweb_TblCuentasContables.browse"
+            template="/org/mg/mgweb/web/admin/tblcuentascontables/tbl-cuentas-contables-browse.xml"/>
+    <screen id="mgweb_TblNotasDeCreditoCompras.browse"
+            template="/org/mg/mgweb/web/admin/tblnotasdecreditocompras/tbl-notas-de-credito-compras-browse.xml"/>
+    <screen id="mgweb_TblEventoTipos.browse" template="/org/mg/mgweb/web/admin/tbleventotipos/tbl-evento-tipos-browse.xml"/>
+    <screen id="mgweb_TblAsientos.browse" template="/org/mg/mgweb/web/admin/tblasientos/tbl-asientos-browse.xml"/>
+    <screen id="mgweb_TblDatabaseUpdates.browse"
+            template="/org/mg/mgweb/web/admin/tbldatabaseupdates/tbl-database-updates-browse.xml"/>
+    <screen id="mgweb_TblEventoCuotas.browse" template="/org/mg/mgweb/web/admin/tbleventocuotas/tbl-evento-cuotas-browse.xml"/>
+    <screen id="mgweb_TblMiembrosAlergias.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembrosalergias/tbl-miembros-alergias-browse.xml"/>
+    <screen id="mgweb_TblTimbradosCompras.browse"
+            template="/org/mg/mgweb/web/admin/tbltimbradoscompras/tbl-timbrados-compras-browse.xml"/>
+    <screen id="mgweb_TblCategoriasArticulos.browse"
+            template="/org/mg/mgweb/web/admin/tblcategoriasarticulos/tbl-categorias-articulos-browse.xml"/>
+    <screen id="mgweb_TblEventoDetalle.browse"
+            template="/org/mg/mgweb/web/admin/tbleventodetalle/tbl-evento-detalle-browse.xml"/>
+    <screen id="mgweb_TblEventos.browse" template="/org/mg/mgweb/web/admin/tbleventos/tbl-eventos-browse.xml"/>
+    <screen id="mgweb_TblMiembrosCategoriasDePago.browse"
+            template="/org/mg/mgweb/web/admin/tblmiembroscategoriasdepago/tbl-miembros-categorias-de-pago-browse.xml"/>
+    <screen id="mgweb_TblTimbrados.browse" template="/org/mg/mgweb/web/admin/tbltimbrados/tbl-timbrados-browse.xml"/>
+    <screen id="mgweb_TblUsers.browse" template="/org/mg/mgweb/web/admin/tblusers/tbl-users-browse.xml"/>
+    <screen id="mgweb_TblCuentasContablesPorDefecto.browse"
+            template="/org/mg/mgweb/web/admin/tblcuentascontablespordefecto/tbl-cuentas-contables-por-defecto-browse.xml"/>
+    <screen id="mgweb_TblGrupos.browse" template="/org/mg/mgweb/web/admin/tblgrupos/tbl-grupos-browse.xml"/>
+    <screen id="mgweb_TblAsientosTemporales.browse"
+            template="/org/mg/mgweb/web/admin/tblasientostemporales/tbl-asientos-temporales-browse.xml"/>
+    <screen id="mgweb_TblEntidadesHistoricoCategorias.browse"
+            template="/org/mg/mgweb/web/admin/tblentidadeshistoricocategorias/tbl-entidades-historico-categorias-browse.xml"/>
+    <screen id="mgweb_TblFormasDePago.browse"
+            template="/org/mg/mgweb/web/admin/tblformasdepago/tbl-formas-de-pago-browse.xml"/>
+    <screen id="mgweb_TblAreasServicioEnIglesia.browse"
+            template="/org/mg/mgweb/web/admin/tblareasservicioeniglesia/tbl-areas-servicio-en-iglesia-browse.xml"/>
+    <screen id="mgweb_TblRecibos.browse" template="/org/mg/mgweb/web/admin/tblrecibos/tbl-recibos-browse.xml"/>
+    <screen id="mgweb_TblRecibosCompra.browse"
+            template="/org/mg/mgweb/web/admin/tblreciboscompra/tbl-recibos-compra-browse.xml"/>
 </screen-config>

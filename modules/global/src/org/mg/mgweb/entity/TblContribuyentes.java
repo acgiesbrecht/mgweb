@@ -1,27 +1,24 @@
 package org.mg.mgweb.entity;
 
-import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
+import com.haulmont.cuba.core.entity.BaseStringIdEntity;
+import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-@Table(name = "TBL_CONTRIBUYENTES")
+@DesignSupport("{'imported':true}")
+@Table(name = "tbl_contribuyentes")
 @Entity(name = "mgweb_TblContribuyentes")
-public class TblContribuyentes extends BaseIntIdentityIdEntity {
-    private static final long serialVersionUID = 4723941036352529725L;
-
-    @NotNull
-    @Column(name = "RUC_SIN_DV", nullable = false, length = 20)
+public class TblContribuyentes extends BaseStringIdEntity {
+    private static final long serialVersionUID = 669448772245106779L;
+    @Id
+    @Column(name = "ruc_sin_dv", nullable = false, length = 20)
     protected String rucSinDv;
-
-    @NotNull
-    @Column(name = "DV", nullable = false, length = 1)
+    @Column(name = "dv", nullable = false, length = 1)
     protected String dv;
-
-    @NotNull
-    @Column(name = "RAZON_SOCIAL", nullable = false)
+    @Column(name = "razon_social", nullable = false, length = 256)
     protected String razonSocial;
 
     public String getRazonSocial() {
@@ -38,6 +35,16 @@ public class TblContribuyentes extends BaseIntIdentityIdEntity {
 
     public void setDv(String dv) {
         this.dv = dv;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.rucSinDv = id;
+    }
+
+    @Override
+    public String getId() {
+        return rucSinDv;
     }
 
     public String getRucSinDv() {

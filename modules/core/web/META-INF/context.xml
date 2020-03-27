@@ -1,7 +1,5 @@
 <Context>
 
-    <!-- Database connection -->
-
     <!-- Switch off session serialization -->
     <Manager pathname=""/>
     <!--<Resource driverClassName="org.hsqldb.jdbc.JDBCDriver"
@@ -13,14 +11,5 @@
           type="javax.sql.DataSource"
           url="jdbc:hsqldb:hsql://localhost:9010/mgweb-fha8Rbfiq"
           username="sa"/>-->
-    <Resource driverClassName="org.postgresql.Driver"
-              maxIdle="2"
-              maxTotal="20"
-              maxWaitMillis="5000"
-              name="jdbc/CubaDS"
-              password="123456"
-              type="javax.sql.DataSource"
-              url="jdbc:postgresql://192.168.7.10:5432/mgweb"
-              username="postgres"/>
 
 </Context>

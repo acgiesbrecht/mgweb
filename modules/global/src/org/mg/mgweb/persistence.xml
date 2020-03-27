@@ -2,8 +2,44 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
     <persistence-unit name="mgweb" transaction-type="RESOURCE_LOCAL">
 
-        <class>org.mg.mgweb.entity.TblTimbrados</class>
+        <class>org.mg.mgweb.entity.TblMiembrosFamilias</class>
+        <class>org.mg.mgweb.entity.TblAutofacturas</class>
+        <class>org.mg.mgweb.entity.TblMiembrosRelacionesTipos</class>
         <class>org.mg.mgweb.entity.TblContribuyentes</class>
+        <class>org.mg.mgweb.entity.TblMiembrosRelacionesRoles</class>
+        <class>org.mg.mgweb.entity.TblRoles</class>
+        <class>org.mg.mgweb.entity.TblEntidades</class>
+        <class>org.mg.mgweb.entity.TblMiembrosRelaciones</class>
+        <class>org.mg.mgweb.entity.TblNotasDeCredito</class>
+        <class>org.mg.mgweb.entity.TblTimbradosNotasDeCredito</class>
+        <class>org.mg.mgweb.entity.TblCentrosDeCosto</class>
+        <class>org.mg.mgweb.entity.TblIglesia</class>
+        <class>org.mg.mgweb.entity.TblTimbradosAutofacturas</class>
+        <class>org.mg.mgweb.entity.TblTransferencias</class>
+        <class>org.mg.mgweb.entity.TblFacturas</class>
+        <class>org.mg.mgweb.entity.TblFacturasCompra</class>
+        <class>org.mg.mgweb.entity.TblAportesImporteMensualSaldoAnterior</class>
+        <class>org.mg.mgweb.entity.TblCuentasContables</class>
+        <class>org.mg.mgweb.entity.TblNotasDeCreditoCompras</class>
+        <class>org.mg.mgweb.entity.TblEventoTipos</class>
+        <class>org.mg.mgweb.entity.TblAsientos</class>
+        <class>org.mg.mgweb.entity.TblDatabaseUpdates</class>
+        <class>org.mg.mgweb.entity.TblEventoCuotas</class>
+        <class>org.mg.mgweb.entity.TblMiembrosAlergias</class>
+        <class>org.mg.mgweb.entity.TblTimbradosCompras</class>
+        <class>org.mg.mgweb.entity.TblCategoriasArticulos</class>
+        <class>org.mg.mgweb.entity.TblEventoDetalle</class>
+        <class>org.mg.mgweb.entity.TblEventos</class>
         <class>org.mg.mgweb.entity.TblMiembrosCategoriasDePago</class>
+        <class>org.mg.mgweb.entity.TblTimbrados</class>
+        <class>org.mg.mgweb.entity.TblUsers</class>
+        <class>org.mg.mgweb.entity.TblCuentasContablesPorDefecto</class>
+        <class>org.mg.mgweb.entity.TblGrupos</class>
+        <class>org.mg.mgweb.entity.TblAsientosTemporales</class>
+        <class>org.mg.mgweb.entity.TblEntidadesHistoricoCategorias</class>
+        <class>org.mg.mgweb.entity.TblFormasDePago</class>
+        <class>org.mg.mgweb.entity.TblAreasServicioEnIglesia</class>
+        <class>org.mg.mgweb.entity.TblRecibos</class>
+        <class>org.mg.mgweb.entity.TblRecibosCompra</class>
     </persistence-unit>
 </persistence>

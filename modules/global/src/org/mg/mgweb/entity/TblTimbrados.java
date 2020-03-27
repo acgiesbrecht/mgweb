@@ -1,60 +1,41 @@
 package org.mg.mgweb.entity;
 
-import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
+import com.haulmont.cuba.core.entity.BaseIntegerIdEntity;
+import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.UUID;
 
-@Table(name = "TBL_TIMBRADOS")
+@DesignSupport("{'imported':true}")
+@AttributeOverrides({
+        @AttributeOverride(name = "id", column = @Column(name = "nro"))
+})
+@Table(name = "tbl_timbrados")
 @Entity(name = "mgweb_TblTimbrados")
-public class TblTimbrados extends BaseIntIdentityIdEntity {
-    private static final long serialVersionUID = -938952079700774210L;
-
-    @NotNull
-    @Column(name = "NRO", nullable = false)
-    protected Integer nro;
-
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    @Column(name = "FECHA_INICIO", nullable = false)
+public class TblTimbrados extends BaseIntegerIdEntity {
+    private static final long serialVersionUID = -2322998246877760826L;
+    @Column(name = "activo")
+    protected Boolean activo;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_inicio", nullable = false)
     protected Date fechaInicio;
-
-    @NotNull
-    @Temporal(TemporalType.DATE)
-    @Column(name = "FECHA_VENCIMIENTO", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha_vencimiento", nullable = false)
     protected Date fechaVencimiento;
-
-    @NotNull
-    @Column(name = "NRO_FACTURA_INICIO", nullable = false)
-    protected Integer nroFacturaInicio;
-
-    @NotNull
-    @Column(name = "NRO_FACTURA_FIN", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id_user")
+    protected org.mg.mgweb.entity.TblUsers idUser;
+    @Column(name = "nro_factura_fin", nullable = false)
     protected Integer nroFacturaFin;
+    @Column(name = "nro_factura_incio", nullable = false)
+    protected Integer nroFacturaIncio;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "ACTIVO")
-    protected Date activo;
-
-    @Column(name = "ID_USER")
-    protected UUID idUser;
-
-    public UUID getIdUser() {
-        return idUser;
+    public Integer getNroFacturaIncio() {
+        return nroFacturaIncio;
     }
 
-    public void setIdUser(UUID idUser) {
-        this.idUser = idUser;
-    }
-
-    public Date getActivo() {
-        return activo;
-    }
-
-    public void setActivo(Date activo) {
-        this.activo = activo;
+    public void setNroFacturaIncio(Integer nroFacturaIncio) {
+        this.nroFacturaIncio = nroFacturaIncio;
     }
 
     public Integer getNroFacturaFin() {
@@ -65,12 +46,12 @@ public class TblTimbrados extends BaseIntIdentityIdEntity {
         this.nroFacturaFin = nroFacturaFin;
     }
 
-    public Integer getNroFacturaInicio() {
-        return nroFacturaInicio;
+    public org.mg.mgweb.entity.TblUsers getIdUser() {
+        return idUser;
     }
 
-    public void setNroFacturaInicio(Integer nroFacturaInicio) {
-        this.nroFacturaInicio = nroFacturaInicio;
+    public void setIdUser(org.mg.mgweb.entity.TblUsers idUser) {
+        this.idUser = idUser;
     }
 
     public Date getFechaVencimiento() {
@@ -89,11 +70,11 @@ public class TblTimbrados extends BaseIntIdentityIdEntity {
         this.fechaInicio = fechaInicio;
     }
 
-    public Integer getNro() {
-        return nro;
+    public Boolean getActivo() {
+        return activo;
     }
 
-    public void setNro(Integer nro) {
-        this.nro = nro;
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 }
