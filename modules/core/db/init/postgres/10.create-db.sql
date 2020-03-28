@@ -631,4 +631,24 @@ create table tbl_roles_users (
     id_role integer,
     primary key (id_user, id_role)
 )^
--- end TBL_ROLES_USERS
+-- end TBL_ROLES_USERS-- begin TBL_CONFIGURACIONES
+create table TBL_CONFIGURACIONES (
+    ID uuid,
+    VERSION integer not null,
+    CREATE_TS timestamp,
+    CREATED_BY varchar(50),
+    UPDATE_TS timestamp,
+    UPDATED_BY varchar(50),
+    DELETE_TS timestamp,
+    DELETED_BY varchar(50),
+    --
+    PERIODO_FISCAL_ACTIVO integer,
+    FORMATO_FACTURA varchar(50) not null,
+    FORMATO_AUTOFACTURA varchar(50) not null,
+    FORMATO_NOTA_DE_CREDITO varchar(50) not null,
+    FRECUENCIA_COBRO_COLECTAS integer not null,
+    MODO_IMPRESION_TRANSFERENCIAS integer not null,
+    --
+    primary key (ID)
+)^
+-- end TBL_CONFIGURACIONES

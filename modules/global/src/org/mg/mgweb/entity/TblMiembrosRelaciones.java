@@ -1,40 +1,54 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
+@NamePattern("%s|id")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_miembros_relaciones")
 @Entity(name = "mgweb_TblMiembrosRelaciones")
 public class TblMiembrosRelaciones extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = 4179229773891361515L;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_fin")
-    protected Date fechaFin;
+    protected LocalDateTime fechaFin;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_inicio")
-    protected Date fechaInicio;
+    protected LocalDateTime fechaInicio;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_entidad_1")
     protected TblEntidades idEntidad1;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_entidad_2")
     protected TblEntidades idEntidad2;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_miembros_familia")
     protected TblMiembrosFamilias idMiembrosFamilia;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_miembros_relaciones_rol_1")
     protected TblMiembrosRelacionesRoles idMiembrosRelacionesRol1;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_miembros_relaciones_rol_2")
     protected TblMiembrosRelacionesRoles idMiembrosRelacionesRol2;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_miembros_relaciones_tipo")
     protected TblMiembrosRelacionesTipos idMiembrosRelacionesTipo;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
@@ -95,19 +109,19 @@ public class TblMiembrosRelaciones extends BaseIntIdentityIdEntity {
         this.idEntidad1 = idEntidad1;
     }
 
-    public Date getFechaInicio() {
+    public LocalDateTime getFechaInicio() {
         return fechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDateTime fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDateTime getFechaFin() {
         return fechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDateTime fechaFin) {
         this.fechaFin = fechaFin;
     }
 }

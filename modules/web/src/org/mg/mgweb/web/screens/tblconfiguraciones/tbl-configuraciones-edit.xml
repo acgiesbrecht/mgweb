@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="org.mg.mgweb.web.screens.tblconfiguraciones">
+    <data>
+        <instance id="tblConfiguracionesDc"
+                  class="org.mg.mgweb.entity.TblConfiguraciones"
+                  view="_local">
+            <loader id="load">
+                <query><![CDATA[select e from mgweb_TblConfiguraciones e where e.id = 1]]></query>
+            </loader>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="tblConfiguracionesDc">
+            <column width="250px">
+                <textField id="periodoFiscalActivoField" property="periodoFiscalActivo"/>
+                <lookupField id="formatoFacturaField" property="formatoFactura"/>
+                <lookupField id="formatoAutofacturaField" property="formatoAutofactura"/>
+                <lookupField id="formatoNotaDeCreditoField" property="formatoNotaDeCredito"/>
+                <lookupField id="frecuenciaCobroColectasField" property="frecuenciaCobroColectas"/>
+                <lookupField id="modoImpresionTransferenciasField" property="modoImpresionTransferencias"/>
+            </column>
+        </form>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+        <buttonsPanel caption="Acciones">
+            <button caption="Realizar BackUp" invoke="doBackup"/>
+        </buttonsPanel>
+    </layout>
+</window>

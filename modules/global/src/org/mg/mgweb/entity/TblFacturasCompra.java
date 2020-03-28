@@ -1,69 +1,93 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
+@NamePattern("%s %s %s|nro,nroTimbrado,fechahora")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_facturas_compra")
 @Entity(name = "mgweb_TblFacturasCompra")
 public class TblFacturasCompra extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = -5507497950942808241L;
+
     @Column(name = "condicion_contado")
     protected Boolean condicionContado;
+
     @Column(name = "cuotas_credito")
     protected Integer cuotasCredito;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_vencimiento_credito")
-    protected Date fechaVencimientoCredito;
+    protected LocalDateTime fechaVencimientoCredito;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora", nullable = false)
-    protected Date fechahora;
+    protected LocalDateTime fechahora;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
+
     @Column(name = "iva10", nullable = false)
     protected Integer iva10;
+
     @Column(name = "iva5", nullable = false)
     protected Integer iva5;
+
     @Column(name = "monto_exentas", nullable = false)
     protected Integer montoExentas;
+
     @Column(name = "monto_iva10", nullable = false)
     protected Integer montoIva10;
+
     @Column(name = "monto_iva5", nullable = false)
     protected Integer montoIva5;
+
     @Column(name = "nro", nullable = false, length = 15)
     protected String nro;
+
     @Column(name = "nro_timbrado", nullable = false, length = 8)
     protected String nroTimbrado;
+
     @Column(name = "observacion")
     protected String observacion;
+
     @Column(name = "razon_social", nullable = false)
     protected String razonSocial;
+
     @Column(name = "ruc", nullable = false, length = 20)
     protected String ruc;
+
     @JoinTable(name = "tbl_facturas_compra_asientos",
             joinColumns = @JoinColumn(name = "id_factura_compra"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento"))
     @ManyToMany
     protected List<org.mg.mgweb.entity.TblAsientos> tblAsientos;
+
     @JoinTable(name = "tbl_recibos_compra_facturas_compra",
             joinColumns = @JoinColumn(name = "id_factura_compra"),
             inverseJoinColumns = @JoinColumn(name = "id_recibo"))
     @ManyToMany
     protected List<org.mg.mgweb.entity.TblRecibosCompra> tblRecibosCompra;
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "vencimiento_timbrado", nullable = false)
-    protected Date vencimientoTimbrado;
 
-    public Date getVencimientoTimbrado() {
+    @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
+    @Column(name = "vencimiento_timbrado", nullable = false)
+    protected LocalDateTime vencimientoTimbrado;
+
+    public LocalDateTime getVencimientoTimbrado() {
         return vencimientoTimbrado;
     }
 
-    public void setVencimientoTimbrado(Date vencimientoTimbrado) {
+    public void setVencimientoTimbrado(LocalDateTime vencimientoTimbrado) {
         this.vencimientoTimbrado = vencimientoTimbrado;
     }
 
@@ -171,19 +195,19 @@ public class TblFacturasCompra extends BaseIntIdentityIdEntity {
         this.idUser = idUser;
     }
 
-    public Date getFechahora() {
+    public LocalDateTime getFechahora() {
         return fechahora;
     }
 
-    public void setFechahora(Date fechahora) {
+    public void setFechahora(LocalDateTime fechahora) {
         this.fechahora = fechahora;
     }
 
-    public Date getFechaVencimientoCredito() {
+    public LocalDateTime getFechaVencimientoCredito() {
         return fechaVencimientoCredito;
     }
 
-    public void setFechaVencimientoCredito(Date fechaVencimientoCredito) {
+    public void setFechaVencimientoCredito(LocalDateTime fechaVencimientoCredito) {
         this.fechaVencimientoCredito = fechaVencimientoCredito;
     }
 

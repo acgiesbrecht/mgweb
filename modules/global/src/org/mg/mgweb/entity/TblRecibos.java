@@ -1,41 +1,56 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
+@NamePattern("%s %s %s|id,fechahora,idEntidad")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_recibos")
 @Entity(name = "mgweb_TblRecibos")
 public class TblRecibos extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = 2746979347628181383L;
+
     @Column(name = "concepto", length = 50)
     protected String concepto;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora", nullable = false)
-    protected Date fechahora;
+    protected LocalDateTime fechahora;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora_compromiso")
-    protected Date fechahoraCompromiso;
+    protected LocalDateTime fechahoraCompromiso;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_entidad")
     protected TblEntidades idEntidad;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_evento")
     protected TblEventos idEvento;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_evento_tipo")
     protected TblEventoTipos idEventoTipo;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user")
     protected TblUsers idUser;
+
     @Column(name = "monto_aporte", nullable = false)
     protected Integer montoAporte;
+
     @Column(name = "monto_donacion", nullable = false)
     protected Integer montoDonacion;
+
     @JoinTable(name = "tbl_recibos_asientos_temporales",
             joinColumns = @JoinColumn(name = "id_recibo"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento_temporal"))
@@ -98,19 +113,19 @@ public class TblRecibos extends BaseIntIdentityIdEntity {
         this.idEntidad = idEntidad;
     }
 
-    public Date getFechahoraCompromiso() {
+    public LocalDateTime getFechahoraCompromiso() {
         return fechahoraCompromiso;
     }
 
-    public void setFechahoraCompromiso(Date fechahoraCompromiso) {
+    public void setFechahoraCompromiso(LocalDateTime fechahoraCompromiso) {
         this.fechahoraCompromiso = fechahoraCompromiso;
     }
 
-    public Date getFechahora() {
+    public LocalDateTime getFechahora() {
         return fechahora;
     }
 
-    public void setFechahora(Date fechahora) {
+    public void setFechahora(LocalDateTime fechahora) {
         this.fechahora = fechahora;
     }
 

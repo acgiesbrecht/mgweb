@@ -1,4 +1,101 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
+    <view entity="mgweb_TblEntidades" name="tblEntidades-view" extends="_local">
+        <property name="idAreaServicioEnIglesia" view="_minimal"/>
+        <property name="idEntidadPaganteAportes" view="_minimal"/>
+        <property name="idFormaDePagoPreferida" view="_minimal"/>
+        <property name="idMiembrosAlergia" view="_minimal"/>
+        <property name="idMiembrosCategoriaDePago" view="_minimal"/>
+        <property name="idUser" view="_minimal"/>
+    </view>
+    <view entity="mgweb_TblEventos" name="tblEventos-view" extends="_local">
+        <property name="idCentroDeCosto" view="_minimal"/>
+        <property name="idEventoTipo" view="_minimal"/>
+        <property name="idGrupo" view="_minimal"/>
+        <property name="idUser" view="_minimal"/>
+    </view>
+    <view entity="mgweb_TblFacturas" name="tblFacturas-view" extends="_local">
+        <property name="idEntidad" view="_minimal"/>
+        <property name="idTimbrado" view="_minimal"/>
+        <property name="idUser" view="_minimal"/>
+        <property name="tblAsientos" view="_minimal">
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="monto"/>
+        </property>
+    </view>
+    <view entity="mgweb_TblFacturasCompra" name="tblFacturasCompra-view" extends="_local">
+        <property name="tblAsientos" view="_minimal">
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="monto"/>
+        </property>
+    </view>
+    <view entity="mgweb_TblNotasDeCredito" name="tblNotasDeCredito-view" extends="_local">
+        <property name="idTimbrado" view="_minimal"/>
+        <property name="nroFactura" view="_minimal"/>
+        <property name="tblAsientos" view="_minimal">
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="monto"/>
+        </property>
+    </view>
+    <view entity="mgweb_TblNotasDeCreditoCompras" name="tblNotasDeCreditoCompras-view" extends="_local">
+        <property name="idUser" view="_minimal"/>
+        <property name="tblAsientos" view="_minimal">
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="monto"/>
+        </property>
+    </view>
+    <view entity="mgweb_TblRecibos" name="tblRecibos-view" extends="_local">
+        <property name="idEntidad" view="_minimal"/>
+        <property name="idEvento" view="_minimal"/>
+        <property name="idEventoTipo" view="_minimal"/>
+        <property name="idUser" view="_minimal"/>
+        <property name="tblAsientosTemporales" view="_minimal">
+            <property name="facturado"/>
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="monto"/>
+        </property>
+    </view>
+    <view entity="mgweb_TblRecibosCompra" name="tblRecibosCompra-view" extends="_local">
+        <property name="idUser" view="_minimal"/>
+        <property name="tblAsientos" view="_minimal">
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="monto"/>
+        </property>
+        <property name="tblFacturasCompra" view="_minimal"/>
+    </view>
+    <view entity="mgweb_TblTransferencias" name="tblTransferencias-view" extends="_local">
+        <property name="idEntidad" view="_minimal"/>
+        <property name="idEvento" view="_minimal"/>
+        <property name="idEventoDetalle" view="_minimal"/>
+        <property name="idEventoTipo" view="_minimal"/>
+        <property name="idUser" view="_minimal"/>
+        <property name="tblAsientosTemporales" view="_minimal">
+            <property name="esAporte"/>
+            <property name="facturado"/>
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="monto"/>
+        </property>
+    </view>
 </views>

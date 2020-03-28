@@ -1,36 +1,46 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntegerIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
 
+@NamePattern("%s|id")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_cuentas_contables_por_defecto")
 @Entity(name = "mgweb_TblCuentasContablesPorDefecto")
 public class TblCuentasContablesPorDefecto extends BaseIntegerIdEntity {
     private static final long serialVersionUID = -1008690371896604546L;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_a_cobrar")
     protected TblCuentasContables idCuentaACobrar;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_aportes")
     protected TblCuentasContables idCuentaAportes;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_caja")
     protected TblCuentasContables idCuentaCaja;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_cta_cte")
     protected TblCuentasContables idCuentaCtaCte;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_debe_compras")
     protected TblCuentasContables idCuentaDebeCompras;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_donaciones")
     protected TblCuentasContables idCuentaDonaciones;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_haber_compras_factura_contado")
     protected TblCuentasContables idCuentaHaberComprasFacturaContado;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_haber_compras_factura_credito")
     protected TblCuentasContables idCuentaHaberComprasFacturaCredito;

@@ -118,5 +118,8 @@
         <entity class="org.mg.mgweb.entity.TblRecibosCompra">
             <include re=".*"/>
         </entity>
+        <entity class="org.mg.mgweb.entity.TblConfiguraciones">
+            <include re=".*"/>
+        </entity>
     </entities>
 </fts-config>

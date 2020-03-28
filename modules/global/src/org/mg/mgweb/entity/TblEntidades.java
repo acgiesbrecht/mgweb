@@ -1,75 +1,150 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.MetaProperty;
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
+@NamePattern("%s, %s / %s / %s|apellidos,nombres,ctacte,rucSinDv")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_entidades")
 @Entity(name = "mgweb_TblEntidades")
 public class TblEntidades extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = -5492348477571791017L;
+
     @Column(name = "apellidos", nullable = false, length = 128)
     protected String apellidos;
+
     @Column(name = "aporte_mensual", nullable = false)
     protected Integer aporteMensual;
+
     @Column(name = "aporte_saldo_anterior")
     protected Long aporteSaldoAnterior;
+
     @Column(name = "box")
     protected Integer box;
+
     @Column(name = "cantidad_de_dependientes_aportantes", nullable = false)
     protected Integer cantidadDeDependientesAportantes;
+
+    @MetaProperty(datatype = "ccm", mandatory = true)
     @Column(name = "ctacte", nullable = false)
     protected Integer ctacte;
+
     @Column(name = "domicilio", length = 50)
     protected String domicilio;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_bautismo")
-    protected Date fechaBautismo;
+    protected LocalDateTime fechaBautismo;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_defuncion")
-    protected Date fechaDefuncion;
+    protected LocalDateTime fechaDefuncion;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_entrada_congregacion")
-    protected Date fechaEntradaCongregacion;
+    protected LocalDateTime fechaEntradaCongregacion;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_nacimiento")
-    protected Date fechaNacimiento;
+    protected LocalDateTime fechaNacimiento;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_salida_congregacion")
-    protected Date fechaSalidaCongregacion;
+    protected LocalDateTime fechaSalidaCongregacion;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_area_servicio_en_iglesia")
     protected org.mg.mgweb.entity.TblAreasServicioEnIglesia idAreaServicioEnIglesia;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_entidad_pagante_aportes")
     protected TblEntidades idEntidadPaganteAportes;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_forma_de_pago_preferida")
     protected org.mg.mgweb.entity.TblFormasDePago idFormaDePagoPreferida;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_miembros_alergia")
     protected org.mg.mgweb.entity.TblMiembrosAlergias idMiembrosAlergia;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_miembros_categoria_de_pago")
     protected org.mg.mgweb.entity.TblMiembrosCategoriasDePago idMiembrosCategoriaDePago;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
+
     @Column(name = "is_miembro_activo")
     protected Boolean isMiembroActivo;
+
     @Column(name = "mes_fin_aporte")
     protected Integer mesFinAporte;
+
     @Column(name = "mes_inicio_aporte")
     protected Integer mesInicioAporte;
+
     @Column(name = "nombres", nullable = false, length = 128)
     protected String nombres;
+
     @Column(name = "razon_social", nullable = false, length = 256)
     protected String razonSocial;
+
     @Column(name = "ruc_sin_dv", nullable = false, length = 20)
     protected String rucSinDv;
+
+    public void setFechaBautismo(LocalDateTime fechaBautismo) {
+        this.fechaBautismo = fechaBautismo;
+    }
+
+    public LocalDateTime getFechaBautismo() {
+        return fechaBautismo;
+    }
+
+    public void setFechaDefuncion(LocalDateTime fechaDefuncion) {
+        this.fechaDefuncion = fechaDefuncion;
+    }
+
+    public LocalDateTime getFechaDefuncion() {
+        return fechaDefuncion;
+    }
+
+    public void setFechaEntradaCongregacion(LocalDateTime fechaEntradaCongregacion) {
+        this.fechaEntradaCongregacion = fechaEntradaCongregacion;
+    }
+
+    public LocalDateTime getFechaEntradaCongregacion() {
+        return fechaEntradaCongregacion;
+    }
+
+    public void setFechaNacimiento(LocalDateTime fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public LocalDateTime getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaSalidaCongregacion(LocalDateTime fechaSalidaCongregacion) {
+        this.fechaSalidaCongregacion = fechaSalidaCongregacion;
+    }
+
+    public LocalDateTime getFechaSalidaCongregacion() {
+        return fechaSalidaCongregacion;
+    }
 
     public String getRucSinDv() {
         return rucSinDv;
@@ -165,46 +240,6 @@ public class TblEntidades extends BaseIntIdentityIdEntity {
 
     public void setIdAreaServicioEnIglesia(org.mg.mgweb.entity.TblAreasServicioEnIglesia idAreaServicioEnIglesia) {
         this.idAreaServicioEnIglesia = idAreaServicioEnIglesia;
-    }
-
-    public Date getFechaSalidaCongregacion() {
-        return fechaSalidaCongregacion;
-    }
-
-    public void setFechaSalidaCongregacion(Date fechaSalidaCongregacion) {
-        this.fechaSalidaCongregacion = fechaSalidaCongregacion;
-    }
-
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public Date getFechaEntradaCongregacion() {
-        return fechaEntradaCongregacion;
-    }
-
-    public void setFechaEntradaCongregacion(Date fechaEntradaCongregacion) {
-        this.fechaEntradaCongregacion = fechaEntradaCongregacion;
-    }
-
-    public Date getFechaDefuncion() {
-        return fechaDefuncion;
-    }
-
-    public void setFechaDefuncion(Date fechaDefuncion) {
-        this.fechaDefuncion = fechaDefuncion;
-    }
-
-    public Date getFechaBautismo() {
-        return fechaBautismo;
-    }
-
-    public void setFechaBautismo(Date fechaBautismo) {
-        this.fechaBautismo = fechaBautismo;
     }
 
     public String getDomicilio() {

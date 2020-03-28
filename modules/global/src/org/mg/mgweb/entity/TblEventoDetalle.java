@@ -1,39 +1,52 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
+@NamePattern("%s %s %s %s|fechahora,idEntidad,idEvento,monto")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_evento_detalle")
 @Entity(name = "mgweb_TblEventoDetalle")
 public class TblEventoDetalle extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = -4135630218631220565L;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora", nullable = false)
-    protected Date fechahora;
+    protected LocalDateTime fechahora;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_categoria_articulo")
     protected TblCategoriasArticulos idCategoriaArticulo;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_entidad")
     protected TblEntidades idEntidad;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_evento")
     protected org.mg.mgweb.entity.TblEventos idEvento;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_forma_de_pago_preferida")
     protected org.mg.mgweb.entity.TblFormasDePago idFormaDePagoPreferida;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
+
     @Column(name = "monto", nullable = false)
     protected Integer monto;
+
     @Column(name = "observacion")
     protected String observacion;
+
     @JoinTable(name = "tbl_evento_detalle_asientos",
             joinColumns = @JoinColumn(name = "id_evento_detalle"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento"))
@@ -104,11 +117,11 @@ public class TblEventoDetalle extends BaseIntIdentityIdEntity {
         this.idCategoriaArticulo = idCategoriaArticulo;
     }
 
-    public Date getFechahora() {
+    public LocalDateTime getFechahora() {
         return fechahora;
     }
 
-    public void setFechahora(Date fechahora) {
+    public void setFechahora(LocalDateTime fechahora) {
         this.fechahora = fechahora;
     }
 }

@@ -1,33 +1,44 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
+@NamePattern("%s %s|nro,idTimbrado")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_notas_de_credito")
 @Entity(name = "mgweb_TblNotasDeCredito")
 public class TblNotasDeCredito extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = 9069454120899233995L;
+
     @Column(name = "anulado")
     protected Boolean anulado;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora", nullable = false)
-    protected Date fechahora;
+    protected LocalDateTime fechahora;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_timbrado")
     protected org.mg.mgweb.entity.TblTimbradosNotasDeCredito idTimbrado;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
+
     @Column(name = "nro", nullable = false, length = 15)
     protected String nro;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "nro_factura")
     protected org.mg.mgweb.entity.TblFacturas nroFactura;
+
     @JoinTable(name = "tbl_notas_de_credito_asientos",
             joinColumns = @JoinColumn(name = "id_nota_de_credito"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento"))
@@ -74,11 +85,11 @@ public class TblNotasDeCredito extends BaseIntIdentityIdEntity {
         this.idTimbrado = idTimbrado;
     }
 
-    public Date getFechahora() {
+    public LocalDateTime getFechahora() {
         return fechahora;
     }
 
-    public void setFechahora(Date fechahora) {
+    public void setFechahora(LocalDateTime fechahora) {
         this.fechahora = fechahora;
     }
 

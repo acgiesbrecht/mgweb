@@ -1,27 +1,35 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
 
+@NamePattern("%s|descripcion")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_centros_de_costo")
 @Entity(name = "mgweb_TblCentrosDeCosto")
 public class TblCentrosDeCosto extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = 6484783048609023578L;
+
     @Column(name = "cta_cte", nullable = false)
     protected Integer ctaCte;
+
     @Column(name = "descripcion", nullable = false)
     protected String descripcion;
+
     @Column(name = "es_donacion_externa")
     protected Boolean esDonacionExterna;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_contable_cta_cte_por_defecto")
     protected org.mg.mgweb.entity.TblCuentasContables idCuentaContableCtaCtePorDefecto;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_contable_efectivo_por_defecto")
     protected org.mg.mgweb.entity.TblCuentasContables idCuentaContableEfectivoPorDefecto;
+
     @Column(name = "preferido")
     protected Boolean preferido;
 

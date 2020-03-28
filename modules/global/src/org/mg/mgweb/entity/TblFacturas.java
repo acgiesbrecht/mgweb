@@ -1,12 +1,15 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntegerIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
+@NamePattern("%s %s %s|id,idTimbrado,fechahora")
 @DesignSupport("{'imported':true}")
 @AttributeOverrides({
         @AttributeOverride(name = "id", column = @Column(name = "nro"))
@@ -15,32 +18,45 @@ import java.util.List;
 @Entity(name = "mgweb_TblFacturas")
 public class TblFacturas extends BaseIntegerIdEntity {
     private static final long serialVersionUID = 4899043112508632430L;
+
     @Column(name = "anulado")
     protected Boolean anulado;
+
     @Column(name = "casilla_de_correo")
     protected Integer casillaDeCorreo;
+
     @Column(name = "domicilio")
     protected String domicilio;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora", nullable = false)
-    protected Date fechahora;
+    protected LocalDateTime fechahora;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_entidad")
     protected TblEntidades idEntidad;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_timbrado")
     protected org.mg.mgweb.entity.TblTimbrados idTimbrado;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
+
     @Column(name = "importe_aporte", nullable = false)
     protected Integer importeAporte;
+
     @Column(name = "importe_donacion", nullable = false)
     protected Integer importeDonacion;
+
     @Column(name = "razon_social", nullable = false, length = 50)
     protected String razonSocial;
+
     @Column(name = "ruc", nullable = false, length = 20)
     protected String ruc;
+
     @JoinTable(name = "tbl_facturas_asientos",
             joinColumns = @JoinColumn(name = "nro_factura"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento"))
@@ -111,11 +127,11 @@ public class TblFacturas extends BaseIntegerIdEntity {
         this.idEntidad = idEntidad;
     }
 
-    public Date getFechahora() {
+    public LocalDateTime getFechahora() {
         return fechahora;
     }
 
-    public void setFechahora(Date fechahora) {
+    public void setFechahora(LocalDateTime fechahora) {
         this.fechahora = fechahora;
     }
 

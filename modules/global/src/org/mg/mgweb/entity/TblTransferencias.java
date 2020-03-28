@@ -1,48 +1,66 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
+@NamePattern("%s %s|id,fechahora")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_transferencias")
 @Entity(name = "mgweb_TblTransferencias")
 public class TblTransferencias extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = -8469543354781673675L;
+
     @Column(name = "cobrado")
     protected Boolean cobrado;
+
     @Column(name = "concepto", length = 50)
     protected String concepto;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora", nullable = false)
-    protected Date fechahora;
+    protected LocalDateTime fechahora;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora_compromiso")
-    protected Date fechahoraCompromiso;
+    protected LocalDateTime fechahoraCompromiso;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_entidad")
     protected TblEntidades idEntidad;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_evento")
     protected org.mg.mgweb.entity.TblEventos idEvento;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_evento_detalle")
     protected org.mg.mgweb.entity.TblEventoDetalle idEventoDetalle;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_evento_tipo")
     protected org.mg.mgweb.entity.TblEventoTipos idEventoTipo;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
+
     @Column(name = "monto_aporte", nullable = false)
     protected Integer montoAporte;
+
     @Column(name = "monto_donacion", nullable = false)
     protected Integer montoDonacion;
+
     @Column(name = "seq_pago", nullable = false)
     protected Integer seqPago;
+
     @JoinTable(name = "tbl_transferencias_asientos_temporales",
             joinColumns = @JoinColumn(name = "id_transferencia"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento_temporal"))
@@ -121,19 +139,19 @@ public class TblTransferencias extends BaseIntIdentityIdEntity {
         this.idEntidad = idEntidad;
     }
 
-    public Date getFechahoraCompromiso() {
+    public LocalDateTime getFechahoraCompromiso() {
         return fechahoraCompromiso;
     }
 
-    public void setFechahoraCompromiso(Date fechahoraCompromiso) {
+    public void setFechahoraCompromiso(LocalDateTime fechahoraCompromiso) {
         this.fechahoraCompromiso = fechahoraCompromiso;
     }
 
-    public Date getFechahora() {
+    public LocalDateTime getFechahora() {
         return fechahora;
     }
 
-    public void setFechahora(Date fechahora) {
+    public void setFechahora(LocalDateTime fechahora) {
         this.fechahora = fechahora;
     }
 

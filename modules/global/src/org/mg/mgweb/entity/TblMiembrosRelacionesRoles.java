@@ -1,5 +1,6 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
@@ -7,11 +8,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+@NamePattern("%s|descripcion")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_miembros_relaciones_roles")
 @Entity(name = "mgweb_TblMiembrosRelacionesRoles")
 public class TblMiembrosRelacionesRoles extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = -44597143056973610L;
+
     @Column(name = "descripcion", nullable = false, length = 50)
     protected String descripcion;
 

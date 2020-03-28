@@ -1,24 +1,32 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseStringIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
+@NamePattern("%s|nro")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_timbrados_compras")
 @Entity(name = "mgweb_TblTimbradosCompras")
 public class TblTimbradosCompras extends BaseStringIdEntity {
     private static final long serialVersionUID = -5259187649668382045L;
+
     @Id
     @Column(name = "nro", nullable = false, length = 8)
     protected String nro;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fecha_vencimiento", nullable = false)
-    protected Date fechaVencimiento;
+    protected LocalDateTime fechaVencimiento;
+
     @Column(name = "id_user")
     protected Integer idUser;
+
     @Column(name = "ruc_sin_dv", nullable = false, length = 20)
     protected String rucSinDv;
 
@@ -38,11 +46,11 @@ public class TblTimbradosCompras extends BaseStringIdEntity {
         this.idUser = idUser;
     }
 
-    public Date getFechaVencimiento() {
+    public LocalDateTime getFechaVencimiento() {
         return fechaVencimiento;
     }
 
-    public void setFechaVencimiento(Date fechaVencimiento) {
+    public void setFechaVencimiento(LocalDateTime fechaVencimiento) {
         this.fechaVencimiento = fechaVencimiento;
     }
 

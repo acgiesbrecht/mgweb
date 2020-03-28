@@ -1,76 +1,100 @@
 package org.mg.mgweb.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
+import java.time.LocalDateTime;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
+@NamePattern("%s %s|id,fechahora")
 @DesignSupport("{'imported':true}")
 @Table(name = "tbl_asientos")
 @Entity(name = "mgweb_TblAsientos")
 public class TblAsientos extends BaseIntIdentityIdEntity {
     private static final long serialVersionUID = -2558281534293276927L;
+
     @Column(name = "asiento_manual")
     protected Boolean asientoManual;
+
     @Temporal(TemporalType.TIMESTAMP)
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
     @Column(name = "fechahora", nullable = false)
-    protected Date fechahora;
+    protected LocalDateTime fechahora;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_centro_de_costo_debe")
     protected TblCentrosDeCosto idCentroDeCostoDebe;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_centro_de_costo_haber")
     protected TblCentrosDeCosto idCentroDeCostoHaber;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_contable_debe")
     protected TblCuentasContables idCuentaContableDebe;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cuenta_contable_haber")
     protected TblCuentasContables idCuentaContableHaber;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_user")
     protected org.mg.mgweb.entity.TblUsers idUser;
+
     @Column(name = "monto", nullable = false)
     protected Integer monto;
+
     @Column(name = "observacion")
     protected String observacion;
+
     @JoinTable(name = "tbl_asientos_asientos_temporales",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento_temporal"))
     @ManyToMany
     protected List<org.mg.mgweb.entity.TblAsientosTemporales> tblAsientosTemporales;
+
     @JoinTable(name = "tbl_autofacturas_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_autofactura"))
     @ManyToMany
     protected List<TblAutofacturas> tblAutofacturas;
+
     @JoinTable(name = "tbl_evento_detalle_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_evento_detalle"))
     @ManyToMany
     protected List<org.mg.mgweb.entity.TblEventoDetalle> tblEventoDetalle;
+
     @JoinTable(name = "tbl_facturas_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "nro_factura"))
     @ManyToMany
     protected List<TblFacturas> tblFacturas;
+
     @JoinTable(name = "tbl_facturas_compra_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_factura_compra"))
     @ManyToMany
     protected List<TblFacturasCompra> tblFacturasCompra;
+
     @JoinTable(name = "tbl_notas_de_credito_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_nota_de_credito"))
     @ManyToMany
     protected List<TblNotasDeCredito> tblNotasDeCredito;
+
     @JoinTable(name = "tbl_notas_de_credito_compras_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_nota_de_credito"))
     @ManyToMany
     protected List<TblNotasDeCreditoCompras> tblNotasDeCreditoCompras;
+
     @JoinTable(name = "tbl_recibos_compra_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_recibo"))
@@ -197,11 +221,11 @@ public class TblAsientos extends BaseIntIdentityIdEntity {
         this.idCentroDeCostoDebe = idCentroDeCostoDebe;
     }
 
-    public Date getFechahora() {
+    public LocalDateTime getFechahora() {
         return fechahora;
     }
 
-    public void setFechahora(Date fechahora) {
+    public void setFechahora(LocalDateTime fechahora) {
         this.fechahora = fechahora;
     }
 
