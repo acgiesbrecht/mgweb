@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-02-08T14:06:47 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="libro_mayor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" isIgnorePagination="true" uuid="59aee2f8-0e6a-4948-9875-e8cfccd96593">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="mg"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString language="SQL">
+		<![CDATA[SELECT ID, DESCRIPCION, CUENTA_MADRE, SUM(IMPORTE) AS IMPORTE FROM (
+    SELECT cc.ID, cc.DESCRIPCION AS DESCRIPCION, cm.DESCRIPCION AS CUENTA_MADRE,  SUM(CAST(A.MONTO AS BIGINT)) AS IMPORTE
+    FROM TBL_ASIENTOS A, TBL_CUENTAS_CONTABLES cc, TBL_CUENTAS_CONTABLES cm
+    WHERE cc.ID = A.ID_CUENTA_CONTABLE_DEBE
+    AND cm.ID = cc.ID_CUENTA_MADRE
+    AND A.MONTO > 0
+    GROUP BY cm.DESCRIPCION, cc.ID, cc.DESCRIPCION
+    UNION ALL
+    SELECT cc.ID, cc.DESCRIPCION AS DESCRIPCION, cm.DESCRIPCION AS CUENTA_MADRE, -SUM(CAST(A.MONTO AS BIGINT)) AS IMPORTE
+    FROM TBL_ASIENTOS A, TBL_CUENTAS_CONTABLES cc, TBL_CUENTAS_CONTABLES cm
+    WHERE cc.ID = A.ID_CUENTA_CONTABLE_HABER
+    AND cm.ID = cc.ID_CUENTA_MADRE
+    AND A.MONTO > 0
+    GROUP BY cm.DESCRIPCION, cc.ID, cc.DESCRIPCION) cuentas
+GROUP BY CUENTA_MADRE, ID, DESCRIPCION]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="DESCRIPCION" class="java.lang.String"/>
+	<field name="CUENTA_MADRE" class="java.lang.String"/>
+	<field name="IMPORTE" class="java.lang.Long"/>
+	<variable name="sum_importe" class="java.lang.Long" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$F{IMPORTE}]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{CUENTA_MADRE}]]></groupExpression>
+		<groupHeader>
+			<band height="20">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField>
+					<reportElement x="30" y="0" width="240" height="20" uuid="3847a5e0-6263-493f-ba07-c8b9787e7814"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CUENTA_MADRE}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField pattern="#,##0.###;(#,##0.###-)">
+					<reportElement x="270" y="0" width="80" height="20" uuid="8dcff3b3-bc92-40ed-9a7a-82c0186ce7db"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{sum_importe}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="30" y="0" width="240" height="20" uuid="0cd578c3-5dfd-484a-a844-f8f8ca581797"/>
+					<textElement verticalAlignment="Middle">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["TOTAL - " + $F{CUENTA_MADRE}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="118" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="22" width="555" height="30" uuid="f4897dda-0521-4f9e-81de-fd9130737515"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BALANCE GENERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="50" width="40" height="20" uuid="ea792960-e164-45fb-9074-10e77a5a42b9"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="70" width="40" height="20" uuid="2f0aebae-171a-4203-a1e1-b792a07d31e2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="350" y="0" width="80" height="20" uuid="196b5bd7-54d7-433e-9762-3ee95c298638"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEBITO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="270" y="0" width="80" height="20" uuid="0a25f7e4-dfb0-47bc-a51e-90d5a16486f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDITO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="30" y="0" width="240" height="20" uuid="ce65d149-ea20-4544-95fa-28531cfa1881"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DOCUMENTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="30" y="0" width="240" height="20" uuid="2e3eb9f9-80f4-4e9b-8eaf-6f952c15b245"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ID} + " - " + $F{DESCRIPCION}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.###;(#,##0.###-)">
+				<reportElement x="270" y="0" width="80" height="20" uuid="44e15188-0042-47bf-8dcc-b3966b091726"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{IMPORTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="406" y="0" width="124" height="13" uuid="c236fb35-01ee-4558-b6f8-54c1525aec22"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pág. " + $V{PAGE_NUMBER} + " de "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="530" y="0" width="24" height="13" uuid="c755e450-07ef-4d0e-ab4c-5962118e841d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm:ss">
+				<reportElement x="0" y="0" width="130" height="12" uuid="b90fcc1e-c12f-4704-a219-165c3fa49bec"/>
+				<textElement textAlignment="Left">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[java.time.LocalDateTime.now()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

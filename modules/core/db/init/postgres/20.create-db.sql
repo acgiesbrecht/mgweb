@@ -91,14 +91,14 @@ create index IDX_TBL_EVENTO_DETALLE_ON_ID_FORMA_DE_PAGO_PREFERIDA on tbl_evento_
 create index IDX_TBL_EVENTO_DETALLE_ON_ID_USER on tbl_evento_detalle (ID_USER)^
 -- end TBL_EVENTO_DETALLE
 -- begin TBL_EVENTOS
-alter table tbl_eventos add constraint FK_TBL_EVENTOS_ON_ID_EVENTO_TIPO foreign key (ID_EVENTO_TIPO) references tbl_evento_tipos(ID)^
-alter table tbl_eventos add constraint FK_TBL_EVENTOS_ON_ID_USER foreign key (ID_USER) references tbl_users(ID)^
-alter table tbl_eventos add constraint FK_TBL_EVENTOS_ON_ID_GRUPO foreign key (ID_GRUPO) references tbl_grupos(ID)^
 alter table tbl_eventos add constraint FK_TBL_EVENTOS_ON_ID_CENTRO_DE_COSTO foreign key (ID_CENTRO_DE_COSTO) references tbl_centros_de_costo(ID)^
-create index IDX_TBL_EVENTOS_ON_ID_EVENTO_TIPO on tbl_eventos (ID_EVENTO_TIPO)^
-create index IDX_TBL_EVENTOS_ON_ID_USER on tbl_eventos (ID_USER)^
-create index IDX_TBL_EVENTOS_ON_ID_GRUPO on tbl_eventos (ID_GRUPO)^
+alter table tbl_eventos add constraint FK_TBL_EVENTOS_ON_ID_EVENTO_TIPO foreign key (ID_EVENTO_TIPO) references tbl_evento_tipos(ID)^
+alter table tbl_eventos add constraint FK_TBL_EVENTOS_ON_ID_GRUPO foreign key (ID_GRUPO) references tbl_grupos(ID)^
+alter table tbl_eventos add constraint FK_TBL_EVENTOS_ON_ID_USER foreign key (ID_USER) references tbl_users(ID)^
 create index IDX_TBL_EVENTOS_ON_ID_CENTRO_DE_COSTO on tbl_eventos (ID_CENTRO_DE_COSTO)^
+create index IDX_TBL_EVENTOS_ON_ID_EVENTO_TIPO on tbl_eventos (ID_EVENTO_TIPO)^
+create index IDX_TBL_EVENTOS_ON_ID_GRUPO on tbl_eventos (ID_GRUPO)^
+create index IDX_TBL_EVENTOS_ON_ID_USER on tbl_eventos (ID_USER)^
 -- end TBL_EVENTOS
 -- begin TBL_FACTURAS
 alter table tbl_facturas add constraint FK_TBL_FACTURAS_ON_ID_TIMBRADO foreign key (ID_TIMBRADO) references tbl_timbrados(nro)^

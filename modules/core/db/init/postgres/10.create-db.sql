@@ -228,13 +228,13 @@ create table tbl_evento_tipos (
 create table tbl_eventos (
     ID serial,
     --
-    fecha timestamp not null,
     descripcion varchar(100),
-    porcentaje_aporte integer not null,
+    fecha timestamp not null,
+    id_centro_de_costo integer not null,
     id_evento_tipo integer not null,
-    id_user integer not null,
     id_grupo integer not null,
-    id_centro_de_costo integer,
+    id_user integer not null,
+    porcentaje_aporte integer not null,
     --
     primary key (ID)
 )^

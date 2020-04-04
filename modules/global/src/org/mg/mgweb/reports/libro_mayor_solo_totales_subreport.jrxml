@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-02-08T08:37:36 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="libro_mayor_subreport" pageWidth="320" pageHeight="842" columnWidth="320" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="eb6130fa-49c5-4919-b5f4-270d4548b962">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="subSubreportObject" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="ctaContable" class="java.lang.Integer"/>
+	<parameter name="fechaDesde" class="java.sql.Timestamp"/>
+	<parameter name="fechaHasta" class="java.sql.Timestamp"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 'ASIENTO MANUAL' AS NRO, A.FECHAHORA, A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A
+WHERE A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_FACTURAS_COMPRA_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_FACTURAS_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_NOTAS_DE_CREDITO_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_AUTOFACTURAS_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_RECIBOS_COMPRA_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_NOTAS_DE_CREDITO_COMPRAS_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_EVENTO_DETALLE_ASIENTOS)
+AND A.ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'ASIENTO MANUAL' AS NRO, A.FECHAHORA, -A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A
+WHERE A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_FACTURAS_COMPRA_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_FACTURAS_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_NOTAS_DE_CREDITO_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_AUTOFACTURAS_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_RECIBOS_COMPRA_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_NOTAS_DE_CREDITO_COMPRAS_ASIENTOS)
+    AND A.ID NOT IN (SELECT ID_ASIENTO FROM TBL_EVENTO_DETALLE_ASIENTOS)
+AND A.ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Factura Compra - ' || C.NRO AS NRO, A.FECHAHORA, A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_FACTURAS_COMPRA_ASIENTOS CA, TBL_FACTURAS_COMPRA C
+WHERE C.ID = CA.ID_FACTURA_COMPRA AND A.ID = CA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Factura Compra - ' || C.NRO AS NRO, A.FECHAHORA, -A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_FACTURAS_COMPRA_ASIENTOS CA, TBL_FACTURAS_COMPRA C
+WHERE C.ID = CA.ID_FACTURA_COMPRA AND A.ID = CA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Factura Venta - ' || CAST(C.NRO AS CHAR(10)) AS NRO, A.FECHAHORA, A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_FACTURAS_ASIENTOS FA, TBL_FACTURAS C
+WHERE C.NRO = FA.NRO_FACTURA AND A.ID = FA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Factura Venta - ' || CAST(C.NRO AS CHAR(10)) AS NRO, A.FECHAHORA, -A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_FACTURAS_ASIENTOS FA, TBL_FACTURAS C
+WHERE C.NRO = FA.NRO_FACTURA AND A.ID = FA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Aportes, Colectas y Remates - ' || CAST(C.ID AS CHAR(10)) AS NRO, A.FECHAHORA, A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_EVENTO_DETALLE_ASIENTOS FA, TBL_EVENTO_DETALLE C
+WHERE C.ID = FA.ID_EVENTO_DETALLE AND A.ID = FA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Aportes, Colectas y Remates - ' || CAST(C.ID AS CHAR(10)) AS NRO, A.FECHAHORA, -A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_EVENTO_DETALLE_ASIENTOS FA, TBL_EVENTO_DETALLE C
+WHERE C.ID = FA.ID_EVENTO_DETALLE AND A.ID = FA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Nota de Credito Venta - ' || CAST(N.NRO AS CHAR(15)) AS NRO, A.FECHAHORA, A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_NOTAS_DE_CREDITO_ASIENTOS NA, TBL_NOTAS_DE_CREDITO N
+WHERE N.ID = NA.ID_NOTA_DE_CREDITO AND A.ID = NA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Nota de Credito Venta - ' || CAST(N.NRO AS CHAR(15)) AS NRO, A.FECHAHORA, -A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_NOTAS_DE_CREDITO_ASIENTOS NA, TBL_NOTAS_DE_CREDITO N
+WHERE N.ID = NA.ID_NOTA_DE_CREDITO AND A.ID = NA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Autofactura - ' || CAST(N.NRO AS CHAR(15)) AS NRO, A.FECHAHORA, A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_AUTOFACTURAS_ASIENTOS NA, TBL_NOTAS_DE_CREDITO N
+WHERE N.ID = NA.ID_AUTOFACTURA AND A.ID = NA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Autofactura - ' || CAST(N.NRO AS CHAR(15)) AS NRO, A.FECHAHORA, -A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_AUTOFACTURAS_ASIENTOS NA, TBL_NOTAS_DE_CREDITO N
+WHERE N.ID = NA.ID_AUTOFACTURA AND A.ID = NA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Recibo Compra - ' || CAST(RC.NRO AS CHAR(15)) AS NRO, A.FECHAHORA, A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_RECIBOS_COMPRA_ASIENTOS RCA, TBL_RECIBOS_COMPRA RC
+WHERE RC.ID = RCA.ID_RECIBO AND A.ID = RCA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+UNION ALL
+SELECT 'Recibo Compra - ' || CAST(RC.NRO AS CHAR(15)) AS NRO, A.FECHAHORA, -A.MONTO AS IMPORTE
+FROM TBL_ASIENTOS A, TBL_RECIBOS_COMPRA_ASIENTOS RCA, TBL_RECIBOS_COMPRA RC
+WHERE RC.ID = RCA.ID_RECIBO AND A.ID = RCA.ID_ASIENTO
+AND ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
+AND A.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+AND A.MONTO > 0
+ORDER BY FECHAHORA, NRO]]>
+	</queryString>
+	<field name="NRO" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="FECHAHORA" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="IMPORTE" class="java.lang.Long"/>
+	<variable name="SALDO_ANTERIOR" class="java.lang.Long" calculation="System"/>
+	<variable name="SUM_ACUMULADO" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{IMPORTE}]]></variableExpression>
+	</variable>
+	<variable name="SALDO_ACUMULADO" class="java.lang.Long">
+		<variableExpression><![CDATA[$V{SUM_ACUMULADO}+$V{SALDO_ANTERIOR}]]></variableExpression>
+	</variable>
+	<variable name="SUM_DEBE" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{IMPORTE}>0?$F{IMPORTE}:0]]></variableExpression>
+	</variable>
+	<variable name="SUM_HABER" class="java.lang.Long" calculation="Sum">
+		<variableExpression><![CDATA[$F{IMPORTE}<0?$F{IMPORTE}:0]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupFooter>
+			<band height="20">
+				<textField pattern="#,##0.###">
+					<reportElement x="80" y="0" width="80" height="20" uuid="f8f47d05-a7c5-4b08-aaf3-89e12894a44f"/>
+					<box padding="2">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SUM_DEBE}]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0.###">
+					<reportElement x="160" y="0" width="80" height="20" uuid="95ca57a0-aa2a-40c7-a6e6-590a55d2c32d"/>
+					<box padding="2">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[-$V{SUM_HABER}]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Group1" pattern="#,##0.###">
+					<reportElement x="240" y="0" width="80" height="20" uuid="35d826cf-e16e-4b9c-9354-760066ded448"/>
+					<box padding="2">
+						<topPen lineWidth="0.5"/>
+						<leftPen lineWidth="0.5"/>
+						<bottomPen lineWidth="0.5"/>
+						<rightPen lineWidth="0.5"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="DejaVu Sans" size="8" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{SALDO_ANTERIOR}+$V{SUM_DEBE}+$V{SUM_HABER}]]></textFieldExpression>
+				</textField>
+				<subreport>
+					<reportElement x="0" y="0" width="80" height="20" uuid="d2a3e78e-f05e-418d-a9d4-1d3b98d67e06">
+						<property name="local_mesure_unitx" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="px"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<subreportParameter name="ctaContable">
+						<subreportParameterExpression><![CDATA[$P{ctaContable}]]></subreportParameterExpression>
+					</subreportParameter>
+					<subreportParameter name="fechaDesde">
+						<subreportParameterExpression><![CDATA[$P{fechaDesde}]]></subreportParameterExpression>
+					</subreportParameter>
+					<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					<returnValue subreportVariable="SALDO_ANTERIOR_SUMA" toVariable="SALDO_ANTERIOR"/>
+					<subreportExpression><![CDATA[$P{subSubreportObject}]]></subreportExpression>
+				</subreport>
+			</band>
+		</groupFooter>
+	</group>
+</jasperReport>

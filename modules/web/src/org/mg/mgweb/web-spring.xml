@@ -16,6 +16,8 @@
                 <entry key="mgweb_FacturacionService" value="org.mg.mgweb.service.FacturacionService"/>
                 <entry key="mgweb_DatabaseService" value="org.mg.mgweb.service.DatabaseService"/>
                 <entry key="mgweb_BuildUpdateService" value="org.mg.mgweb.service.BuildUpdateService"/>
+                <entry key="mgweb_RucService" value="org.mg.mgweb.service.RucService"/>
+                <entry key="mgweb_InformesService" value="org.mg.mgweb.service.InformesService"/>
             </map>
         </property>
     </bean>

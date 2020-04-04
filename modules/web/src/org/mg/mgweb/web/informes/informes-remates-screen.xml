@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="Informes - Remates"
+        messagesPack="org.mg.mgweb.web.screens">
+    <data>
+        <collection id="tblEventosDs" class="org.mg.mgweb.entity.TblEventos"
+                    view="tblEventos-view">
+            <loader>
+                <query><![CDATA[select t from mgweb_TblEventos t where t.idEventoTipo.id = 1]]></query>
+            </loader>
+        </collection>
+        <collection id="tblEntidadesDs" class="org.mg.mgweb.entity.TblEntidades"
+                    view="_minimal">
+            <loader>
+                <query><![CDATA[select e from mgweb_TblEntidades e]]></query>
+            </loader>
+        </collection>
+    </data>
+    <layout>
+        <groupBox caption="Informe de Remates">
+            <vbox spacing="true">
+                <hbox align="MIDDLE_LEFT" spacing="true">
+                    <label align="MIDDLE_LEFT" value="Remate:"/>
+                    <lookupPickerField id="lookupPickerFieldEventos"
+                                       optionsContainer="tblEventosDs" width="600px" required="true"/>
+                </hbox>
+                <grid spacing="true">
+                    <columns count="3"/>
+                    <rows>
+                        <row>
+                            <label align="MIDDLE_LEFT" value="Detalle de Compras:"/>
+                            <button id="btnDetalleComprasVer" caption="Ver" invoke="onBtnDetalleComprasClick"
+                                    primary="true"/>
+                            <popupButton id="popupButton" caption="Exportar">
+                                <actions>
+                                    <action id="btnDetalleComprasPDF" caption="PDF" icon="FILE_PDF_O"
+                                            invoke="onBtnDetalleComprasPDFClick"/>
+                                    <action id="btnDetalleComprasXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                            invoke="onBtnDetalleComprasXLSXClick"/>
+                                </actions>
+                            </popupButton>
+                        </row>
+                        <row>
+                        <label align="MIDDLE_LEFT" value="Transferencias pendientes de firma:"/>
+                        <button id="btnTransferenciasPendientesVer" caption="Ver"
+                                invoke="onBtnTransferenciasPendientesClick"
+                                primary="true"/>
+                        <popupButton id="popupButtonTransferenciasPendientes" caption="Exportar">
+                            <actions>
+                                <action id="btnTransferenciasPendientesPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnTransferenciasPendientesPDFClick"/>
+                                <action id="btnTransferenciasPendientesXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnTransferenciasPendientesXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </row>
+                        <row>
+                        <label align="MIDDLE_LEFT" value="Transferencias firmadas:"/>
+                        <button id="btnTransferenciasFirmadasVer" caption="Ver"
+                                invoke="onBtnTransferenciasFirmadasClick"
+                                primary="true"/>
+                        <popupButton id="popupButtonTransferenciasFirmadas" caption="Exportar">
+                            <actions>
+                                <action id="btnTransferenciasFirmadasPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnTransferenciasFirmadasPDFClick"/>
+                                <action id="btnTransferenciasFirmadasXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnTransferenciasFirmadasXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </row>
+                        <row>
+                            <label align="MIDDLE_LEFT" value="Pagos en efectivo:"/>
+                            <button id="btnPagosEfectivoVer" caption="Ver"
+                                    invoke="onBtnPagosEfectivoClick"
+                                    primary="true"/>
+                            <popupButton id="popupButtonPagosEfectivo" caption="Exportar">
+                                <actions>
+                                    <action id="btnPagosEfectivoPDF" caption="PDF" icon="FILE_PDF_O"
+                                            invoke="onBtnPagosEfectivoPDFClick"/>
+                                    <action id="btnPagosEfectivoXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                            invoke="onBtnPagosEfectivoXLSXClick"/>
+                                </actions>
+                            </popupButton>
+                        </row>
+                        <row>
+                            <label align="MIDDLE_LEFT" value="Resumen de Pagos:"/>
+                            <button id="btnPagosResumenVer" caption="Ver"
+                                    invoke="onBtnPagosResumenClick"
+                                    primary="true"/>
+                            <popupButton id="popupButtonPagosResumen" caption="Exportar">
+                                <actions>
+                                    <action id="btnPagosResumenPDF" caption="PDF" icon="FILE_PDF_O"
+                                            invoke="onBtnPagosResumenPDFClick"/>
+                                    <action id="btnPagosResumenXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                            invoke="onBtnPagosResumenXLSXClick"/>
+                                </actions>
+                            </popupButton>
+                        </row>
+                        <row/>
+                        <row>
+                            <hbox align="MIDDLE_LEFT" spacing="true">
+                                <label align="MIDDLE_LEFT" value="Cliente:"/>
+                                <lookupPickerField id="lookupPickerFieldEntidades"
+                                                   optionsContainer="tblEntidadesDs" width="600px">
+                                    <validators>
+                                        <notNull/>
+                                    </validators>
+                                </lookupPickerField>
+                            </hbox>
+                        </row>
+                        <row>
+                            <label align="MIDDLE_LEFT" value="Resumen de Pagos:"/>
+                            <button id="btnComprasClienteVer" caption="Ver"
+                                    invoke="onBtnComprasClienteClick"
+                                    primary="true"/>
+                            <popupButton id="popupButtonComprasCliente" caption="Exportar">
+                                <actions>
+                                    <action id="btnComprasClientePDF" caption="PDF" icon="FILE_PDF_O"
+                                            invoke="onBtnComprasClientePDFClick"/>
+                                    <action id="btnComprasClienteXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                            invoke="onBtnComprasClienteXLSXClick"/>
+                                </actions>
+                            </popupButton>
+                        </row>
+                        <row>
+                            <label align="MIDDLE_LEFT" value="Resumen de Pagos:"/>
+                            <button id="btnPagosClienteVer" caption="Ver"
+                                    invoke="onBtnPagosClienteClick"
+                                    primary="true"/>
+                            <popupButton id="popupButtonPagosCliente" caption="Exportar">
+                                <actions>
+                                    <action id="btnPagosClientePDF" caption="PDF" icon="FILE_PDF_O"
+                                            invoke="onBtnPagosClientePDFClick"/>
+                                    <action id="btnPagosClienteXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                            invoke="onBtnPagosClienteXLSXClick"/>
+                                </actions>
+                            </popupButton>
+                        </row>
+                    </rows>
+                </grid>
+            </vbox>
+        </groupBox>
+
+    </layout>
+</window>

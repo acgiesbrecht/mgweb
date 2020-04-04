@@ -7,12 +7,4 @@ public interface UtilsService {
 
     String convertNumberToLetter(String number);
 
-    Boolean isValidRUC(String ruc);
-
-    String getRucEntero(String rucSinDv);
-
-    String getDVfromRUC(String ruc);
-
-    String getRUCsinDVfromRUC(String ruc);
-
 }

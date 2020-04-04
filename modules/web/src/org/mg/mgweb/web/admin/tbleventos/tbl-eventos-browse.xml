@@ -7,12 +7,12 @@
     <dsContext>
         <datasource id="tblEventosDs"
                     class="org.mg.mgweb.entity.TblEventos"
-                    view="_local"/>
+                    view="tblEventos-view"/>
         <collectionDatasource id="tblEventosesDs"
                               class="org.mg.mgweb.entity.TblEventos"
-                              view="_local">
+                              view="tblEventos-view">
             <query>
-                <![CDATA[select e from mgweb_TblEventos e]]>
+                <![CDATA[select e from mgweb_TblEventos e where extract(year from e.fecha) = (select c.periodoFiscalActivo from mgweb_TblConfiguraciones c where c.id = 1)]]>
             </query>
         </collectionDatasource>
     </dsContext>
@@ -37,9 +37,12 @@
                         <action id="remove"/>
                     </actions>
                     <columns>
-                        <column id="descripcion"/>
                         <column id="fecha"/>
+                        <column id="descripcion"/>
+                        <column id="idEventoTipo"/>
+                        <column id="idCentroDeCosto"/>
                         <column id="porcentajeAporte"/>
+                        <column id="porcentajeDonacion"/>
                     </columns>
                     <rows datasource="tblEventosesDs"/>
                     <rowsCount/>
@@ -56,8 +59,11 @@
                     <fieldGroup id="fieldGroup" datasource="tblEventosDs">
                         <column width="250px">
                             <field property="descripcion"/>
-                            <field property="fecha"/>
-                            <field property="porcentajeAporte"/>
+                            <field property="fecha" resolution="DAY"/>
+                            <field property="idEventoTipo"/>
+                            <field property="idCentroDeCosto"/>
+                            <field property="porcentajeAporte" width="50"/>
+                            <field property="porcentajeDonacion" width="50" editable="false"/>
                         </column>
                     </fieldGroup>
                 </scrollBox>

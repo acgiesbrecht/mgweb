@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://caption"
+        messagesPack="org.mg.mgweb.web.screens">
+    <layout>
+        <browserFrame id="browserFrame"
+                      height="100%"
+                      width="100%"/>
+    </layout>
+</window>

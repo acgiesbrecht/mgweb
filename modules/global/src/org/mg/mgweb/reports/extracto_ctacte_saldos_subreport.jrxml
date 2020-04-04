@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-02-01T21:01:12 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pendientes" pageWidth="160" pageHeight="60" whenNoDataType="NoDataSection" columnWidth="160" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="59aee2f8-0e6a-4948-9875-e8cfccd96593">
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="mg.xml"/>
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <parameter name="fechaDesde" class="java.sql.Timestamp"/>
+    <parameter name="fechaHasta" class="java.sql.Timestamp"/>
+    <parameter name="centroDeCosto" class="java.lang.Integer"/>
+    <queryString language="SQL">
+		<![CDATA[SELECT f.FECHAHORA, 'Fac - '  || f.RAZON_SOCIAL AS NOMBRE, -SUM(a.MONTO) AS IMPORTE
+                        FROM TBL_FACTURAS_COMPRA f
+                            INNER JOIN TBL_FACTURAS_COMPRA_ASIENTOS fa ON fa.ID_FACTURA_COMPRA = f.ID
+                            INNER JOIN TBL_ASIENTOS a ON a.ID = fa.ID_ASIENTO
+                            INNER JOIN TBL_CUENTAS_CONTABLES_POR_DEFECTO ccpd ON ccpd.ID_CUENTA_CTA_CTE = a.ID_CUENTA_CONTABLE_HABER
+                        WHERE a.ID_CENTRO_DE_COSTO_HABER = $P{centroDeCosto}
+                            AND ccpd.ID = 1
+                            AND a.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                            GROUP BY f.FECHAHORA, f.RAZON_SOCIAL, a.MONTO, f.ID
+                    UNION ALL
+                        SELECT n.FECHAHORA, 'NdC - '  || n.RAZON_SOCIAL AS NOMBRE, SUM(a.MONTO) AS IMPORTE
+                        FROM TBL_NOTAS_DE_CREDITO_COMPRAS n, TBL_NOTAS_DE_CREDITO_COMPRAS_ASIENTOS na, TBL_ASIENTOS a, TBL_CUENTAS_CONTABLES_POR_DEFECTO ccpd
+                        WHERE a.ID_CUENTA_CONTABLE_DEBE = ccpd.ID_CUENTA_CTA_CTE
+                        AND a.ID_CENTRO_DE_COSTO_DEBE = $P{centroDeCosto}
+                            AND ccpd.ID = 1
+                            AND a.ID = na.ID_ASIENTO
+                            AND n.ID = na.ID_NOTA_DE_CREDITO
+                            AND a.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                            GROUP BY n.FECHAHORA, n.RAZON_SOCIAL, a.MONTO, n.ID
+                    UNION ALL
+                        SELECT r.FECHAHORA, 'Rec - '  || r.RAZON_SOCIAL AS NOMBRE, -SUM(a.MONTO) AS IMPORTE
+                        FROM TBL_RECIBOS_COMPRA r, TBL_RECIBOS_COMPRA_ASIENTOS ra, TBL_ASIENTOS a, TBL_CUENTAS_CONTABLES_POR_DEFECTO ccpd
+                        WHERE a.ID_CUENTA_CONTABLE_HABER = ccpd.ID_CUENTA_CTA_CTE
+                        AND a.ID_CENTRO_DE_COSTO_HABER = $P{centroDeCosto}
+                            AND ccpd.ID = 1
+                            AND a.ID = ra.ID_ASIENTO
+                            AND r.ID = ra.ID_RECIBO
+                            AND a.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                            GROUP BY r.FECHAHORA, r.RAZON_SOCIAL, a.MONTO, r.ID
+                    UNION ALL
+                        SELECT af.FECHAHORA, 'AuF - '  || af.NOMBRE AS NOMBRE, -SUM(a.MONTO) AS IMPORTE
+                        FROM TBL_AUTOFACTURAS af, TBL_AUTOFACTURAS_ASIENTOS afa, TBL_ASIENTOS a, TBL_CUENTAS_CONTABLES_POR_DEFECTO ccpd
+                        WHERE a.ID_CUENTA_CONTABLE_HABER = ccpd.ID_CUENTA_CTA_CTE
+                        AND a.ID_CENTRO_DE_COSTO_HABER = $P{centroDeCosto}
+                            AND ccpd.ID = 1
+                            AND a.ID = afa.ID_ASIENTO
+                            AND af.ID = afa.ID_AUTOFACTURA
+                            AND a.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                            AND af.ANULADO = FALSE
+                            GROUP BY af.FECHAHORA, af.NOMBRE, af.ID
+                    UNION ALL
+                        SELECT a.FECHAHORA, ccd.DESCRIPCION || ' - ' || cdc.DESCRIPCION AS NOMBRE, -a.MONTO AS IMPORTE FROM   TBL_ASIENTOS a,
+                            TBL_CUENTAS_CONTABLES ccd,
+                            TBL_CUENTAS_CONTABLES cch,
+                            TBL_CUENTAS_CONTABLES_POR_DEFECTO ccpd,
+                            TBL_CENTROS_DE_COSTO cdc
+                        WHERE a.ID_CUENTA_CONTABLE_DEBE = ccd.ID
+                            AND a.ID_CUENTA_CONTABLE_HABER = cch.ID
+                            AND cch.ID = ccpd.ID_CUENTA_CTA_CTE
+                            AND a.ID_CENTRO_DE_COSTO_HABER = $P{centroDeCosto}
+                            AND a.ID_CENTRO_DE_COSTO_DEBE = cdc.ID
+                            AND ccpd.ID = 1
+                            AND a.ASIENTO_MANUAL = TRUE
+                            AND a.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                    UNION ALL
+                        SELECT a.FECHAHORA, cch.DESCRIPCION || ' - ' || cdc.DESCRIPCION AS NOMBRE, a.MONTO AS IMPORTE FROM   TBL_ASIENTOS a,
+                            TBL_CUENTAS_CONTABLES ccd,
+                            TBL_CUENTAS_CONTABLES cch,
+                            TBL_CUENTAS_CONTABLES_POR_DEFECTO ccpd,
+                            TBL_CENTROS_DE_COSTO cdc
+                        WHERE a.ID_CUENTA_CONTABLE_DEBE = ccd.ID
+                            AND a.ID_CUENTA_CONTABLE_HABER = cch.ID
+                            AND ccd.ID = ccpd.ID_CUENTA_CTA_CTE
+                            AND a.ID_CENTRO_DE_COSTO_DEBE = $P{centroDeCosto}
+                            AND a.ID_CENTRO_DE_COSTO_HABER = cdc.ID
+                            AND ccpd.ID = 1
+                            AND a.ASIENTO_MANUAL = TRUE
+                            AND a.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                    UNION ALL
+                        SELECT t.FECHAHORA, 'Transferencias 0.00% - ' || et.DESCRIPCION as NOMBRE, SUM(aat.MONTO) AS IMPORTE
+                        FROM TBL_TRANSFERENCIAS t, TBL_EVENTO_TIPOS et, TBL_TRANSFERENCIAS_ASIENTOS_TEMPORALES tat, TBL_ASIENTOS_TEMPORALES aat
+                        WHERE t.COBRADO = TRUE
+                        AND t.ID_EVENTO_TIPO = et.ID
+                        AND tat.ID_TRANSFERENCIA = t.ID
+                        AND tat.ID_ASIENTO_TEMPORAL = aat.ID
+                        AND aat.ID_CENTRO_DE_COSTO_DEBE = $P{centroDeCosto}
+                        AND aat.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                            GROUP BY t.FECHAHORA, et.DESCRIPCION, t.SEQ_PAGO
+                    UNION ALL
+                        SELECT r.FECHAHORA, 'Ingresos efectivo - ' || et.DESCRIPCION as NOMBRE, SUM(aat.MONTO) AS IMPORTE
+                        FROM TBL_RECIBOS r, TBL_EVENTO_TIPOS et, TBL_RECIBOS_ASIENTOS_TEMPORALES rat, TBL_ASIENTOS_TEMPORALES aat
+                        WHERE r.ID_EVENTO_TIPO = et.ID
+                        AND rat.ID_RECIBO = r.ID
+                        AND rat.ID_ASIENTO_TEMPORAL = aat.ID
+                        AND aat.ID_CENTRO_DE_COSTO_DEBE = $P{centroDeCosto}
+                        AND aat.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
+                            GROUP BY r.FECHAHORA, et.DESCRIPCION
+                    ORDER BY FECHAHORA]]>
+    </queryString>
+    <field name="NOMBRE" class="java.lang.String"/>
+    <field name="IMPORTE" class="java.lang.Integer"/>
+    <variable name="sum_ingresos" class="java.lang.Long" calculation="Sum">
+        <variableExpression><![CDATA[$F{IMPORTE} > 0 ? $F{IMPORTE} : 0]]></variableExpression>
+        <initialValueExpression><![CDATA[0L]]></initialValueExpression>
+    </variable>
+    <variable name="sum_egresos" class="java.lang.Long" calculation="Sum">
+        <variableExpression><![CDATA[$F{IMPORTE} < 0 ? $F{IMPORTE} : 0]]></variableExpression>
+        <initialValueExpression><![CDATA[0L]]></initialValueExpression>
+    </variable>
+    <background>
+        <band splitType="Stretch"/>
+    </background>
+    <summary>
+        <band height="20">
+            <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+            <textField pattern="#,##0">
+                <reportElement x="80" y="0" width="80" height="20" uuid="42e527ad-ea36-4acc-9ccc-bc9199249333">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                </reportElement>
+                <box leftPadding="3" rightPadding="3">
+                    <topPen lineWidth="0.4"/>
+                    <leftPen lineWidth="0.4"/>
+                    <bottomPen lineWidth="0.4"/>
+                    <rightPen lineWidth="0.4"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font fontName="SansSerif" size="10" isBold="false"/>
+                    <paragraph lineSpacing="Double"/>
+                </textElement>
+                <textFieldExpression><![CDATA[-$V{sum_egresos}]]></textFieldExpression>
+            </textField>
+            <textField pattern="#,##0">
+                <reportElement x="0" y="0" width="80" height="20" uuid="ba4e2998-fa74-4b5d-8269-a15ef5bdb43a">
+                    <property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+                </reportElement>
+                <box leftPadding="3" rightPadding="3">
+                    <topPen lineWidth="0.4"/>
+                    <leftPen lineWidth="0.4"/>
+                    <bottomPen lineWidth="0.4"/>
+                    <rightPen lineWidth="0.4"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle">
+                    <font size="10" isBold="false"/>
+                </textElement>
+                <textFieldExpression><![CDATA[$V{sum_ingresos}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+    <noData>
+        <band height="20">
+            <property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+            <staticText>
+                <reportElement x="0" y="0" width="80" height="20" uuid="3f8976f7-cd27-4488-9ec7-c00981c1eaf9"/>
+                <box leftPadding="3" rightPadding="3">
+                    <pen lineWidth="0.4"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[0]]></text>
+            </staticText>
+            <staticText>
+                <reportElement x="80" y="0" width="80" height="20" uuid="92d7aefe-91c8-403e-b91f-1d500b84ab2a"/>
+                <box leftPadding="3" rightPadding="3">
+                    <pen lineWidth="0.4"/>
+                </box>
+                <textElement textAlignment="Right" verticalAlignment="Middle"/>
+                <text><![CDATA[0]]></text>
+            </staticText>
+        </band>
+    </noData>
+</jasperReport>
