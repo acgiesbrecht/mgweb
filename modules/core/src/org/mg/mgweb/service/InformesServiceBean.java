@@ -37,28 +37,36 @@ public class InformesServiceBean implements InformesService {
     protected Persistence persistence;
 
     @Transactional
-    public Map<String, Object> generarInforme(String reportFileUrl,
+    public Map<String, Object> generarInforme(String reportFileName,
+                                              String subReportFileName,
                                               ReportFileFormatEnum fileFormat,
-                                              Map parameters) {
+                                              Map parameters,
+                                              JRDataSource dataSource) {
         try {
-            return generarInforme(reportFileUrl, null, fileFormat, parameters);
+            JasperReport report = JasperCompileManager
+                    .compileReport(
+                            resources.getResourceAsStream("org/mg/mgweb/reports/" + subReportFileName + ".jrxml"));
+            parameters.put("subreportObject", report);
+            return generarInforme(reportFileName, fileFormat, parameters, dataSource);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
     }
 
     @Transactional
-    public Map<String, Object> generarInforme(String reportFileUrl,
-                                              JRDataSource datasource,
+    public Map<String, Object> generarInforme(String reportFileName,
                                               ReportFileFormatEnum fileFormat,
-                                              Map parameters) {
+                                              Map parameters,
+                                              JRDataSource datasource) {
         try {
             java.util.Locale locale = new Locale("es", "PY");
             parameters.put(JRParameter.REPORT_LOCALE, locale);
 
             //parameters.put("logo_cch", ImageIO.read(resources.getResourceAsStream("com/chortitzer/cinweb/reports/images/logo_cch.png")));
 
-            JasperReport report = JasperCompileManager.compileReport(resources.getResourceAsStream(reportFileUrl));
+            JasperReport report = JasperCompileManager
+                    .compileReport(
+                            resources.getResourceAsStream("org/mg/mgweb/reports/" + reportFileName + ".jrxml"));
 
             JasperPrint jasperPrint;
             if (datasource == null) {

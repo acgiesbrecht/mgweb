@@ -8,6 +8,7 @@
     </menu>
     <menu id="Informes"  insertBefore="Gestion">
         <item screen="mgweb_InformesRematesScreen"/>
+        <item screen="mgweb_InformesContabilidadScreen"/>
     </menu>
     <menu id="Gestion" insertBefore="administration">
         <item screen="mgweb_TblEntidades.browse"/>

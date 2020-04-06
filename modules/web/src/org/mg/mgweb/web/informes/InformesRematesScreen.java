@@ -55,7 +55,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Detalle Compras - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("org/mg/mgweb/reports/remate_detalle.jrxml", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle", fileFormatEnum, paramsMap);
     }
 
     public void onBtnTransferenciasPendientesClick(){
@@ -76,7 +76,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Transferencias Pendientes - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("org/mg/mgweb/reports/remate_transferencias_pendientes_de_firma.jrxml", fileFormatEnum, paramsMap);
+        generarInforme("remate_transferencias_pendientes_de_firma", fileFormatEnum, paramsMap);
     }
 
     public void onBtnTransferenciasFirmadasClick(){
@@ -97,7 +97,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Transferencias Firmadas - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("org/mg/mgweb/reports/remate_detalle_transferencias.jrxml", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_transferencias", fileFormatEnum, paramsMap);
     }
 
     public void onBtnPagosEfectivoClick(){
@@ -118,7 +118,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Pagos en efectivo - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("org/mg/mgweb/reports/remate_detalle_recibos.jrxml", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_recibos", fileFormatEnum, paramsMap);
     }
 
     public void onBtnPagosResumenClick(){
@@ -139,7 +139,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Resumen de Pagos - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("org/mg/mgweb/reports/remate_detalle_recibos.jrxml", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_recibos", fileFormatEnum, paramsMap);
     }
 
     public void onBtnComprasClienteClick(){
@@ -161,7 +161,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
         paramsMap.put("id_miembro", (lookupPickerFieldEntidades.getValue()).getId().intValue());
 
-        generarInforme("org/mg/mgweb/reports/remate_detalle_compras_miembro.jrxml", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_compras_miembro", fileFormatEnum, paramsMap);
     }
 
     public void onBtnPagosClienteClick(){
@@ -183,15 +183,16 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
         paramsMap.put("id_miembro", (lookupPickerFieldEntidades.getValue()).getId().intValue());
 
-        generarInforme("org/mg/mgweb/reports/remate_detalle_pagos_miembro.jrxml", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_pagos_miembro", fileFormatEnum, paramsMap);
     }
     
-    private void generarInforme(String reportFileUrl,
+    private void generarInforme(String reportFileName,
                    InformesService.ReportFileFormatEnum fileFormatEnum,
                    Map paramsMap){
-        Map params = informesService.generarInforme(reportFileUrl,
+        Map params = informesService.generarInforme(reportFileName,
                 fileFormatEnum,
-                paramsMap);
+                paramsMap,
+                null);
         if(fileFormatEnum == HTML) {
             Screenreport screen = screens.create(Screenreport.class, OpenMode.NEW_WINDOW);
             screen.setParams(params);

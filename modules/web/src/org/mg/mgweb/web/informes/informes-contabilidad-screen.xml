@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://caption"
+        messagesPack="org.mg.mgweb.web.informes">
+    <data>
+        <collection id="tblCentrosDeCostoDs" class="org.mg.mgweb.entity.TblCentrosDeCosto"
+                    view="_minimal">
+            <loader>
+                <query><![CDATA[select t from mgweb_TblCentrosDeCosto t order by t.descripcion]]></query>
+            </loader>
+        </collection>
+    </data>
+    <layout>
+        <vbox spacing="true">
+            <hbox align="MIDDLE_LEFT" spacing="true">
+                <label align="MIDDLE_LEFT" value="Periodo:"/>
+                <lookupField id="lookupPickerFieldPeriodo" width="200px" required="true"/>
+            </hbox>
+            <hbox align="MIDDLE_LEFT" spacing="true">
+                <label align="MIDDLE_LEFT" value="Desde:"/>
+                <dateField id="dateFieldDesde" resolution="SEC"/>
+                <label align="MIDDLE_LEFT" value="Hasta:"/>
+                <dateField id="dateFieldHasta" resolution="SEC"/>
+            </hbox>
+            <grid spacing="true">
+                <columns count="8"/>
+                <rows>
+                    <row>
+                        <groupBox caption="Extracto de Cuenta Corriente:">
+                            <hbox spacing="true">
+                                <label align="MIDDLE_LEFT" value="Centro de Costo:"/>
+                                <lookupPickerField id="lookupPickerFieldCentroDeCosto"
+                                                   optionsContainer="tblCentrosDeCostoDs" width="300px" nullName="Todos"/>
+                                <checkBox id="checkBoxCtaCteDetalle" caption="Detalle"/>
+                                <label align="MIDDLE_LEFT" value="Detalle:"/>
+                                <button id="btnCtaCteDetalleVer" caption="Ver" invoke="onBtnCtaCteDetalleClick"
+                                        primary="true"/>
+                                <popupButton id="popupButton" caption="Exportar">
+                                    <actions>
+                                        <action id="btnCtaCteDetallePDF" caption="PDF" icon="FILE_PDF_O"
+                                                invoke="onBtnCtaCteDetallePDFClick"/>
+                                        <action id="btnCtaCteDetalleXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                                invoke="onBtnCtaCteDetalleXLSXClick"/>
+                                    </actions>
+                                </popupButton>
+                            </hbox>
+                        </groupBox>
+                    </row>
+                </rows>
+            </grid>
+        </vbox>
+    </layout>
+</window>

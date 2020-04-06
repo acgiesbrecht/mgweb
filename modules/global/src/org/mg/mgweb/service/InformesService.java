@@ -11,14 +11,16 @@ public interface InformesService {
         XML, XLSX, PDF, HTML, PRINT
     }
 
-    Map<String, Object> generarInforme(String reportFileUrl,
-                                        ReportFileFormatEnum fileFormat,
-                                        Map paramsMap);
+    Map<String, Object> generarInforme(String reportFileName,
+                                       String subReportFileName,
+                                       ReportFileFormatEnum fileFormat,
+                                       Map paramsMap,
+                                       JRDataSource datasource);
 
-    Map<String, Object> generarInforme(String reportFileUrl,
-                                        JRDataSource datasource,
+    Map<String, Object> generarInforme(String reportFileName,
                                         ReportFileFormatEnum fileFormat,
-                                        Map paramsMap);
+                                        Map paramsMap,
+                                       JRDataSource datasource);
 
     /*void printInforme(String reportFileUrl,
                       Object datasource,
