@@ -10,13 +10,13 @@
         FROM TBL_ASIENTOS A
         WHERE ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
         AND A.FECHAHORA < $P{fechaDesde}
-        AND YEAR(A.FECHAHORA) = YEAR(CAST($P{fechaDesde} AS VARCHAR(20)))        
+        AND EXATRCT(YEAR FROMA.FECHAHORA) = EXATRCT(YEAR FROMCAST($P{fechaDesde} AS VARCHAR(20)))
         UNION ALL
         SELECT -A.MONTO AS SALDO_ANTERIOR
         FROM TBL_ASIENTOS A
         WHERE ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
         AND A.FECHAHORA < $P{fechaDesde}
-        AND YEAR(A.FECHAHORA) = YEAR(CAST($P{fechaDesde} AS VARCHAR(20)))        
+        AND EXATRCT(YEAR FROMA.FECHAHORA) = EXATRCT(YEAR FROMCAST($P{fechaDesde} AS VARCHAR(20)))
         ) AS S]]>
 	</queryString>
 	<field name="SALDO_ANTERIOR_SUMA" class="java.lang.Long"/>

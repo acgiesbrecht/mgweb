@@ -52,6 +52,9 @@ public class InformesContabilidadScreen extends Screen {
         map.put("A\u00f1o anterior", 4);
         lookupPickerFieldPeriodo.setOptionsMap(map);
         lookupPickerFieldPeriodo.setValue(2);
+
+        dateFieldDesde.setValue(Date.from(LocalDate.of(2016,01,01).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+        dateFieldHasta.setValue(Date.from(LocalDate.of(2016,12,31).atStartOfDay(ZoneId.systemDefault()).plusDays(1).minusSeconds(1).toInstant()));
     }
 
     @Subscribe("lookupPickerFieldPeriodo")
@@ -95,7 +98,7 @@ public class InformesContabilidadScreen extends Screen {
 
         paramsMap.put("reportScreenCaption", "Extracto de Cuenta Corriente");
         paramsMap.put("fechaDesde", Timestamp.from(dateFieldDesde.getValue().toInstant()));
-        paramsMap.put("fechaHasta", Timestamp.from(dateFieldDesde.getValue().toInstant()));
+        paramsMap.put("fechaHasta", Timestamp.from(dateFieldHasta.getValue().toInstant()));
         if (lookupPickerFieldCentroDeCosto.getValue() != null) {
             paramsMap.put("centroDeCosto", lookupPickerFieldCentroDeCosto.getValue().getId().intValue());
             paramsMap.put("centroDeCostoNombre", lookupPickerFieldCentroDeCosto.getValue().getDescripcion());

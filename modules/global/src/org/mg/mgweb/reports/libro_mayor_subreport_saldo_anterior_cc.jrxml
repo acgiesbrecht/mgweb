@@ -11,14 +11,14 @@
         FROM TBL_ASIENTOS A
         WHERE ID_CUENTA_CONTABLE_DEBE =  $P{ctaContable}
         AND A.FECHAHORA < $P{fechaDesde}
-        AND YEAR(A.FECHAHORA) = YEAR(CAST($P{fechaDesde} AS VARCHAR(20)))        
+        AND EXATRCT(YEAR FROMA.FECHAHORA) = EXATRCT(YEAR FROMCAST($P{fechaDesde} AS VARCHAR(20)))
         AND A.ID_CENTRO_DE_COSTO_DEBE = $P{centroDeCosto}
         UNION ALL
         SELECT -A.MONTO AS SALDO_ANTERIOR
         FROM TBL_ASIENTOS A
         WHERE ID_CUENTA_CONTABLE_HABER =  $P{ctaContable}
         AND A.FECHAHORA < $P{fechaDesde}
-        AND YEAR(A.FECHAHORA) = YEAR(CAST($P{fechaDesde} AS VARCHAR(20)))
+        AND EXATRCT(YEAR FROMA.FECHAHORA) = EXATRCT(YEAR FROMCAST($P{fechaDesde} AS VARCHAR(20)))
         AND A.ID_CENTRO_DE_COSTO_HABER = $P{centroDeCosto}
         ) AS S]]>
 	</queryString>

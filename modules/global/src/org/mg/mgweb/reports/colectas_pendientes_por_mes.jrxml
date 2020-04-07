@@ -7,28 +7,28 @@
 	<queryString language="SQL">
 		<![CDATA[SELECT * FROM (SELECT e.ID, e.CTACTE, e.APELLIDOS, e.NOMBRES, DETALLE.mes, DETALLE.ano, SUM(DETALLE.MONTOAPORTE) AS MONTOAPORTE, SUM(DETALLE.MONTODONACION) AS MONTODONACION FROM
 (SELECT ed.id_entidad,
-                MONTH(ev.FECHA) AS mes,
-                YEAR(ev.FECHA) AS ano,
+                EXATRCT(MONTH FROM ev.FECHA) AS mes,
+                EXATRCT(YEAR FROM ev.FECHA) AS ano,
                 SUM(CAST(ed.monto*(CAST(ev.PORCENTAJE_APORTE AS FLOAT)/100) AS INTEGER)) AS montoAporte,
                 SUM(ed.monto - CAST(ed.monto*(CAST(ev.PORCENTAJE_APORTE AS FLOAT)/100) AS INTEGER)) AS montoDonacion
               FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 2
-                group by MONTH(ev.FECHA), YEAR(ev.FECHA), ed.id_entidad
+                group by EXATRCT(MONTH FROM ev.FECHA), EXATRCT(YEAR FROM ev.FECHA), ed.id_entidad
 UNION ALL
 SELECT p.id_entidad,
-                 MONTH(p.fechahora_COMPROMISO) AS mes,
-                 YEAR(p.fechahora_COMPROMISO) AS ano,
+                 EXATRCT(MONTH FROMp.fechahora_COMPROMISO) AS mes,
+                 EXATRCT(YEAR FROMp.fechahora_COMPROMISO) AS ano,
                  -SUM(p.MONTO_APORTE) AS montoAporte,
                  -SUM(p.MONTO_DONACION) AS montoDonacion
                  FROM MG.TBL_TRANSFERENCIAS p WHERE ID_EVENTO_TIPO = 2
-                 group by YEAR(p.FECHAHORA_COMPROMISO), MONTH(p.FECHAHORA_COMPROMISO), p.id_entidad
+                 group by EXATRCT(YEAR FROMp.FECHAHORA_COMPROMISO), EXATRCT(MONTH FROMp.FECHAHORA_COMPROMISO), p.id_entidad
 UNION ALL
 SELECT p.id_entidad,
-        MONTH(p.fechahora_COMPROMISO) AS mes,
-        YEAR(p.fechahora_COMPROMISO) AS ano,
+        EXATRCT(MONTH FROMp.fechahora_COMPROMISO) AS mes,
+        EXATRCT(YEAR FROMp.fechahora_COMPROMISO) AS ano,
         -SUM(p.MONTO_APORTE) AS montoAporte,
         -SUM(p.MONTO_DONACION) AS montoDonacion
         FROM MG.TBL_RECIBOS p WHERE ID_EVENTO_TIPO = 2
-        group by YEAR(p.FECHAHORA_COMPROMISO), MONTH(p.FECHAHORA_COMPROMISO), p.id_entidad) DETALLE LEFT JOIN MG.TBL_ENTIDADES e ON DETALLE.ID_ENTIDAD = e.ID
+        group by EXATRCT(YEAR FROMp.FECHAHORA_COMPROMISO), EXATRCT(MONTH FROMp.FECHAHORA_COMPROMISO), p.id_entidad) DETALLE LEFT JOIN MG.TBL_ENTIDADES e ON DETALLE.ID_ENTIDAD = e.ID
 GROUP BY e.ID, e.CTACTE, e.APELLIDOS, e.NOMBRES, DETALLE.ano, DETALLE.mes) d
 WHERE MONTODONACION + MONTOAPORTE > 0
 ORDER BY CTACTE]]>

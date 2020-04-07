@@ -12,12 +12,12 @@
 		<![CDATA[select t.FECHAHORA as fechahora, t.CONCEPTO, t.ID_EVENTO_TIPO, (t.MONTO_APORTE+t.MONTO_DONACION) as importe, e.* from tbl_transferencias t, tbl_entidades e
 where t.ID_ENTIDAD = e.ID and t.COBRADO = true
 and e.ID = $P{idEntidad}
-and YEAR(t.FECHAHORA) = $P{pAno}
+and EXATRCT(YEAR FROM t.FECHAHORA) = $P{pAno}
 union all
 select r.FECHAHORA as fechahora, r.CONCEPTO, r.ID_EVENTO_TIPO, (r.MONTO_APORTE+r.MONTO_DONACION) as importe, e.* from tbl_recibos r, tbl_entidades e
 where r.ID_ENTIDAD = e.ID and
 e.ID = $P{idEntidad} and
-YEAR(r.FECHAHORA) = $P{pAno}
+EXATRCT(YEAR FROM r.FECHAHORA) = $P{pAno}
 ORDER BY ID_EVENTO_TIPO, fechahora]]>
 	</queryString>
 	<field name="FECHAHORA" class="java.sql.Timestamp"/>

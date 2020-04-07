@@ -11,7 +11,7 @@
                                   FROM TBL_ENTIDADES m
                                      LEFT JOIN (SELECT ed.*, ev.* FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3) rd
                                      ON m.id = rd.ID_ENTIDAD
-                                     WHERE YEAR(rd.FECHAHORA) = $P{pAno} AND MONTH(rd.FECHAHORA) = $P{pMes}
+                                     WHERE EXATRCT(YEAR FROM rd.FECHAHORA) = $P{pAno} AND EXATRCT(MONTH FROM rd.FECHAHORA) = $P{pMes}
                             GROUP BY m.id, m.ctacte, m.nombres, m.apellidos
                             ORDER BY m.apellidos, m.nombres]]>
     </queryString>

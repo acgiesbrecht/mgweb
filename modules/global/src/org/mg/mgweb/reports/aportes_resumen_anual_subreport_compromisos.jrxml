@@ -20,72 +20,72 @@
     (SELECT
     COALESCE(SUM(ed.monto),0) as enero
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 1 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 1 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) enero,
 (SELECT
     COALESCE(SUM(ed.monto),0) as febrero
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 2 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 2 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) febrero,
 (SELECT
     COALESCE(SUM(ed.monto),0) as marzo
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 3 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 3 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) marzo,
 (SELECT
     COALESCE(SUM(ed.monto),0) as abril
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 4 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 4 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) abril,
 (SELECT
     COALESCE(SUM(ed.monto),0) as mayo
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 5 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 5 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) mayo,
 (SELECT
     COALESCE(SUM(ed.monto),0) as junio
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 6 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 6 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) junio,
 (SELECT
     COALESCE(SUM(ed.monto),0) as julio
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 7 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 7 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) julio,
 (SELECT
     COALESCE(SUM(ed.monto),0) as agosto
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 8 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 8 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) agosto,
 (SELECT
     COALESCE(SUM(ed.monto),0) as setiembre
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 9 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 9 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) setiembre,
 (SELECT
     COALESCE(SUM(ed.monto),0) as octubre
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 10 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 10 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) octubre,
 (SELECT
     COALESCE(SUM(ed.monto),0) as noviembre
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 11 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 11 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) noviembre,
 (SELECT
     COALESCE(SUM(ed.monto),0) as diciembre
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND MONTH(ev.FECHA) = 12 AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(MONTH FROM ev.FECHA) = 12 AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) diciembre,
 (SELECT
     COALESCE(SUM(ed.monto),0) as total
     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
-    AND YEAR(ev.FECHA) = $P{ano}
+    AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}
     AND ed.ID_ENTIDAD = $P{id_entidad}) total,
 (SELECT
     SUM(COALESCE(e.APORTE_MENSUAL * (SELECT COUNT(*) FROM MG.TBL_EVENTOS ev
     WHERE ev.ID_EVENTO_TIPO = 3
-    AND YEAR(ev.FECHA) = $P{ano}), 0)) as compromiso
+    AND EXATRCT(YEAR FROM ev.FECHA) = $P{ano}), 0)) as compromiso
     FROM TBL_ENTIDADES e
     WHERE e.ID = $P{id_entidad} OR e.ID_ENTIDAD_PAGANTE_APORTES = $P{id_entidad}) compromiso,
 (SELECT
