@@ -34,7 +34,7 @@
                         where afa.ID_AUTOFACTURA = af.ID AND afa.ID_ASIENTO = a.ID
                         AND (a.ID_CUENTA_CONTABLE_DEBE <> 401010100 AND a.ID_CUENTA_CONTABLE_DEBE <> 401010200)
                         AND af.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
-                        AND af.ANULADO = FALSE) S
+                        AND af.ANULADO IS NOT TRUE) S
                 UNION ALL
                 SELECT 'RUBRO 2 : Egresos' as tipo, 'Celda 16 - Aportes y Donaciones pagadas' as descripcion, SUM(monto_exentas) as importe FROM
                         (select monto_exentas from
@@ -48,13 +48,13 @@
                         where afa.ID_AUTOFACTURA = af.ID AND afa.ID_ASIENTO = a.ID
                         AND (a.ID_CUENTA_CONTABLE_DEBE = 401010100 OR a.ID_CUENTA_CONTABLE_DEBE = 401010200)
                         AND af.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
-                        AND af.ANULADO = FALSE
+                        AND af.ANULADO IS NOT TRUE
                     UNION ALL
                     select f.IMPORTE_APORTE + f.IMPORTE_DONACION as monto_exentas
                         from TBL_NOTAS_DE_CREDITO nc, TBL_FACTURAS f
                         WHERE f.NRO = nc.NRO_FACTURA
                         AND nc.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
-                        AND nc.ANULADO = FALSE
+                        AND nc.ANULADO IS NOT TRUE
                     UNION ALL
                         select r.monto as monto_exentas
                         from TBL_RECIBOS_COMPRA r, TBL_RECIBOS_COMPRA_ASIENTOS rca, TBL_ASIENTOS a

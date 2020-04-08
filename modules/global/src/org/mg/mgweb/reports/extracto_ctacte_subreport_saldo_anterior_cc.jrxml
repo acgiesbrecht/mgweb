@@ -16,7 +16,7 @@
                             AND a.ID = fa.ID_ASIENTO
                             AND f.ID = fa.ID_FACTURA_COMPRA
                             AND a.FECHAHORA < $P{fechaDesde}
-                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
+                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
                             GROUP BY f.FECHAHORA, f.RAZON_SOCIAL, f.ID
                     UNION ALL
                         SELECT n.FECHAHORA, 'NdC - '  || n.RAZON_SOCIAL AS NOMBRE, SUM(a.MONTO) AS IMPORTE
@@ -27,7 +27,7 @@
                             AND a.ID = na.ID_ASIENTO
                             AND n.ID = na.ID_NOTA_DE_CREDITO
                             AND a.FECHAHORA < $P{fechaDesde}
-                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
+                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
                             GROUP BY n.FECHAHORA, n.RAZON_SOCIAL, n.ID
                     UNION ALL
                         SELECT r.FECHAHORA, 'Rec - '  || r.RAZON_SOCIAL AS NOMBRE, -SUM(a.MONTO) AS IMPORTE
@@ -38,7 +38,7 @@
                             AND a.ID = ra.ID_ASIENTO
                             AND r.ID = ra.ID_RECIBO
                             AND a.FECHAHORA < $P{fechaDesde}
-                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
+                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
                             GROUP BY r.FECHAHORA, r.RAZON_SOCIAL, r.ID
                     UNION ALL
                         SELECT af.FECHAHORA, 'AuF - '  || af.NOMBRE AS NOMBRE, -SUM(a.MONTO) AS IMPORTE
@@ -49,8 +49,8 @@
                             AND a.ID = afa.ID_ASIENTO
                             AND af.ID = afa.ID_AUTOFACTURA
                             AND a.FECHAHORA < $P{fechaDesde}
-                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
-                            AND af.ANULADO = FALSE
+                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
+                            AND af.ANULADO IS NOT TRUE
                             GROUP BY af.FECHAHORA, af.NOMBRE, af.ID
                     UNION ALL
                         SELECT a.FECHAHORA, ccd.DESCRIPCION || ' - ' || cdc.DESCRIPCION AS NOMBRE, -a.MONTO AS IMPORTE FROM   TBL_ASIENTOS a,
@@ -66,7 +66,7 @@
                             AND ccpd.ID = 1
                             AND a.ASIENTO_MANUAL = TRUE
                             AND a.FECHAHORA < $P{fechaDesde}
-                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
+                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
                     UNION ALL
                         SELECT a.FECHAHORA, cch.DESCRIPCION || ' - ' || cdc.DESCRIPCION AS NOMBRE, a.MONTO AS IMPORTE FROM   TBL_ASIENTOS a,
                             TBL_CUENTAS_CONTABLES ccd,
@@ -81,7 +81,7 @@
                             AND ccpd.ID = 1
                             AND a.ASIENTO_MANUAL = TRUE
                             AND a.FECHAHORA < $P{fechaDesde}
-                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
+                            AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
                     UNION ALL
                         SELECT t.FECHAHORA, 'Transferencias 0.00% - ' || et.DESCRIPCION as NOMBRE, SUM(aat.MONTO) AS IMPORTE
                         FROM TBL_TRANSFERENCIAS t, TBL_EVENTO_TIPOS et, TBL_TRANSFERENCIAS_ASIENTOS_TEMPORALES tat, TBL_ASIENTOS_TEMPORALES aat
@@ -91,7 +91,7 @@
                         AND tat.ID_ASIENTO_TEMPORAL = aat.ID
                         AND aat.ID_CENTRO_DE_COSTO_DEBE = $P{centroDeCosto}
                         AND aat.FECHAHORA < $P{fechaDesde}
-                        AND EXTRACT(YEAR FROM aat.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
+                        AND EXTRACT(YEAR FROM aat.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
                             GROUP BY t.FECHAHORA, et.DESCRIPCION, t.SEQ_PAGO
                     UNION ALL
                         SELECT r.FECHAHORA, 'Ingresos efectivo - ' || et.DESCRIPCION as NOMBRE, SUM(aat.MONTO) AS IMPORTE
@@ -101,7 +101,7 @@
                         AND rat.ID_ASIENTO_TEMPORAL = aat.ID
                         AND aat.ID_CENTRO_DE_COSTO_DEBE = $P{centroDeCosto}
                         AND aat.FECHAHORA < $P{fechaDesde}
-                        AND EXTRACT(YEAR FROM aat.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde})
+                        AND EXTRACT(YEAR FROM aat.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
                             GROUP BY r.FECHAHORA, et.DESCRIPCION
                     ORDER BY FECHAHORA) t]]>
     </queryString>

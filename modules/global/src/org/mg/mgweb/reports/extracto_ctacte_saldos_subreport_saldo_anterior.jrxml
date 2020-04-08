@@ -50,7 +50,7 @@
                             AND af.ID = afa.ID_AUTOFACTURA
                             AND a.FECHAHORA < $P{fechaDesde}
                             AND EXTRACT(YEAR FROM a.FECHAHORA) = EXTRACT(YEAR FROM $P{fechaDesde}::timestamp)
-                            AND af.ANULADO = FALSE
+                            AND af.ANULADO IS NOT TRUE
                             GROUP BY af.FECHAHORA, af.NOMBRE, af.ID
                     UNION ALL
                         SELECT a.FECHAHORA, ccd.DESCRIPCION || ' - ' || cdc.DESCRIPCION AS NOMBRE, -a.MONTO AS IMPORTE FROM   TBL_ASIENTOS a,

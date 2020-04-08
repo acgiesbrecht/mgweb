@@ -50,7 +50,7 @@
                             AND a.ID = afa.ID_ASIENTO
                             AND af.ID = afa.ID_AUTOFACTURA
                             AND a.FECHAHORA BETWEEN $P{fechaDesde} AND $P{fechaHasta}
-                            AND af.ANULADO = FALSE
+                            AND af.ANULADO IS NOT TRUE
                             GROUP BY af.FECHAHORA, af.NOMBRE, af.ID
                     UNION ALL
                         SELECT a.FECHAHORA, ccd.DESCRIPCION || ' - ' || cdc.DESCRIPCION AS NOMBRE, -a.MONTO AS IMPORTE FROM   TBL_ASIENTOS a,

@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import static org.mg.mgweb.service.InformesService.ReportFileFormatEnum.PDF;
 import static org.mg.mgweb.service.InformesService.ReportFileFormatEnum.PRINT;
 
 @Service(InformesService.NAME)
@@ -61,7 +62,11 @@ public class InformesServiceBean implements InformesService {
         try {
             java.util.Locale locale = new Locale("es", "PY");
             parameters.put(JRParameter.REPORT_LOCALE, locale);
-
+            if(fileFormat == PDF){
+                parameters.put(JRParameter.IS_IGNORE_PAGINATION, false);
+            }else{
+                parameters.put(JRParameter.IS_IGNORE_PAGINATION, true);
+            }
             //parameters.put("logo_cch", ImageIO.read(resources.getResourceAsStream("com/chortitzer/cinweb/reports/images/logo_cch.png")));
 
             JasperReport report = JasperCompileManager
