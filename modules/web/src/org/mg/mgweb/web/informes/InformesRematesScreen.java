@@ -55,7 +55,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Detalle Compras - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("remate_detalle", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle", fileFormatEnum, paramsMap, false);
     }
 
     public void onBtnTransferenciasPendientesClick(){
@@ -76,7 +76,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Transferencias Pendientes - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("remate_transferencias_pendientes_de_firma", fileFormatEnum, paramsMap);
+        generarInforme("remate_transferencias_pendientes_de_firma", fileFormatEnum, paramsMap, false);
     }
 
     public void onBtnTransferenciasFirmadasClick(){
@@ -97,7 +97,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Transferencias Firmadas - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("remate_detalle_transferencias", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_transferencias", fileFormatEnum, paramsMap, false);
     }
 
     public void onBtnPagosEfectivoClick(){
@@ -118,7 +118,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Informes de Pagos en efectivo - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("remate_detalle_recibos", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_recibos", fileFormatEnum, paramsMap, false);
     }
 
     public void onBtnPagosResumenClick(){
@@ -139,7 +139,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("reportScreenCaption", "Resumen de Pagos - Remates");
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
 
-        generarInforme("remate_detalle_recibos", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_recibos", fileFormatEnum, paramsMap, false);
     }
 
     public void onBtnComprasClienteClick(){
@@ -161,7 +161,7 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
         paramsMap.put("id_miembro", (lookupPickerFieldEntidades.getValue()).getId().intValue());
 
-        generarInforme("remate_detalle_compras_miembro", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_compras_miembro", fileFormatEnum, paramsMap, false);
     }
 
     public void onBtnPagosClienteClick(){
@@ -183,16 +183,17 @@ public class InformesRematesScreen extends Screen {
         paramsMap.put("id_evento", (lookupPickerFieldEventos.getValue()).getId().intValue());
         paramsMap.put("id_miembro", (lookupPickerFieldEntidades.getValue()).getId().intValue());
 
-        generarInforme("remate_detalle_pagos_miembro", fileFormatEnum, paramsMap);
+        generarInforme("remate_detalle_pagos_miembro", fileFormatEnum, paramsMap, false);
     }
     
     private void generarInforme(String reportFileName,
                    InformesService.ReportFileFormatEnum fileFormatEnum,
-                   Map paramsMap){
+                   Map paramsMap, Boolean landscape){
         Map params = informesService.generarInforme(reportFileName,
                 fileFormatEnum,
                 paramsMap,
-                null);
+                null,
+                landscape);
         if(fileFormatEnum == HTML) {
             Screenreport screen = screens.create(Screenreport.class, OpenMode.NEW_WINDOW);
             screen.setParams(params);

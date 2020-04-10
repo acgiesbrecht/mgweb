@@ -22,32 +22,123 @@
                 <label align="MIDDLE_LEFT" value="Hasta:"/>
                 <dateField id="dateFieldHasta" resolution="SEC"/>
             </hbox>
-            <grid spacing="true">
-                <columns count="8"/>
-                <rows>
-                    <row>
-                        <groupBox caption="Extracto de Cuenta Corriente:">
-                            <hbox spacing="true">
-                                <label align="MIDDLE_LEFT" value="Centro de Costo:"/>
-                                <lookupPickerField id="lookupPickerFieldCentroDeCosto"
-                                                   optionsContainer="tblCentrosDeCostoDs" width="300px" nullName="Todos"/>
-                                <checkBox id="checkBoxCtaCteDetalle" caption="Detalle"/>
-                                <label align="MIDDLE_LEFT" value="Detalle:"/>
-                                <button id="btnCtaCteDetalleVer" caption="Ver" invoke="onBtnCtaCteDetalleClick"
-                                        primary="true"/>
-                                <popupButton id="popupButton" caption="Exportar">
-                                    <actions>
-                                        <action id="btnCtaCteDetallePDF" caption="PDF" icon="FILE_PDF_O"
-                                                invoke="onBtnCtaCteDetallePDFClick"/>
-                                        <action id="btnCtaCteDetalleXLSX" caption="Excel" icon="FILE_EXCEL_O"
-                                                invoke="onBtnCtaCteDetalleXLSXClick"/>
-                                    </actions>
-                                </popupButton>
-                            </hbox>
-                        </groupBox>
-                    </row>
-                </rows>
-            </grid>
+            <hbox align="MIDDLE_LEFT" spacing="true">
+                <groupBox caption="Extracto de Cuenta Corriente:">
+                    <hbox spacing="true">
+                        <label align="MIDDLE_LEFT" value="Centro de Costo:"/>
+                        <lookupPickerField id="lookupPickerFieldCentroDeCosto"
+                                           optionsContainer="tblCentrosDeCostoDs" width="300px" nullName="Todos"/>
+                        <checkBox id="checkBoxCtaCteDetalle" align="MIDDLE_LEFT" caption="Detalle"/>
+                        <button id="btnCtaCteDetalleVer" caption="Ver" invoke="onBtnCtaCteDetalleClick"
+                                primary="true"/>
+                        <popupButton id="popupButton" caption="Exportar">
+                            <actions>
+                                <action id="btnCtaCteDetallePDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnCtaCteDetallePDFClick"/>
+                                <action id="btnCtaCteDetalleXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnCtaCteDetalleXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </hbox>
+                </groupBox>
+                <groupBox caption="Saldos de Cuenta Corriente por Centro de Costo:">
+                    <hbox spacing="true">
+                        <lookupField id="lookupPickerFieldSaldos" width="200px" required="true"/>
+                        <button id="btnSaldosCentroCostoVer" caption="Ver" invoke="onBtnSaldosCentroCostoClick"
+                                primary="true"/>
+                        <popupButton id="popupButton7" caption="Exportar">
+                            <actions>
+                                <action id="btnSaldosCentroCostoPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnSaldosCentroCostoPDFClick"/>
+                                <action id="btnSaldosCentroCostoXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnSaldosCentroCostoXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </hbox>
+                </groupBox>
+            </hbox>
+            <hbox align="MIDDLE_LEFT" spacing="true">
+                <groupBox caption="Libro mayor:">
+                    <hbox spacing="true">
+                        <label align="MIDDLE_LEFT" value="Centro de Costo:"/>
+                        <lookupPickerField id="lookupPickerFieldCentroDeCostoMayor"
+                                           optionsContainer="tblCentrosDeCostoDs" width="300px" nullName="Todos"/>
+                        <checkBox id="checkBoxLibroMayorTotales" align="MIDDLE_LEFT" caption="Solo totales"/>
+                        <button id="btnLibroMayorVer" caption="Ver" invoke="onBtnLibroMayorClick"
+                                primary="true"/>
+                        <popupButton id="popupButton2" caption="Exportar">
+                            <actions>
+                                <action id="btnLibroMayorPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnLibroMayorPDFClick"/>
+                                <action id="btnLibroMayorXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnLibroMayorXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </hbox>
+                </groupBox>
+            </hbox>
+            <hbox align="MIDDLE_LEFT" spacing="true">
+                <groupBox caption="Libro Egresos:">
+                    <hbox spacing="true">
+                        <checkBox id="checkBoxLibroEgresosCdC" align="MIDDLE_LEFT"
+                                  caption="Mostrar Centro de Costo y Cuentas Contables"/>
+                        <button id="btnLibroEgresosVer" caption="Ver" invoke="onBtnLibroEgresosClick"
+                                primary="true"/>
+                        <popupButton id="popupButton3" caption="Exportar">
+                            <actions>
+                                <action id="btnLibroEgresosPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnLibroEgresosPDFClick"/>
+                                <action id="btnLibroEgresosXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnLibroEgresosXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </hbox>
+                </groupBox>
+                <groupBox caption="Libro Ingresos:">
+                    <hbox spacing="true">
+                        <button id="btnLibroIngresosVer" caption="Ver" invoke="onBtnLibroIngresosClick"
+                                primary="true"/>
+                        <popupButton id="popupButton4" caption="Exportar">
+                            <actions>
+                                <action id="btnLibroIngresosPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnLibroIngresosPDFClick"/>
+                                <action id="btnLibroIngresosXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnLibroIngresosXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </hbox>
+                </groupBox>
+            </hbox>
+            <hbox align="MIDDLE_LEFT" spacing="true">
+                <groupBox caption="DDJJ IVA Semestral:">
+                    <hbox spacing="true">
+                        <button id="btnLibroIvaSemestralVer" caption="Ver" invoke="onBtnIvaSemestralClick"
+                                primary="true"/>
+                        <popupButton id="popupButton5" caption="Exportar">
+                            <actions>
+                                <action id="btnIvaSemestralPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnIvaSemestralPDFClick"/>
+                                <action id="btnIvaSemestralXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnIvaSemestralXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </hbox>
+                </groupBox>
+                <groupBox caption="Facturas Credito - Resumen:">
+                    <hbox spacing="true">
+                        <button id="btnFacturasCreditoVer" caption="Ver" invoke="onBtnFacturasCreditoClick"
+                                primary="true"/>
+                        <popupButton id="popupButton6" caption="Exportar">
+                            <actions>
+                                <action id="btnFacturasCreditoPDF" caption="PDF" icon="FILE_PDF_O"
+                                        invoke="onBtnFacturasCreditoPDFClick"/>
+                                <action id="btnFacturasCreditoXLSX" caption="Excel" icon="FILE_EXCEL_O"
+                                        invoke="onBtnFacturasCreditoXLSXClick"/>
+                            </actions>
+                        </popupButton>
+                    </hbox>
+                </groupBox>
+            </hbox>
         </vbox>
     </layout>
 </window>

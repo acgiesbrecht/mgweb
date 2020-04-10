@@ -215,7 +215,7 @@ ORDER BY cp.DESCRIPCION, e.APELLIDOS, e.NOMBRES]]>
 					<pen lineWidth="0.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[org.mg.mgweb.datatypes.CcmDatatype.formatCta($F{CTACTE})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(new org.mg.mgweb.datatypes.CcmDatatype).format($F{CTACTE})]]></textFieldExpression>
 			</textField>
 			<textField pattern="">
 				<reportElement x="435" y="0" width="82" height="15" uuid="d021926a-3a96-4d44-83bf-f557468275e2">

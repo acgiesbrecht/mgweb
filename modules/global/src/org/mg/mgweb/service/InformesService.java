@@ -13,14 +13,24 @@ public interface InformesService {
 
     Map<String, Object> generarInforme(String reportFileName,
                                        String subReportFileName,
+                                       String subSubReportFileName,
                                        ReportFileFormatEnum fileFormat,
                                        Map paramsMap,
-                                       JRDataSource datasource);
+                                       JRDataSource datasource,
+                                       Boolean landscape);
+
+    Map<String, Object> generarInforme(String reportFileName,
+                                       String subReportFileName,
+                                       ReportFileFormatEnum fileFormat,
+                                       Map paramsMap,
+                                       JRDataSource datasource,
+                                       Boolean landscape);
 
     Map<String, Object> generarInforme(String reportFileName,
                                         ReportFileFormatEnum fileFormat,
                                         Map paramsMap,
-                                       JRDataSource datasource);
+                                       JRDataSource datasource,
+                                       Boolean landscape);
 
     /*void printInforme(String reportFileUrl,
                       Object datasource,

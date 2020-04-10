@@ -130,7 +130,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[com.gnadenheimer.utils.NumeroALetras.convertNumberToLetter($F{importeAporte}+$F{importeDonacion})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(new org.mg.mgweb.service.UtilsServiceBean()).convertNumberToLetter($F{importeAporte}+$F{importeDonacion})]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement x="5" y="92" width="45" height="20" uuid="cd85e5db-b342-45fe-a014-10bad7650e68"/>
@@ -341,7 +341,7 @@
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="7" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[com.gnadenheimer.utils.NumeroALetras.convertNumberToLetter($F{importeAporte}+$F{importeDonacion})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(new org.mg.mgweb.service.UtilsServiceBean()).convertNumberToLetter($F{importeAporte}+$F{importeDonacion})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#000000" isBlankWhenNull="false">
 				<reportElement x="345" y="490" width="186" height="24" uuid="7f28a5bf-e0d1-47eb-a4c3-087a7be26a2d"/>

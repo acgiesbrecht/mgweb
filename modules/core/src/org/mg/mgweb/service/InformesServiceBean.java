@@ -9,6 +9,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.JRPrintServiceExporter;
 import net.sf.jasperreports.engine.export.JRXmlExporter;
 import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
+import net.sf.jasperreports.engine.type.WhenNoDataTypeEnum;
 import net.sf.jasperreports.export.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,15 +41,34 @@ public class InformesServiceBean implements InformesService {
     @Transactional
     public Map<String, Object> generarInforme(String reportFileName,
                                               String subReportFileName,
+                                              String subSubReportFileName,
                                               ReportFileFormatEnum fileFormat,
                                               Map parameters,
-                                              JRDataSource dataSource) {
+                                              JRDataSource dataSource,
+                                              Boolean landscape) {
+        try {
+            JasperReport report = JasperCompileManager
+                    .compileReport(
+                            resources.getResourceAsStream("org/mg/mgweb/reports/" + subSubReportFileName + ".jrxml"));
+            parameters.put("subSubreportObject", report);
+            return generarInforme(reportFileName, subReportFileName, fileFormat, parameters, dataSource, landscape);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @Transactional
+    public Map<String, Object> generarInforme(String reportFileName,
+                                              String subReportFileName,
+                                              ReportFileFormatEnum fileFormat,
+                                              Map parameters,
+                                              JRDataSource dataSource, Boolean landscape) {
         try {
             JasperReport report = JasperCompileManager
                     .compileReport(
                             resources.getResourceAsStream("org/mg/mgweb/reports/" + subReportFileName + ".jrxml"));
             parameters.put("subreportObject", report);
-            return generarInforme(reportFileName, fileFormat, parameters, dataSource);
+            return generarInforme(reportFileName, fileFormat, parameters, dataSource, landscape);
         } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
@@ -58,7 +78,7 @@ public class InformesServiceBean implements InformesService {
     public Map<String, Object> generarInforme(String reportFileName,
                                               ReportFileFormatEnum fileFormat,
                                               Map parameters,
-                                              JRDataSource datasource) {
+                                              JRDataSource datasource, Boolean landscape) {
         try {
             java.util.Locale locale = new Locale("es", "PY");
             parameters.put(JRParameter.REPORT_LOCALE, locale);
@@ -67,11 +87,21 @@ public class InformesServiceBean implements InformesService {
             }else{
                 parameters.put(JRParameter.IS_IGNORE_PAGINATION, true);
             }
+
+            if (landscape) {
+                JasperReport reportHeader = JasperCompileManager.compileReport(resources.getResourceAsStream("org/mg/mgweb/reports/header_landscape.jrxml"));
+                parameters.put("subreportHeader", reportHeader);
+            } else {
+                JasperReport reportHeader = JasperCompileManager.compileReport(resources.getResourceAsStream("org/mg/mgweb/reports/header.jrxml"));
+                parameters.put("subreportHeader", reportHeader);
+            }
+
             //parameters.put("logo_cch", ImageIO.read(resources.getResourceAsStream("com/chortitzer/cinweb/reports/images/logo_cch.png")));
 
             JasperReport report = JasperCompileManager
                     .compileReport(
                             resources.getResourceAsStream("org/mg/mgweb/reports/" + reportFileName + ".jrxml"));
+            report.setWhenNoDataType(WhenNoDataTypeEnum.NO_DATA_SECTION);
 
             JasperPrint jasperPrint;
             if (datasource == null) {

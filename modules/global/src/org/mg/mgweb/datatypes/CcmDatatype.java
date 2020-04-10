@@ -56,8 +56,4 @@ public class CcmDatatype implements Datatype<Integer> {
         return parse(value);
     }
 
-    public static String formatCta(Integer cta){
-        return new CcmDatatype().format(cta);
-    }
-
 }

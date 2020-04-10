@@ -55,7 +55,7 @@
 		<queryString>
 			<![CDATA[SELECT e.FECHA, SUM(ed.MONTO) AS SUMA, m.APELLIDOS, m.NOMBRES, m.CTACTE FROM tbl_eventos e, tbl_evento_detalle ed, tbl_entidades m
 where ed.id_evento = e.id AND ed.id_entidad = m.id
-AND EXATRCT(MONTH FROM e.fecha) = $P{mes} AND YEAR(e.fecha) = $P{ano}
+AND EXTRACT(MONTH FROM e.fecha) = $P{mes} AND YEAR(e.fecha) = $P{ano}
 AND e.ID_EVENTO_TIPO = 2
 GROUP BY e.FECHA, m.CTACTE, m.APELLIDOS, m.NOMBRES
 ORDER BY e.FECHA, m.CTACTE]]>
@@ -141,7 +141,7 @@ ORDER BY e.FECHA, m.CTACTE]]>
 								<textElement textAlignment="Left" verticalAlignment="Middle">
 									<font size="8"/>
 								</textElement>
-								<textFieldExpression><![CDATA[org.mg.mgweb.datatypes.CcmDatatype.formatCta($V{CTACTE1})]]></textFieldExpression>
+								<textFieldExpression><![CDATA[(new org.mg.mgweb.datatypes.CcmDatatype).format($V{CTACTE1})]]></textFieldExpression>
 							</textField>
 						</cellContents>
 					</crosstabRowHeader>

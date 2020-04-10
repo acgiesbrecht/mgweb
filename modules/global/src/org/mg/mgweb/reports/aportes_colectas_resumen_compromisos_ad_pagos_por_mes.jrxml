@@ -19,35 +19,35 @@
     <queryString language="SQL">
 		<![CDATA[SELECT * FROM
 (select CAST(COALESCE(SUM(rd.monto),0)*(CAST(rd.PORCENTAJE_APORTE AS double)/100) AS INTEGER) as monto_compra_a, CAST(COALESCE(SUM(rd.monto),0)*(100-CAST(rd.PORCENTAJE_APORTE AS double))/100 AS INTEGER) as monto_compra_d, rd.id_entidad, m.apellidos, m.nombres, m.ctacte,
-        EXATRCT(MONTH FROM rd.FECHA) AS mes,
-        EXATRCT(YEAR FROM rd.FECHA) AS ano
+        EXTRACT(MONTH FROM rd.FECHA) AS mes,
+        EXTRACT(YEAR FROM rd.FECHA) AS ano
     from (SELECT * FROM tbl_evento_detalle ed
             LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID
             WHERE (ev.ID_EVENTO_TIPO = 2 OR ev.ID_EVENTO_TIPO = 3)
-            AND EXATRCT(YEAR FROM ev.fecha) = $P{pAno} AND EXATRCT(MONTH FROM ev.fecha) = $P{pMes}) rd
+            AND EXTRACT(YEAR FROM ev.fecha) = $P{pAno} AND EXTRACT(MONTH FROM ev.fecha) = $P{pMes}) rd
     LEFT JOIN tbl_entidades m ON rd.id_entidad = m.id
-    GROUP BY EXATRCT(MONTH FROM rd.FECHA), EXATRCT(YEAR FROM rd.FECHA), rd.id_entidad, m.apellidos, m.nombres, m.ctacte, rd.PORCENTAJE_APORTE) c
+    GROUP BY EXTRACT(MONTH FROM rd.FECHA), EXTRACT(YEAR FROM rd.FECHA), rd.id_entidad, m.apellidos, m.nombres, m.ctacte, rd.PORCENTAJE_APORTE) c
 LEFT JOIN
 (SELECT entidad, SUM(monto_p_a) as monto_pago_a, SUM(monto_p_d) as monto_pago_d FROM
     (SELECT m.id as entidad,
-        EXATRCT(MONTH FROM t.FECHAHORA_COMPROMISO) AS mes,
-        EXATRCT(YEAR FROM t.FECHAHORA_COMPROMISO) AS ano,
+        EXTRACT(MONTH FROM t.FECHAHORA_COMPROMISO) AS mes,
+        EXTRACT(YEAR FROM t.FECHAHORA_COMPROMISO) AS ano,
         SUM(COALESCE(t.monto_aporte,0)) as monto_p_a,
         SUM(COALESCE(t.monto_donacion,0)) as monto_p_d FROM tbl_entidades m
         LEFT JOIN (SELECT * FROM tbl_transferencias WHERE (ID_EVENTO_TIPO = 2 OR ID_EVENTO_TIPO = 3)
-AND EXATRCT(YEAR FROM fechahora_compromiso) = $P{pAno} AND EXATRCT(MONTH FROM fechahora_compromiso) = $P{pMes}) t
+AND EXTRACT(YEAR FROM fechahora_compromiso) = $P{pAno} AND EXTRACT(MONTH FROM fechahora_compromiso) = $P{pMes}) t
         ON m.id = t.ID_ENTIDAD
-    GROUP BY EXATRCT(YEAR FROM t.FECHAHORA_COMPROMISO), EXATRCT(MONTH FROM t.FECHAHORA_COMPROMISO), m.id
+    GROUP BY EXTRACT(YEAR FROM t.FECHAHORA_COMPROMISO), EXTRACT(MONTH FROM t.FECHAHORA_COMPROMISO), m.id
     UNION ALL
     SELECT m.id as entidad,
-        EXATRCT(MONTH FROM r.FECHAHORA) AS mes,
-        EXATRCT(YEAR FROM r.FECHAHORA) AS ano,
+        EXTRACT(MONTH FROM r.FECHAHORA) AS mes,
+        EXTRACT(YEAR FROM r.FECHAHORA) AS ano,
         SUM(COALESCE(r.monto_aporte,0)) as monto_p_a,
         SUM(COALESCE(r.monto_donacion,0)) as monto_p_d FROM tbl_entidades m
         LEFT JOIN (SELECT * FROM tbl_recibos WHERE (ID_EVENTO_TIPO = 2 OR ID_EVENTO_TIPO = 3)
-        AND EXATRCT(YEAR FROM fechahora) = $P{pAno} AND EXATRCT(MONTH FROM fechahora) = $P{pMes}) r
+        AND EXTRACT(YEAR FROM fechahora) = $P{pAno} AND EXTRACT(MONTH FROM fechahora) = $P{pMes}) r
         ON m.id = r.ID_ENTIDAD
-        GROUP BY YEAR(r.FECHAHORA), EXATRCT(MONTH FROM r.FECHAHORA), m.id
+        GROUP BY YEAR(r.FECHAHORA), EXTRACT(MONTH FROM r.FECHAHORA), m.id
 ORDER BY entidad) pago
 GROUP BY pago.entidad) p
 ON c.id_entidad = p.entidad]]>
@@ -185,7 +185,7 @@ ON c.id_entidad = p.entidad]]>
                 <textElement verticalAlignment="Middle">
                     <font size="8"/>
                 </textElement>
-                <textFieldExpression><![CDATA[org.mg.mgweb.datatypes.CcmDatatype.formatCta($F{CTACTE})]]></textFieldExpression>
+                <textFieldExpression><![CDATA[(new org.mg.mgweb.datatypes.CcmDatatype).format($F{CTACTE})]]></textFieldExpression>
             </textField>
             <textField pattern="#,##0">
                 <reportElement x="370" y="0" width="80" height="20" uuid="920b3bb4-9c54-4815-b16a-8c493ad8c299"/>
