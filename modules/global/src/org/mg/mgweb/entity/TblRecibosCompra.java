@@ -3,10 +3,11 @@ package org.mg.mgweb.entity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
+import com.haulmont.cuba.security.entity.User;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
 @NamePattern("%s %s|nro,fechahora")
@@ -21,9 +22,9 @@ public class TblRecibosCompra extends BaseIntIdentityIdEntity {
     @Column(name = "fechahora", nullable = false)
     protected LocalDateTime fechahora;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
-    protected TblUsers idUser;
+    protected User idUser;
 
     @Column(name = "monto", nullable = false)
     protected Integer monto;
@@ -108,11 +109,11 @@ public class TblRecibosCompra extends BaseIntIdentityIdEntity {
         this.monto = monto;
     }
 
-    public TblUsers getIdUser() {
+    public User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(TblUsers idUser) {
+    public void setIdUser(User idUser) {
         this.idUser = idUser;
     }
 

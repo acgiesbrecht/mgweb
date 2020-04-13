@@ -42,16 +42,12 @@
             template="/org/mg/mgweb/web/admin/tbltimbradoscompras/tbl-timbrados-compras-browse.xml"/>
     <screen id="mgweb_TblCategoriasArticulos.browse"
             template="/org/mg/mgweb/web/admin/tblcategoriasarticulos/tbl-categorias-articulos-browse.xml"/>
-    <screen id="mgweb_TblEventoDetalle.browse"
-            template="/org/mg/mgweb/web/admin/tbleventodetalle/tbl-evento-detalle-browse.xml"/>
     <screen id="mgweb_TblEventos.browse" template="/org/mg/mgweb/web/admin/tbleventos/tbl-eventos-browse.xml"/>
     <screen id="mgweb_TblMiembrosCategoriasDePago.browse"
             template="/org/mg/mgweb/web/admin/tblmiembroscategoriasdepago/tbl-miembros-categorias-de-pago-browse.xml"/>
     <screen id="mgweb_TblTimbrados.browse" template="/org/mg/mgweb/web/admin/tbltimbrados/tbl-timbrados-browse.xml"/>
-    <screen id="mgweb_TblUsers.browse" template="/org/mg/mgweb/web/admin/tblusers/tbl-users-browse.xml"/>
     <screen id="mgweb_TblCuentasContablesPorDefecto.browse"
             template="/org/mg/mgweb/web/admin/tblcuentascontablespordefecto/tbl-cuentas-contables-por-defecto-browse.xml"/>
-    <screen id="mgweb_TblGrupos.browse" template="/org/mg/mgweb/web/admin/tblgrupos/tbl-grupos-browse.xml"/>
     <screen id="mgweb_TblAsientosTemporales.browse"
             template="/org/mg/mgweb/web/admin/tblasientostemporales/tbl-asientos-temporales-browse.xml"/>
     <screen id="mgweb_TblEntidadesHistoricoCategorias.browse"
@@ -72,7 +68,6 @@
             template="/org/mg/mgweb/web/admin/tblcontribuyentes/tbl-contribuyentes-browse.xml"/>
     <screen id="mgweb_TblMiembrosRelacionesRoles.browse"
             template="/org/mg/mgweb/web/admin/tblmiembrosrelacionesroles/tbl-miembros-relaciones-roles-browse.xml"/>
-    <screen id="mgweb_TblRoles.browse" template="/org/mg/mgweb/web/admin/tblroles/tbl-roles-browse.xml"/>
     <screen id="mgweb_TblEntidades.browse" template="/org/mg/mgweb/web/admin/tblentidades/tbl-entidades-browse.xml"/>
     <screen id="mgweb_TblMiembrosRelaciones.browse"
             template="/org/mg/mgweb/web/admin/tblmiembrosrelaciones/tbl-miembros-relaciones-browse.xml"/>
@@ -107,16 +102,12 @@
             template="/org/mg/mgweb/web/admin/tbltimbradoscompras/tbl-timbrados-compras-browse.xml"/>
     <screen id="mgweb_TblCategoriasArticulos.browse"
             template="/org/mg/mgweb/web/admin/tblcategoriasarticulos/tbl-categorias-articulos-browse.xml"/>
-    <screen id="mgweb_TblEventoDetalle.browse"
-            template="/org/mg/mgweb/web/admin/tbleventodetalle/tbl-evento-detalle-browse.xml"/>
     <screen id="mgweb_TblEventos.browse" template="/org/mg/mgweb/web/admin/tbleventos/tbl-eventos-browse.xml"/>
     <screen id="mgweb_TblMiembrosCategoriasDePago.browse"
             template="/org/mg/mgweb/web/admin/tblmiembroscategoriasdepago/tbl-miembros-categorias-de-pago-browse.xml"/>
     <screen id="mgweb_TblTimbrados.browse" template="/org/mg/mgweb/web/admin/tbltimbrados/tbl-timbrados-browse.xml"/>
-    <screen id="mgweb_TblUsers.browse" template="/org/mg/mgweb/web/admin/tblusers/tbl-users-browse.xml"/>
     <screen id="mgweb_TblCuentasContablesPorDefecto.browse"
             template="/org/mg/mgweb/web/admin/tblcuentascontablespordefecto/tbl-cuentas-contables-por-defecto-browse.xml"/>
-    <screen id="mgweb_TblGrupos.browse" template="/org/mg/mgweb/web/admin/tblgrupos/tbl-grupos-browse.xml"/>
     <screen id="mgweb_TblAsientosTemporales.browse"
             template="/org/mg/mgweb/web/admin/tblasientostemporales/tbl-asientos-temporales-browse.xml"/>
     <screen id="mgweb_TblEntidadesHistoricoCategorias.browse"

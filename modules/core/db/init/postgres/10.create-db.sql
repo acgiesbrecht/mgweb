@@ -1,3 +1,5 @@
+-- CREATE EXTENSION "uuid-ossp";
+
 -- begin TBL_APORTES_IMPORTE_MENSUAL_SALDO_ANTERIOR
 create table tbl_aportes_importe_mensual_saldo_anterior (
     ID serial,
@@ -23,15 +25,15 @@ create table tbl_areas_servicio_en_iglesia (
 create table tbl_asientos (
     ID serial,
     --
-    fechahora timestamp not null,
-    id_cuenta_contable_debe integer not null,
-    id_cuenta_contable_haber integer not null,
-    observacion varchar(255),
-    monto integer not null,
-    id_user integer not null,
     asiento_manual boolean,
+    fechahora timestamp not null,
     id_centro_de_costo_debe integer not null,
     id_centro_de_costo_haber integer not null,
+    id_cuenta_contable_debe integer not null,
+    id_cuenta_contable_haber integer not null,
+    id_user uuid,
+    monto integer not null,
+    observacion varchar(255),
     --
     primary key (ID)
 )^
@@ -56,21 +58,21 @@ create table tbl_asientos_temporales (
 create table tbl_autofacturas (
     ID serial,
     --
-    nro varchar(15) not null,
-    id_timbrado integer not null,
-    fechahora timestamp not null,
-    nombre varchar(255) not null,
-    domicilio varchar(255) not null,
-    direccion_de_transaccion varchar(255) not null,
-    ci varchar(20) not null,
-    cantidad integer not null,
-    concepto varchar(255) not null,
-    precio_unitario integer not null,
-    monto integer not null,
-    observacion varchar(255),
     anulado boolean,
-    id_user integer not null,
+    cantidad integer not null,
+    ci varchar(20) not null,
+    concepto varchar(255) not null,
     condicion_contado boolean,
+    direccion_de_transaccion varchar(255) not null,
+    domicilio varchar(255) not null,
+    fechahora timestamp not null,
+    id_timbrado integer not null,
+    id_user uuid,
+    monto integer not null,
+    nombre varchar(255) not null,
+    nro varchar(15) not null,
+    observacion varchar(255),
+    precio_unitario integer not null,
     --
     primary key (ID)
 )^
@@ -146,30 +148,30 @@ create table tbl_database_updates (
 create table tbl_entidades (
     ID serial,
     --
-    nombres varchar(128) not null,
     apellidos varchar(128) not null,
-    razon_social varchar(256) not null,
-    ruc_sin_dv varchar(20) not null,
+    aporte_mensual integer not null,
+    aporte_saldo_anterior bigint,
+    box integer,
+    cantidad_de_dependientes_aportantes integer not null,
     ctacte integer not null,
     domicilio varchar(50),
-    box integer,
-    is_miembro_activo boolean,
-    id_forma_de_pago_preferida integer,
-    aporte_mensual integer not null,
-    id_entidad_pagante_aportes integer,
-    fecha_nacimiento timestamp,
     fecha_bautismo timestamp,
-    fecha_entrada_congregacion timestamp,
-    fecha_salida_congregacion timestamp,
     fecha_defuncion timestamp,
+    fecha_entrada_congregacion timestamp,
+    fecha_nacimiento timestamp,
+    fecha_salida_congregacion timestamp,
     id_area_servicio_en_iglesia integer,
-    id_miembros_categoria_de_pago integer,
+    id_entidad_pagante_aportes integer,
+    id_forma_de_pago_preferida integer,
     id_miembros_alergia integer,
-    id_user integer,
-    aporte_saldo_anterior bigint,
-    mes_inicio_aporte integer,
+    id_miembros_categoria_de_pago integer,
+    id_user uuid,
+    is_miembro_activo boolean,
     mes_fin_aporte integer,
-    cantidad_de_dependientes_aportantes integer not null,
+    mes_inicio_aporte integer,
+    nombres varchar(128) not null,
+    razon_social varchar(256) not null,
+    ruc_sin_dv varchar(20) not null,
     --
     primary key (ID)
 )^
@@ -194,7 +196,7 @@ create table tbl_evento_cuotas (
     fecha_2 timestamp,
     fecha_3 timestamp,
     fecha_4 timestamp,
-    id_user integer,
+    id_user uuid,
     --
     primary key (id_evento)
 )^
@@ -204,13 +206,13 @@ create table tbl_evento_detalle (
     ID serial,
     --
     fechahora timestamp not null,
-    observacion varchar(255),
-    monto integer not null,
+    id_categoria_articulo integer not null,
     id_entidad integer not null,
     id_evento integer not null,
-    id_categoria_articulo integer not null,
     id_forma_de_pago_preferida integer not null,
-    id_user integer,
+    id_user uuid,
+    monto integer not null,
+    observacion varchar(255),
     --
     primary key (ID)
 )^
@@ -232,8 +234,7 @@ create table tbl_eventos (
     fecha timestamp not null,
     id_centro_de_costo integer not null,
     id_evento_tipo integer not null,
-    id_grupo integer not null,
-    id_user integer not null,
+    id_user uuid,
     porcentaje_aporte integer not null,
     --
     primary key (ID)
@@ -243,17 +244,17 @@ create table tbl_eventos (
 create table tbl_facturas (
     nro integer,
     --
-    id_timbrado integer not null,
+    anulado boolean,
+    casilla_de_correo integer,
+    domicilio varchar(255),
     fechahora timestamp not null,
     id_entidad integer not null,
+    id_timbrado integer not null,
+    id_user uuid,
+    importe_aporte integer not null,
+    importe_donacion integer not null,
     razon_social varchar(50) not null,
     ruc varchar(20) not null,
-    importe_donacion integer not null,
-    importe_aporte integer not null,
-    anulado boolean,
-    id_user integer not null,
-    domicilio varchar(255),
-    casilla_de_correo integer,
     --
     primary key (nro)
 )^
@@ -262,22 +263,22 @@ create table tbl_facturas (
 create table tbl_facturas_compra (
     ID serial,
     --
+    condicion_contado boolean,
+    cuotas_credito integer,
+    fecha_vencimiento_credito timestamp,
+    fechahora timestamp not null,
+    id_user uuid,
+    iva10 integer not null,
+    iva5 integer not null,
+    monto_exentas integer not null,
+    monto_iva10 integer not null,
+    monto_iva5 integer not null,
     nro varchar(15) not null,
     nro_timbrado varchar(8) not null,
-    vencimiento_timbrado timestamp not null,
-    condicion_contado boolean,
-    fecha_vencimiento_credito timestamp,
-    cuotas_credito integer,
-    fechahora timestamp not null,
+    observacion varchar(255),
     razon_social varchar(255) not null,
     ruc varchar(20) not null,
-    monto_exentas integer not null,
-    monto_iva5 integer not null,
-    monto_iva10 integer not null,
-    iva5 integer not null,
-    iva10 integer not null,
-    observacion varchar(255),
-    id_user integer not null,
+    vencimiento_timbrado timestamp not null,
     --
     primary key (ID)
 )^
@@ -291,15 +292,6 @@ create table tbl_formas_de_pago (
     primary key (ID)
 )^
 -- end TBL_FORMAS_DE_PAGO
--- begin TBL_GRUPOS
-create table tbl_grupos (
-    ID serial,
-    --
-    descripcion varchar(50) not null,
-    --
-    primary key (ID)
-)^
--- end TBL_GRUPOS
 -- begin TBL_IGLESIA
 create table tbl_iglesia (
     ID integer,
@@ -346,15 +338,15 @@ create table tbl_miembros_familias (
 create table tbl_miembros_relaciones (
     ID serial,
     --
-    id_miembros_familia integer,
+    fecha_fin timestamp,
+    fecha_inicio timestamp,
     id_entidad_1 integer,
     id_entidad_2 integer,
-    id_miembros_relaciones_tipo integer,
+    id_miembros_familia integer,
     id_miembros_relaciones_rol_1 integer,
     id_miembros_relaciones_rol_2 integer,
-    fecha_inicio timestamp,
-    fecha_fin timestamp,
-    id_user integer,
+    id_miembros_relaciones_tipo integer,
+    id_user uuid,
     --
     primary key (ID)
 )^
@@ -381,12 +373,12 @@ create table tbl_miembros_relaciones_tipos (
 create table tbl_notas_de_credito (
     ID serial,
     --
-    nro varchar(15) not null,
-    id_timbrado integer not null,
-    fechahora timestamp not null,
-    nro_factura integer not null,
     anulado boolean,
-    id_user integer not null,
+    fechahora timestamp not null,
+    id_timbrado integer not null,
+    id_user uuid,
+    nro varchar(15) not null,
+    nro_factura integer not null,
     --
     primary key (ID)
 )^
@@ -395,19 +387,19 @@ create table tbl_notas_de_credito (
 create table tbl_notas_de_credito_compras (
     ID serial,
     --
+    fechahora timestamp not null,
+    id_user uuid,
+    iva10 integer not null,
+    iva5 integer not null,
+    monto_exentas integer not null,
+    monto_iva10 integer not null,
+    monto_iva5 integer not null,
     nro varchar(15) not null,
     nro_timbrado varchar(8) not null,
-    vencimiento_timbrado timestamp not null,
-    fechahora timestamp not null,
+    observacion varchar(255),
     razon_social varchar(255) not null,
     ruc varchar(20) not null,
-    monto_exentas integer not null,
-    monto_iva5 integer not null,
-    monto_iva10 integer not null,
-    iva5 integer not null,
-    iva10 integer not null,
-    observacion varchar(255),
-    id_user integer not null,
+    vencimiento_timbrado timestamp not null,
     --
     primary key (ID)
 )^
@@ -416,15 +408,15 @@ create table tbl_notas_de_credito_compras (
 create table tbl_recibos (
     ID serial,
     --
-    fechahora timestamp not null,
     concepto varchar(50),
+    fechahora timestamp not null,
+    fechahora_compromiso timestamp,
+    id_entidad integer not null,
+    id_evento integer,
+    id_evento_tipo integer not null,
+    id_user uuid,
     monto_aporte integer not null,
     monto_donacion integer not null,
-    id_entidad integer not null,
-    id_evento_tipo integer not null,
-    id_user integer not null,
-    id_evento integer,
-    fechahora_compromiso timestamp,
     --
     primary key (ID)
 )^
@@ -433,36 +425,27 @@ create table tbl_recibos (
 create table tbl_recibos_compra (
     ID serial,
     --
-    nro varchar(30) not null,
     fechahora timestamp not null,
+    id_user uuid,
+    monto integer not null,
+    nro varchar(30) not null,
+    observacion varchar(255),
     razon_social varchar(255) not null,
     ruc varchar(20) not null,
-    monto integer not null,
-    observacion varchar(255),
-    id_user integer not null,
     --
     primary key (ID)
 )^
 -- end TBL_RECIBOS_COMPRA
--- begin TBL_ROLES
-create table tbl_roles (
-    ID serial,
-    --
-    descripcion varchar(50) not null,
-    --
-    primary key (ID)
-)^
--- end TBL_ROLES
 -- begin TBL_TIMBRADOS
 create table tbl_timbrados (
     nro integer,
     --
+    activo boolean,
     fecha_inicio timestamp not null,
     fecha_vencimiento timestamp not null,
-    nro_factura_incio integer not null,
+    id_user uuid,
     nro_factura_fin integer not null,
-    activo boolean,
-    id_user integer not null,
+    nro_factura_incio integer not null,
     --
     primary key (nro)
 )^
@@ -471,13 +454,13 @@ create table tbl_timbrados (
 create table tbl_timbrados_autofacturas (
     ID serial,
     --
-    nro varchar(8) not null,
+    activo boolean,
     fecha_inicio timestamp not null,
     fecha_vencimiento timestamp not null,
-    nro_factura_incio integer not null,
+    id_user uuid,
+    nro varchar(8) not null,
     nro_factura_fin integer not null,
-    activo boolean,
-    id_user integer not null,
+    nro_factura_incio integer not null,
     --
     primary key (ID)
 )^
@@ -487,8 +470,8 @@ create table tbl_timbrados_compras (
     nro varchar(8),
     --
     fecha_vencimiento timestamp not null,
+    id_user uuid,
     ruc_sin_dv varchar(20) not null,
-    id_user integer,
     --
     primary key (nro)
 )^
@@ -497,15 +480,15 @@ create table tbl_timbrados_compras (
 create table tbl_timbrados_notas_de_credito (
     ID serial,
     --
-    nro varchar(8) not null,
+    activo boolean,
     establecimiento varchar(3) not null,
-    punto_de_expedicion varchar(3) not null,
     fecha_inicio timestamp not null,
     fecha_vencimiento timestamp not null,
-    nro_nota_de_credito_incio integer not null,
+    id_user uuid,
+    nro varchar(8) not null,
     nro_nota_de_credito_fin integer not null,
-    activo boolean,
-    id_user integer not null,
+    nro_nota_de_credito_incio integer not null,
+    punto_de_expedicion varchar(3) not null,
     --
     primary key (ID)
 )^
@@ -514,33 +497,22 @@ create table tbl_timbrados_notas_de_credito (
 create table tbl_transferencias (
     ID serial,
     --
-    fechahora timestamp not null,
+    cobrado boolean,
     concepto varchar(50),
+    fechahora timestamp not null,
+    fechahora_compromiso timestamp,
+    id_entidad integer not null,
+    id_evento integer,
+    id_evento_detalle integer,
+    id_evento_tipo integer not null,
+    id_user uuid,
     monto_aporte integer not null,
     monto_donacion integer not null,
-    id_entidad integer not null,
-    id_evento_tipo integer not null,
-    cobrado boolean,
-    id_user integer not null,
-    id_evento integer,
-    fechahora_compromiso timestamp,
-    id_evento_detalle integer,
     seq_pago integer not null,
     --
     primary key (ID)
 )^
 -- end TBL_TRANSFERENCIAS
--- begin TBL_USERS
-create table tbl_users (
-    ID serial,
-    --
-    nombre varchar(50) not null,
-    password varchar(100) not null,
-    nombrecompleto varchar(100) not null,
-    --
-    primary key (ID)
-)^
--- end TBL_USERS
 -- begin TBL_AUTOFACTURAS_ASIENTOS
 create table tbl_autofacturas_asientos (
     id_autofactura integer,
@@ -611,13 +583,6 @@ create table tbl_recibos_asientos_temporales (
     primary key (id_recibo, id_asiento_temporal)
 )^
 -- end TBL_RECIBOS_ASIENTOS_TEMPORALES
--- begin TBL_GRUPOS_USERS
-create table tbl_grupos_users (
-    id_user integer,
-    id_grupo integer,
-    primary key (id_user, id_grupo)
-)^
--- end TBL_GRUPOS_USERS
 -- begin TBL_TRANSFERENCIAS_ASIENTOS_TEMPORALES
 create table tbl_transferencias_asientos_temporales (
     id_transferencia integer,
@@ -625,22 +590,8 @@ create table tbl_transferencias_asientos_temporales (
     primary key (id_transferencia, id_asiento_temporal)
 )^
 -- end TBL_TRANSFERENCIAS_ASIENTOS_TEMPORALES
--- begin TBL_ROLES_USERS
-create table tbl_roles_users (
-    id_user integer,
-    id_role integer,
-    primary key (id_user, id_role)
-)^
--- end TBL_ROLES_USERS-- begin TBL_CONFIGURACIONES
 create table TBL_CONFIGURACIONES (
-    ID uuid,
-    VERSION integer not null,
-    CREATE_TS timestamp,
-    CREATED_BY varchar(50),
-    UPDATE_TS timestamp,
-    UPDATED_BY varchar(50),
-    DELETE_TS timestamp,
-    DELETED_BY varchar(50),
+    ID serial,
     --
     PERIODO_FISCAL_ACTIVO integer,
     FORMATO_FACTURA varchar(50) not null,

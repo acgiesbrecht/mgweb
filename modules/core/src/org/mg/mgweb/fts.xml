@@ -16,9 +16,6 @@
         <entity class="org.mg.mgweb.entity.TblMiembrosRelacionesRoles">
             <include re=".*"/>
         </entity>
-        <entity class="org.mg.mgweb.entity.TblRoles">
-            <include re=".*"/>
-        </entity>
         <entity class="org.mg.mgweb.entity.TblEntidades">
             <include re=".*"/>
         </entity>
@@ -91,13 +88,7 @@
         <entity class="org.mg.mgweb.entity.TblTimbrados">
             <include re=".*"/>
         </entity>
-        <entity class="org.mg.mgweb.entity.TblUsers">
-            <include re=".*"/>
-        </entity>
         <entity class="org.mg.mgweb.entity.TblCuentasContablesPorDefecto">
-            <include re=".*"/>
-        </entity>
-        <entity class="org.mg.mgweb.entity.TblGrupos">
             <include re=".*"/>
         </entity>
         <entity class="org.mg.mgweb.entity.TblAsientosTemporales">

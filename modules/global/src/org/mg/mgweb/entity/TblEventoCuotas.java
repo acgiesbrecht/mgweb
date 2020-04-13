@@ -6,6 +6,8 @@ import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
+import com.haulmont.cuba.security.entity.User;
 import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
 @NamePattern("%s %s|id,fecha1")
@@ -38,14 +40,15 @@ public class TblEventoCuotas extends BaseIntegerIdEntity {
     @Column(name = "fecha_4")
     protected LocalDateTime fecha4;
 
-    @Column(name = "id_user")
-    protected Integer idUser;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    protected com.haulmont.cuba.security.entity.User idUser;
 
-    public Integer getIdUser() {
+    public User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Integer idUser) {
+    public void setIdUser(User idUser) {
         this.idUser = idUser;
     }
 

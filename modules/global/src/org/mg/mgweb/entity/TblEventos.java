@@ -8,6 +8,8 @@ import com.haulmont.cuba.core.entity.annotation.LookupType;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
 import com.haulmont.cuba.core.global.DesignSupport;
+import com.haulmont.cuba.security.entity.User;
+import org.mg.mgweb.converters.LocalDateAttributeConverter;
 import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import org.springframework.cglib.core.Local;
 
@@ -15,6 +17,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -29,9 +32,9 @@ public class TblEventos extends BaseIntIdentityIdEntity {
     protected String descripcion;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Convert(converter = LocalDateTimeAttributeConverter.class)
+    @Convert(converter = LocalDateAttributeConverter.class)
     @Column(name = "fecha", nullable = false)
-    protected LocalDateTime fecha;
+    protected LocalDate fecha;
 
     @NotNull
     @OnDeleteInverse(DeletePolicy.DENY)
@@ -46,13 +49,9 @@ public class TblEventos extends BaseIntIdentityIdEntity {
     @JoinColumn(name = "id_evento_tipo")
     protected TblEventoTipos idEventoTipo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_grupo")
-    protected TblGrupos idGrupo;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
-    protected TblUsers idUser;
+    protected User idUser;
 
     @Max(message = "Valor debe estar entre 0 y 100", value = 100)
     @Min(message = "Valor debe estar entre 0 y 100", value = 0)
@@ -68,11 +67,11 @@ public class TblEventos extends BaseIntIdentityIdEntity {
         return 100 - porcentajeAporte;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
@@ -84,20 +83,12 @@ public class TblEventos extends BaseIntIdentityIdEntity {
         this.porcentajeAporte = porcentajeAporte;
     }
 
-    public org.mg.mgweb.entity.TblUsers getIdUser() {
+    public User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(org.mg.mgweb.entity.TblUsers idUser) {
+    public void setIdUser(User idUser) {
         this.idUser = idUser;
-    }
-
-    public org.mg.mgweb.entity.TblGrupos getIdGrupo() {
-        return idGrupo;
-    }
-
-    public void setIdGrupo(org.mg.mgweb.entity.TblGrupos idGrupo) {
-        this.idGrupo = idGrupo;
     }
 
     public TblEventoTipos getIdEventoTipo() {

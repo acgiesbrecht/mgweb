@@ -12,8 +12,8 @@
     <view entity="mgweb_TblEventos" name="tblEventos-view" extends="_local">
         <property name="idCentroDeCosto" view="_minimal"/>
         <property name="idEventoTipo" view="_minimal"/>
-        <property name="idGrupo" view="_minimal"/>
         <property name="idUser" view="_minimal"/>
+        <property name="porcentajeDonacion"/>
     </view>
     <view entity="mgweb_TblFacturas" name="tblFacturas-view" extends="_local">
         <property name="idEntidad" view="_minimal"/>
@@ -97,5 +97,17 @@
             <property name="idCuentaContableHaber" view="_minimal"/>
             <property name="monto"/>
         </property>
+    </view>
+    <view entity="mgweb_TblEventoDetalle" name="tblEventoDetalle-view" extends="_local">
+        <property name="idCategoriaArticulo" view="_minimal"/>
+        <property name="idEntidad" view="_minimal"/>
+        <property name="idEvento" view="_minimal">
+            <property name="idCentroDeCosto" view="_minimal"/>
+            <property name="porcentajeAporte"/>
+            <property name="porcentajeDonacion"/>
+        </property>
+        <property name="idFormaDePagoPreferida" view="_minimal"/>
+        <property name="idUser" view="_minimal"/>
+        <property name="tblAsientos" view="_minimal"/>
     </view>
 </views>

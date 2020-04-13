@@ -51,13 +51,13 @@ public class TblMiembrosRelaciones extends BaseIntIdentityIdEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
-    protected org.mg.mgweb.entity.TblUsers idUser;
+    protected com.haulmont.cuba.security.entity.User idUser;
 
-    public org.mg.mgweb.entity.TblUsers getIdUser() {
+    public com.haulmont.cuba.security.entity.User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(org.mg.mgweb.entity.TblUsers idUser) {
+    public void setIdUser(com.haulmont.cuba.security.entity.User idUser) {
         this.idUser = idUser;
     }
 

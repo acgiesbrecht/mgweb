@@ -9,7 +9,7 @@ create table TBL_CONFIGURACIONES (
     MODO_IMPRESION_TRANSFERENCIAS integer not null,
     --
     primary key (ID)
-);
+)^
 
 INSERT INTO TBL_CONFIGURACIONES (ID,
                                 PERIODO_FISCAL_ACTIVO,
@@ -19,4 +19,4 @@ INSERT INTO TBL_CONFIGURACIONES (ID,
                                 FRECUENCIA_COBRO_COLECTAS,
                                 MODO_IMPRESION_TRANSFERENCIAS)
                              VALUES
-                                (1, 2020, 'factura', 'autofactura', 'nota_de_credito', 1, 1);
+                                (1, 2020, 'factura', 'autofactura', 'nota_de_credito', 1, 1)^

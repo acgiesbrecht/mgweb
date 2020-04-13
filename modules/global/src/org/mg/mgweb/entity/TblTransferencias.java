@@ -3,10 +3,10 @@ package org.mg.mgweb.entity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
 @NamePattern("%s %s|id,fechahora")
@@ -48,9 +48,9 @@ public class TblTransferencias extends BaseIntIdentityIdEntity {
     @JoinColumn(name = "id_evento_tipo")
     protected org.mg.mgweb.entity.TblEventoTipos idEventoTipo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
-    protected org.mg.mgweb.entity.TblUsers idUser;
+    protected com.haulmont.cuba.security.entity.User idUser;
 
     @Column(name = "monto_aporte", nullable = false)
     protected Integer montoAporte;
@@ -99,11 +99,11 @@ public class TblTransferencias extends BaseIntIdentityIdEntity {
         this.montoAporte = montoAporte;
     }
 
-    public org.mg.mgweb.entity.TblUsers getIdUser() {
+    public com.haulmont.cuba.security.entity.User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(org.mg.mgweb.entity.TblUsers idUser) {
+    public void setIdUser(com.haulmont.cuba.security.entity.User idUser) {
         this.idUser = idUser;
     }
 

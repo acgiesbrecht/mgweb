@@ -6,6 +6,8 @@ import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+
+import com.haulmont.cuba.security.entity.User;
 import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
@@ -41,9 +43,9 @@ public class TblRecibos extends BaseIntIdentityIdEntity {
     @JoinColumn(name = "id_evento_tipo")
     protected TblEventoTipos idEventoTipo;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
-    protected TblUsers idUser;
+    protected User idUser;
 
     @Column(name = "monto_aporte", nullable = false)
     protected Integer montoAporte;
@@ -81,11 +83,11 @@ public class TblRecibos extends BaseIntIdentityIdEntity {
         this.montoAporte = montoAporte;
     }
 
-    public TblUsers getIdUser() {
+    public User getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(TblUsers idUser) {
+    public void setIdUser(User idUser) {
         this.idUser = idUser;
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <metadata xmlns="http://schemas.haulmont.com/cuba/metadata.xsd">
     <datatypes>
-        <datatype id="ccm" class="(new org.mg.mgweb.datatypes.CcmDatatype)"/>
+        <datatype id="ccm" class="org.mg.mgweb.datatypes.CcmDatatype"/>
     </datatypes>
     <metadata-model root-package="org.mg.mgweb" namespace="mgweb"/>
 </metadata>

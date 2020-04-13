@@ -7,7 +7,6 @@
         <class>org.mg.mgweb.entity.TblMiembrosRelacionesTipos</class>
         <class>org.mg.mgweb.entity.TblContribuyentes</class>
         <class>org.mg.mgweb.entity.TblMiembrosRelacionesRoles</class>
-        <class>org.mg.mgweb.entity.TblRoles</class>
         <class>org.mg.mgweb.entity.TblEntidades</class>
         <class>org.mg.mgweb.entity.TblMiembrosRelaciones</class>
         <class>org.mg.mgweb.entity.TblNotasDeCredito</class>
@@ -32,15 +31,14 @@
         <class>org.mg.mgweb.entity.TblEventos</class>
         <class>org.mg.mgweb.entity.TblMiembrosCategoriasDePago</class>
         <class>org.mg.mgweb.entity.TblTimbrados</class>
-        <class>org.mg.mgweb.entity.TblUsers</class>
         <class>org.mg.mgweb.entity.TblCuentasContablesPorDefecto</class>
-        <class>org.mg.mgweb.entity.TblGrupos</class>
         <class>org.mg.mgweb.entity.TblAsientosTemporales</class>
         <class>org.mg.mgweb.entity.TblEntidadesHistoricoCategorias</class>
         <class>org.mg.mgweb.entity.TblFormasDePago</class>
         <class>org.mg.mgweb.entity.TblAreasServicioEnIglesia</class>
         <class>org.mg.mgweb.entity.TblRecibos</class>
         <class>org.mg.mgweb.entity.TblRecibosCompra</class>
+        <class>org.mg.mgweb.converters.LocalDateAttributeConverter</class>
         <class>org.mg.mgweb.converters.LocalDateTimeAttributeConverter</class>
         <class>org.mg.mgweb.entity.TblConfiguraciones</class>
     </persistence-unit>
