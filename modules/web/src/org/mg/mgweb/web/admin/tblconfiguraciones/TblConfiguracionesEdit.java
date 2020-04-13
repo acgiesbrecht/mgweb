@@ -1,4 +1,4 @@
-package org.mg.mgweb.web.screens.tblconfiguraciones;
+package org.mg.mgweb.web.admin.tblconfiguraciones;
 
 import com.haulmont.cuba.gui.screen.*;
 import org.mg.mgweb.entity.TblConfiguraciones;

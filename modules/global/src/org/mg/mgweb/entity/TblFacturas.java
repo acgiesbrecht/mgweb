@@ -46,10 +46,10 @@ public class TblFacturas extends BaseIntegerIdEntity {
     protected com.haulmont.cuba.security.entity.User idUser;
 
     @Column(name = "importe_aporte", nullable = false)
-    protected Integer importeAporte;
+    protected Long importeAporte;
 
     @Column(name = "importe_donacion", nullable = false)
-    protected Integer importeDonacion;
+    protected Long importeDonacion;
 
     @Column(name = "razon_social", nullable = false, length = 50)
     protected String razonSocial;
@@ -87,19 +87,19 @@ public class TblFacturas extends BaseIntegerIdEntity {
         this.razonSocial = razonSocial;
     }
 
-    public Integer getImporteDonacion() {
+    public Long getImporteDonacion() {
         return importeDonacion;
     }
 
-    public void setImporteDonacion(Integer importeDonacion) {
+    public void setImporteDonacion(Long importeDonacion) {
         this.importeDonacion = importeDonacion;
     }
 
-    public Integer getImporteAporte() {
+    public Long getImporteAporte() {
         return importeAporte;
     }
 
-    public void setImporteAporte(Integer importeAporte) {
+    public void setImporteAporte(Long importeAporte) {
         this.importeAporte = importeAporte;
     }
 

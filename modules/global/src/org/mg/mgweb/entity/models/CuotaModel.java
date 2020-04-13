@@ -6,7 +6,7 @@ import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 public class CuotaModel {
 
     private LocalDateTime fecha;
-    private Integer monto;
+    private Long monto;
 
     /**
      * @return the fecha
@@ -25,14 +25,14 @@ public class CuotaModel {
     /**
      * @return the monto
      */
-    public Integer getMonto() {
+    public Long getMonto() {
         return monto;
     }
 
     /**
      * @param monto the monto to set
      */
-    public void setMonto(Integer monto) {
+    public void setMonto(Long monto) {
         this.monto = monto;
     }
 

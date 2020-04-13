@@ -5,6 +5,7 @@ import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
@@ -42,7 +43,7 @@ public class TblEventoDetalle extends BaseIntIdentityIdEntity {
     protected com.haulmont.cuba.security.entity.User idUser;
 
     @Column(name = "monto", nullable = false)
-    protected Integer monto;
+    protected Long monto;
 
     @Column(name = "observacion")
     protected String observacion;
@@ -69,11 +70,11 @@ public class TblEventoDetalle extends BaseIntIdentityIdEntity {
         this.observacion = observacion;
     }
 
-    public Integer getMonto() {
+    public Long getMonto() {
         return monto;
     }
 
-    public void setMonto(Integer monto) {
+    public void setMonto(Long monto) {
         this.monto = monto;
     }
 

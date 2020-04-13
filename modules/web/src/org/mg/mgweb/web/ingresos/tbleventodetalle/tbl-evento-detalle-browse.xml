@@ -1,21 +1,38 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
         caption="msg://browseCaption"
         focusComponent="table"
-        messagesPack="org.mg.mgweb.web.screens.tbleventodetalle">
+        messagesPack="org.mg.mgweb.web.ingresos.tbleventodetalle">
     <data>
+        <instance id="cuentasContablesPorDefectoDc"
+                  class="org.mg.mgweb.entity.TblCuentasContablesPorDefecto"
+                    view="tblCuentasContablesPorDefecto-view">
+            <loader id="cuentasContablesPorDefectoDl">
+                <query><![CDATA[select e from mgweb_TblCuentasContablesPorDefecto e where e.id = 1]]></query>
+            </loader>
+        </instance>
+        <collection id="tblEventoTiposDc"
+                    class="org.mg.mgweb.entity.TblEventoTipos"
+                    view="_local">
+            <loader id="TblEventoTiposDl">
+                <query>
+                    <![CDATA[select e from mgweb_TblEventoTipos e where e.id < 4]]>
+                </query>
+            </loader>
+        </collection>
         <collection id="tblEventosDc"
                     class="org.mg.mgweb.entity.TblEventos"
                     view="tblEventos-view">
             <loader id="tblEventosDl">
                 <query>
-                    <![CDATA[select e from mgweb_TblEventos e where e.idEventoTipo.id = 1 and extract(year from e.fecha) = (select c.periodoFiscalActivo from mgweb_TblConfiguraciones c where c.id = 1) order by e.fecha desc]]>
+                    <![CDATA[select e from mgweb_TblEventos e where e.idEventoTipo = :component_lookupFieldEventoTipo and extract(year from e.fecha) = (select c.periodoFiscalActivo from mgweb_TblConfiguraciones c where c.id = 1) order by e.fecha desc]]>
                 </query>
             </loader>
         </collection>
         <collection id="tblEntidadesDc"
-                    class="org.mg.mgweb.entity.TblEntidades"
-                    view="_minimal">
+                    class="org.mg.mgweb.entity.TblEntidades">
+            <view extends="_minimal">
+                <property name="idFormaDePagoPreferida" view="_minimal"/>
+            </view>
             <loader id="tblEntidadesDl">
                 <query>
                     <![CDATA[select e from mgweb_TblEntidades e]]>
@@ -27,7 +44,7 @@
                     view="_minimal">
             <loader id="tblCategoriasArticulosDl">
                 <query>
-                    <![CDATA[select e from mgweb_TblCategoriasArticulos e]]>
+                    <![CDATA[select e from mgweb_TblCategoriasArticulos e order by e.descripcion]]>
                 </query>
             </loader>
         </collection>
@@ -36,12 +53,7 @@
                     view="tblEventoDetalle-view">
             <loader id="tblEventoDetallesDl">
                 <query>
-                    <![CDATA[select e from mgweb_TblEventoDetalle e]]>
-                    <condition>
-                        <c:jpql>
-                            <c:where>e.idEvento = :evento</c:where>
-                        </c:jpql>
-                </condition>
+                    <![CDATA[select e from mgweb_TblEventoDetalle e where e.idEvento = :component_lookupFieldEvento]]>
                 </query>
             </loader>
         </collection>
@@ -52,6 +64,9 @@
             <collection id="tblAsientosDc" property="tblAsientos"/>
         </instance>
     </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+    </facets>
     <actions>
         <action id="save" icon="icons/ok.png" caption="mainMsg://actions.Ok" shortcut="CTRL-ENTER"/>
         <action id="cancel" icon="icons/cancel.png" caption="mainMsg://actions.Cancel" description="Esc"/>
@@ -60,11 +75,18 @@
     <layout>
         <split id="split" height="100%" orientation="horizontal" reversePosition="true" width="100%" pos="40">
             <vbox id="lookupBox" expand="table" height="100%" margin="false,true,false,false" spacing="true">
-                <lookupField id="lookupPickerFieldEvento"
-                                   caption="Evento:" 
-                                   optionsContainer="tblEventosDc"
-                                   required="true" nullOptionVisible="false" width="450">
-                </lookupField>
+                <hbox spacing="true">
+                    <lookupField id="lookupFieldEventoTipo"
+                                 caption="Tipo:"
+                                 optionsContainer="tblEventoTiposDc"
+                                 required="true" nullOptionVisible="false" width="100" />
+                    <lookupField id="lookupFieldEvento"
+                                 caption="Evento:"
+                                 optionsContainer="tblEventosDc"
+                                 required="true"
+                                 nullOptionVisible="false"
+                                 width="450" />
+                </hbox>
                 <filter id="filter" applyTo="table" dataLoader="tblEventoDetallesDl">
                     <properties include=".*"/>
                 </filter>
@@ -72,7 +94,7 @@
                             width="100%"
                             dataContainer="tblEventoDetallesDc">
                     <actions>
-                        <action id="create" type="create"/>
+                        <action id="create" type="create" enable="false"/>
                         <action id="edit" type="edit"/>
                         <action id="remove" type="remove"/>
                     </actions>
@@ -104,10 +126,12 @@
                                 <form id="form" dataContainer="tblEventoDetalleDc">
                                     <column width="250px">
                                         <dateField id="fechahoraField" property="fechahora"/>
-                                        <lookupPickerField id="idCategoriaArticuloField" property="idCategoriaArticulo" optionsContainer="tblCategoriasArticulosDc" width="200"/>
+                                        <lookupPickerField id="idCategoriaArticuloField" property="idCategoriaArticulo"
+                                                           optionsContainer="tblCategoriasArticulosDc" width="200"/>
                                         <textField id="observacionField" property="observacion" width="400"/>
-                                        <lookupPickerField id="idEntidadField" property="idEntidad" width="400" optionsContainer="tblEntidadesDc"/>
-                                        <textField id="montoField" property="monto" width="100" datatype="int"/>
+                                        <lookupPickerField id="idEntidadField" property="idEntidad" width="400"
+                                                           optionsContainer="tblEntidadesDc"/>
+                                        <textField id="montoField" property="monto" width="100" datatype="long"/>
                                     </column>
                                 </form>
                             </scrollBox>

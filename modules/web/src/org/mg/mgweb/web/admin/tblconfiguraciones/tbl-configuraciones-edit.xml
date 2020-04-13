@@ -2,7 +2,7 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://editorCaption"
         focusComponent="form"
-        messagesPack="org.mg.mgweb.web.screens.tblconfiguraciones">
+        messagesPack="org.mg.mgweb.web.admin.tblconfiguraciones">
     <data>
         <instance id="tblConfiguracionesDc"
                   class="org.mg.mgweb.entity.TblConfiguraciones"

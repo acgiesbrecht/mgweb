@@ -89,6 +89,7 @@
         <property name="idEventoTipo" view="_minimal"/>
         <property name="idUser" view="_minimal"/>
         <property name="tblAsientosTemporales" view="_minimal">
+            <property name="fechahora"/>
             <property name="esAporte"/>
             <property name="facturado"/>
             <property name="idCentroDeCostoDebe" view="_minimal"/>
@@ -108,6 +109,26 @@
         </property>
         <property name="idFormaDePagoPreferida" view="_minimal"/>
         <property name="idUser" view="_minimal"/>
-        <property name="tblAsientos" view="_minimal"/>
+        <property name="tblAsientos" view="_minimal">
+            <property name="fechahora"/>
+            <property name="asientoManual"/>
+            <property name="idCentroDeCostoDebe" view="_minimal"/>
+            <property name="idCentroDeCostoHaber" view="_minimal"/>
+            <property name="idCuentaContableDebe" view="_minimal"/>
+            <property name="idCuentaContableHaber" view="_minimal"/>
+            <property name="idUser" view="_minimal"/>
+            <property name="monto"/>
+            <property name="observacion"/>
+        </property>
+    </view>
+    <view entity="mgweb_TblCuentasContablesPorDefecto" name="tblCuentasContablesPorDefecto-view" extends="_local">
+        <property name="idCuentaACobrar" view="_minimal"/>
+        <property name="idCuentaAportes" view="_minimal"/>
+        <property name="idCuentaCaja" view="_minimal"/>
+        <property name="idCuentaCtaCte" view="_minimal"/>
+        <property name="idCuentaDebeCompras" view="_minimal"/>
+        <property name="idCuentaDonaciones" view="_minimal"/>
+        <property name="idCuentaHaberComprasFacturaContado" view="_minimal"/>
+        <property name="idCuentaHaberComprasFacturaCredito" view="_minimal"/>
     </view>
 </views>

@@ -44,7 +44,7 @@ public class TblAsientosTemporales extends BaseIntIdentityIdEntity {
     protected TblCuentasContables idCuentaContableHaber;
 
     @Column(name = "monto", nullable = false)
-    protected Integer monto;
+    protected Long monto;
 
     @JoinTable(name = "tbl_asientos_asientos_temporales",
             joinColumns = @JoinColumn(name = "id_asiento_temporal"),
@@ -88,11 +88,11 @@ public class TblAsientosTemporales extends BaseIntIdentityIdEntity {
         this.tblAsientos = tblAsientos;
     }
 
-    public Integer getMonto() {
+    public Long getMonto() {
         return monto;
     }
 
-    public void setMonto(Integer monto) {
+    public void setMonto(Long monto) {
         this.monto = monto;
     }
 

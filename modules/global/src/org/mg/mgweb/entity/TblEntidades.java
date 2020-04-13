@@ -21,7 +21,7 @@ public class TblEntidades extends BaseIntIdentityIdEntity {
     protected String apellidos;
 
     @Column(name = "aporte_mensual", nullable = false)
-    protected Integer aporteMensual;
+    protected Long aporteMensual;
 
     @Column(name = "aporte_saldo_anterior")
     protected Long aporteSaldoAnterior;
@@ -282,11 +282,11 @@ public class TblEntidades extends BaseIntIdentityIdEntity {
         this.aporteSaldoAnterior = aporteSaldoAnterior;
     }
 
-    public Integer getAporteMensual() {
+    public Long getAporteMensual() {
         return aporteMensual;
     }
 
-    public void setAporteMensual(Integer aporteMensual) {
+    public void setAporteMensual(Long montoMensual) {
         this.aporteMensual = aporteMensual;
     }
 

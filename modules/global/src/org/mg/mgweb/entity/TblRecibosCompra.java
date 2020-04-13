@@ -27,7 +27,7 @@ public class TblRecibosCompra extends BaseIntIdentityIdEntity {
     protected User idUser;
 
     @Column(name = "monto", nullable = false)
-    protected Integer monto;
+    protected Long monto;
 
     @Column(name = "nro", nullable = false, length = 30)
     protected String nro;
@@ -101,11 +101,11 @@ public class TblRecibosCompra extends BaseIntIdentityIdEntity {
         this.nro = nro;
     }
 
-    public Integer getMonto() {
+    public Long getMonto() {
         return monto;
     }
 
-    public void setMonto(Integer monto) {
+    public void setMonto(Long monto) {
         this.monto = monto;
     }
 

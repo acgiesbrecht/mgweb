@@ -182,11 +182,11 @@ public class UtilsServiceBean implements UtilsService {
 
 
 
-    public List<CuotaModel> getCuotas(TblEventoCuotas eventoCuotas, Integer monto) {
+    public List<CuotaModel> getCuotas(TblEventoCuotas eventoCuotas, Long monto) {
         List<LocalDateTime> fechas = getCuotasFechas(eventoCuotas);
         List<CuotaModel> listCuotas = new ArrayList<>();
         float divi = monto * 1.0F / fechas.size();
-        Integer montoCuota = Math.round(divi);
+        Long montoCuota = Long.valueOf(Math.round(divi));
         for (LocalDateTime fecha : fechas) {
             CuotaModel cuota = new CuotaModel();
             cuota.setFecha(fecha);

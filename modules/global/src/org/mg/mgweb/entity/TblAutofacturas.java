@@ -51,7 +51,7 @@ public class TblAutofacturas extends BaseIntIdentityIdEntity {
     protected com.haulmont.cuba.security.entity.User idUser;
 
     @Column(name = "monto", nullable = false)
-    protected Integer monto;
+    protected Long monto;
 
     @Column(name = "nombre", nullable = false)
     protected String nombre;
@@ -69,13 +69,13 @@ public class TblAutofacturas extends BaseIntIdentityIdEntity {
             joinColumns = @JoinColumn(name = "id_autofactura"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento"))
     @ManyToMany
-    protected List<org.mg.mgweb.entity.TblAsientos> tblAsientos;
+    protected List<TblAsientos> tblAsientos;
 
-    public List<org.mg.mgweb.entity.TblAsientos> getTblAsientos() {
+    public List<TblAsientos> getTblAsientos() {
         return tblAsientos;
     }
 
-    public void setTblAsientos(List<org.mg.mgweb.entity.TblAsientos> tblAsientos) {
+    public void setTblAsientos(List<TblAsientos> tblAsientos) {
         this.tblAsientos = tblAsientos;
     }
 
@@ -111,11 +111,11 @@ public class TblAutofacturas extends BaseIntIdentityIdEntity {
         this.nombre = nombre;
     }
 
-    public Integer getMonto() {
+    public Long getMonto() {
         return monto;
     }
 
-    public void setMonto(Integer monto) {
+    public void setMonto(Long monto) {
         this.monto = monto;
     }
 

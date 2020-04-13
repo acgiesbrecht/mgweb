@@ -37,19 +37,19 @@ public class TblFacturasCompra extends BaseIntIdentityIdEntity {
     protected com.haulmont.cuba.security.entity.User idUser;
 
     @Column(name = "iva10", nullable = false)
-    protected Integer iva10;
+    protected Long iva10;
 
     @Column(name = "iva5", nullable = false)
-    protected Integer iva5;
+    protected Long iva5;
 
     @Column(name = "monto_exentas", nullable = false)
-    protected Integer montoExentas;
+    protected Long montoExentas;
 
     @Column(name = "monto_iva10", nullable = false)
-    protected Integer montoIva10;
+    protected Long montoIva10;
 
     @Column(name = "monto_iva5", nullable = false)
-    protected Integer montoIva5;
+    protected Long montoIva5;
 
     @Column(name = "nro", nullable = false, length = 15)
     protected String nro;
@@ -147,43 +147,43 @@ public class TblFacturasCompra extends BaseIntIdentityIdEntity {
         this.nro = nro;
     }
 
-    public Integer getMontoIva5() {
+    public Long getMontoIva5() {
         return montoIva5;
     }
 
-    public void setMontoIva5(Integer montoIva5) {
+    public void setMontoIva5(Long montoIva5) {
         this.montoIva5 = montoIva5;
     }
 
-    public Integer getMontoIva10() {
+    public Long getMontoIva10() {
         return montoIva10;
     }
 
-    public void setMontoIva10(Integer montoIva10) {
+    public void setMontoIva10(Long montoIva10) {
         this.montoIva10 = montoIva10;
     }
 
-    public Integer getMontoExentas() {
+    public Long getMontoExentas() {
         return montoExentas;
     }
 
-    public void setMontoExentas(Integer montoExentas) {
+    public void setMontoExentas(Long montoExentas) {
         this.montoExentas = montoExentas;
     }
 
-    public Integer getIva5() {
+    public Long getIva5() {
         return iva5;
     }
 
-    public void setIva5(Integer iva5) {
+    public void setIva5(Long iva5) {
         this.iva5 = iva5;
     }
 
-    public Integer getIva10() {
+    public Long getIva10() {
         return iva10;
     }
 
-    public void setIva10(Integer iva10) {
+    public void setIva10(Long iva10) {
         this.iva10 = iva10;
     }
 

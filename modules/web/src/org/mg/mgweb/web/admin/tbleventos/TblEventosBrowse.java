@@ -1,6 +1,11 @@
 package org.mg.mgweb.web.admin.tbleventos;
 
-import com.haulmont.cuba.gui.components.EntityCombinedScreen;
+import com.haulmont.cuba.gui.screen.*;
+import org.mg.mgweb.entity.TblEventos;
 
-public class TblEventosBrowse extends EntityCombinedScreen {
+@UiController("mgweb_TblEventos.browse")
+@UiDescriptor("tbl-eventos-browse.xml")
+@LookupComponent("table")
+@LoadDataBeforeShow
+public class TblEventosBrowse extends MasterDetailScreen<TblEventos> {
 }

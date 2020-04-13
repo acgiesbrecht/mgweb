@@ -48,10 +48,10 @@ public class TblRecibos extends BaseIntIdentityIdEntity {
     protected User idUser;
 
     @Column(name = "monto_aporte", nullable = false)
-    protected Integer montoAporte;
+    protected Long montoAporte;
 
     @Column(name = "monto_donacion", nullable = false)
-    protected Integer montoDonacion;
+    protected Long montoDonacion;
 
     @JoinTable(name = "tbl_recibos_asientos_temporales",
             joinColumns = @JoinColumn(name = "id_recibo"),
@@ -67,19 +67,19 @@ public class TblRecibos extends BaseIntIdentityIdEntity {
         this.tblAsientosTemporales = tblAsientosTemporales;
     }
 
-    public Integer getMontoDonacion() {
+    public Long getMontoDonacion() {
         return montoDonacion;
     }
 
-    public void setMontoDonacion(Integer montoDonacion) {
+    public void setMontoDonacion(Long montoDonacion) {
         this.montoDonacion = montoDonacion;
     }
 
-    public Integer getMontoAporte() {
+    public Long getMontoAporte() {
         return montoAporte;
     }
 
-    public void setMontoAporte(Integer montoAporte) {
+    public void setMontoAporte(Long montoAporte) {
         this.montoAporte = montoAporte;
     }
 

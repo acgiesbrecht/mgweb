@@ -1,7 +1,6 @@
 package org.mg.mgweb.entity;
 
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
-import com.haulmont.cuba.core.entity.StandardEntity;
 import org.mg.mgweb.entity.enums.*;
 
 import javax.persistence.Column;

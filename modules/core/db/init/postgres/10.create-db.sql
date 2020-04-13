@@ -32,7 +32,7 @@ create table tbl_asientos (
     id_cuenta_contable_debe integer not null,
     id_cuenta_contable_haber integer not null,
     id_user uuid,
-    monto integer not null,
+    monto bigint not null,
     observacion varchar(255),
     --
     primary key (ID)
@@ -45,7 +45,7 @@ create table tbl_asientos_temporales (
     fechahora timestamp not null,
     id_cuenta_contable_debe integer not null,
     id_cuenta_contable_haber integer not null,
-    monto integer not null,
+    monto bigint not null,
     es_aporte boolean,
     facturado boolean,
     id_centro_de_costo_debe integer not null,
@@ -68,7 +68,7 @@ create table tbl_autofacturas (
     fechahora timestamp not null,
     id_timbrado integer not null,
     id_user uuid,
-    monto integer not null,
+    monto bigint not null,
     nombre varchar(255) not null,
     nro varchar(15) not null,
     observacion varchar(255),
@@ -149,7 +149,7 @@ create table tbl_entidades (
     ID serial,
     --
     apellidos varchar(128) not null,
-    aporte_mensual integer not null,
+    aporte_mensual bigint not null,
     aporte_saldo_anterior bigint,
     box integer,
     cantidad_de_dependientes_aportantes integer not null,
@@ -211,7 +211,7 @@ create table tbl_evento_detalle (
     id_evento integer not null,
     id_forma_de_pago_preferida integer not null,
     id_user uuid,
-    monto integer not null,
+    monto bigint not null,
     observacion varchar(255),
     --
     primary key (ID)
@@ -251,8 +251,8 @@ create table tbl_facturas (
     id_entidad integer not null,
     id_timbrado integer not null,
     id_user uuid,
-    importe_aporte integer not null,
-    importe_donacion integer not null,
+    importe_aporte bigint not null,
+    importe_donacion bigint not null,
     razon_social varchar(50) not null,
     ruc varchar(20) not null,
     --
@@ -268,11 +268,11 @@ create table tbl_facturas_compra (
     fecha_vencimiento_credito timestamp,
     fechahora timestamp not null,
     id_user uuid,
-    iva10 integer not null,
-    iva5 integer not null,
-    monto_exentas integer not null,
-    monto_iva10 integer not null,
-    monto_iva5 integer not null,
+    iva10 bigint not null,
+    iva5 bigint not null,
+    monto_exentas bigint not null,
+    monto_iva10 bigint not null,
+    monto_iva5 bigint not null,
     nro varchar(15) not null,
     nro_timbrado varchar(8) not null,
     observacion varchar(255),
@@ -389,11 +389,11 @@ create table tbl_notas_de_credito_compras (
     --
     fechahora timestamp not null,
     id_user uuid,
-    iva10 integer not null,
-    iva5 integer not null,
-    monto_exentas integer not null,
-    monto_iva10 integer not null,
-    monto_iva5 integer not null,
+    iva10 bigint not null,
+    iva5 bigint not null,
+    monto_exentas bigint not null,
+    monto_iva10 bigint not null,
+    monto_iva5 bigint not null,
     nro varchar(15) not null,
     nro_timbrado varchar(8) not null,
     observacion varchar(255),
@@ -415,8 +415,8 @@ create table tbl_recibos (
     id_evento integer,
     id_evento_tipo integer not null,
     id_user uuid,
-    monto_aporte integer not null,
-    monto_donacion integer not null,
+    monto_aporte bigint not null,
+    monto_donacion bigint not null,
     --
     primary key (ID)
 )^
@@ -427,7 +427,7 @@ create table tbl_recibos_compra (
     --
     fechahora timestamp not null,
     id_user uuid,
-    monto integer not null,
+    monto bigint not null,
     nro varchar(30) not null,
     observacion varchar(255),
     razon_social varchar(255) not null,
@@ -506,8 +506,8 @@ create table tbl_transferencias (
     id_evento_detalle integer,
     id_evento_tipo integer not null,
     id_user uuid,
-    monto_aporte integer not null,
-    monto_donacion integer not null,
+    monto_aporte bigint not null,
+    monto_donacion bigint not null,
     seq_pago integer not null,
     --
     primary key (ID)

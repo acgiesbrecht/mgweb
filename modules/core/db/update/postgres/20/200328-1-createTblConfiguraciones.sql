@@ -10,7 +10,6 @@ create table TBL_CONFIGURACIONES (
     --
     primary key (ID)
 )^
-
 INSERT INTO TBL_CONFIGURACIONES (ID,
                                 PERIODO_FISCAL_ACTIVO,
                                 FORMATO_FACTURA,

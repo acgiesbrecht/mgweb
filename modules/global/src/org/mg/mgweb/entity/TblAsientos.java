@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.global.DesignSupport;
 import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.time.LocalDateTime;
@@ -48,7 +49,7 @@ public class TblAsientos extends BaseIntIdentityIdEntity {
     protected com.haulmont.cuba.security.entity.User idUser;
 
     @Column(name = "monto", nullable = false)
-    protected Integer monto;
+    protected Long monto;
 
     @Column(name = "observacion")
     protected String observacion;
@@ -57,7 +58,7 @@ public class TblAsientos extends BaseIntIdentityIdEntity {
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento_temporal"))
     @ManyToMany
-    protected List<org.mg.mgweb.entity.TblAsientosTemporales> tblAsientosTemporales;
+    protected List<TblAsientosTemporales> tblAsientosTemporales;
 
     @JoinTable(name = "tbl_autofacturas_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
@@ -69,7 +70,7 @@ public class TblAsientos extends BaseIntIdentityIdEntity {
             joinColumns = @JoinColumn(name = "id_asiento"),
             inverseJoinColumns = @JoinColumn(name = "id_evento_detalle"))
     @ManyToMany
-    protected List<org.mg.mgweb.entity.TblEventoDetalle> tblEventoDetalle;
+    protected List<TblEventoDetalle> tblEventoDetalle;
 
     @JoinTable(name = "tbl_facturas_asientos",
             joinColumns = @JoinColumn(name = "id_asiento"),
@@ -173,11 +174,11 @@ public class TblAsientos extends BaseIntIdentityIdEntity {
         this.observacion = observacion;
     }
 
-    public Integer getMonto() {
+    public Long getMonto() {
         return monto;
     }
 
-    public void setMonto(Integer monto) {
+    public void setMonto(Long monto) {
         this.monto = monto;
     }
 

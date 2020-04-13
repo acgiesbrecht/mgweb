@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
-    <menu id="Ingresos" insertBefore="Egresos">
+    <menu id="Ingresos" insertBefore="administration">
         <item screen="mgweb_TblEventoDetalle.browse"/>
     </menu>
-    <menu id="Egresos" insertBefore="Informes">
+    <menu id="Egresos" insertBefore="administration">
         <item screen="mgweb_TblFacturasCompra.browse"/>
     </menu>
-    <menu id="Informes"  insertBefore="Gestion">
+    <menu id="Informes"  insertBefore="administration">
         <item screen="mgweb_InformesRematesScreen"/>
         <item screen="mgweb_InformesContabilidadScreen"/>
     </menu>

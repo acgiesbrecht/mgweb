@@ -3,10 +3,10 @@ package org.mg.mgweb.entity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.BaseIntIdentityIdEntity;
 import com.haulmont.cuba.core.global.DesignSupport;
+import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import org.mg.mgweb.converters.LocalDateTimeAttributeConverter;
 import java.util.List;
 
 @NamePattern("%s %s|nro,idTimbrado")
@@ -26,7 +26,7 @@ public class TblNotasDeCredito extends BaseIntIdentityIdEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_timbrado")
-    protected org.mg.mgweb.entity.TblTimbradosNotasDeCredito idTimbrado;
+    protected TblTimbradosNotasDeCredito idTimbrado;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
@@ -37,19 +37,19 @@ public class TblNotasDeCredito extends BaseIntIdentityIdEntity {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "nro_factura")
-    protected org.mg.mgweb.entity.TblFacturas nroFactura;
+    protected TblFacturas nroFactura;
 
     @JoinTable(name = "tbl_notas_de_credito_asientos",
             joinColumns = @JoinColumn(name = "id_nota_de_credito"),
             inverseJoinColumns = @JoinColumn(name = "id_asiento"))
     @ManyToMany
-    protected List<org.mg.mgweb.entity.TblAsientos> tblAsientos;
+    protected List<TblAsientos> tblAsientos;
 
-    public List<org.mg.mgweb.entity.TblAsientos> getTblAsientos() {
+    public List<TblAsientos> getTblAsientos() {
         return tblAsientos;
     }
 
-    public void setTblAsientos(List<org.mg.mgweb.entity.TblAsientos> tblAsientos) {
+    public void setTblAsientos(List<TblAsientos> tblAsientos) {
         this.tblAsientos = tblAsientos;
     }
 
