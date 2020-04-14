@@ -18,6 +18,7 @@
                 <entry key="mgweb_BuildUpdateService" value="org.mg.mgweb.service.BuildUpdateService"/>
                 <entry key="mgweb_RucService" value="org.mg.mgweb.service.RucService"/>
                 <entry key="mgweb_InformesService" value="org.mg.mgweb.service.InformesService"/>
+                <entry key="mgweb_RematesService" value="org.mg.mgweb.service.RematesService"/>
             </map>
         </property>
     </bean>

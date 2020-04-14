@@ -13,7 +13,7 @@ import java.net.URL;
 public class BuildUpdateServiceBean implements BuildUpdateService {
     public void build(){
         try {
-            URL url = new URL ("http://localhost:8080/job/mgweb/build"); // Jenkins URL localhost:8080, job named 'test'
+            URL url = new URL ("http://localhost:8080/jenkins/job/mgweb/build"); // Jenkins URL localhost:8080, job named 'test'
             String user = "auto"; // username
             String pass = "auto"; // password or API token
             String authStr = user +":"+  pass;

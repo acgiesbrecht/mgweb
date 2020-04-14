@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://caption"
+        messagesPack="org.mg.mgweb.web.ingresos.tbleventodetalle">
+    <data>
+        <collection id="tblEventosDc"
+                    class="org.mg.mgweb.entity.TblEventos"
+                    view="tblEventos-view">
+            <loader id="tblEventosDl">
+                <query>
+                    <![CDATA[select e from mgweb_TblEventos e where e.idEventoTipo.id = 1 and extract(year from e.fecha) = (select c.periodoFiscalActivo from mgweb_TblConfiguraciones c where c.id = 1) order by e.fecha desc]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="tblEntidadesDc"
+                    class="org.mg.mgweb.entity.TblEntidades">
+            <view extends="_minimal">
+                <property name="idFormaDePagoPreferida" view="_minimal"/>
+            </view>
+            <loader id="tblEntidadesDl" />
+        </collection>
+        <collection id="tblEventoDetallesDc"
+                    class="org.mg.mgweb.entity.TblEventoDetalle"
+                    view="tblEventoDetalle-view">
+            <loader id="tblEventoDetallesDl">
+                <query>
+                    <![CDATA[select e from mgweb_TblEventoDetalle e
+                    where e.idEvento = :component_lookupFieldEvento
+                    and e.idEntidad = :component_lookupFieldEntidad]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true">
+            <refresh loader="tblEntidadesDl" onComponentValueChanged="lookupFieldEvento"/>
+        </dataLoadCoordinator>
+    </facets>
+    <layout>
+        <vbox spacing="true">
+            <hbox spacing="true">
+                <lookupField id="lookupFieldEvento"
+                             caption="Evento:"
+                             optionsContainer="tblEventosDc"
+                             required="true"
+                             nullOptionVisible="false"
+                             width="450"/>
+                <lookupField id="lookupFieldEntidad"
+                             caption="Entidad:"
+                             required="true"
+                             optionsContainer="tblEntidadesDc"
+                             nullOptionVisible="false"
+                             width="450"/>
+            </hbox>
+        </vbox>
+    </layout>
+</window>

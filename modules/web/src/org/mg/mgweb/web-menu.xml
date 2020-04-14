@@ -2,6 +2,7 @@
 <menu-config xmlns="http://schemas.haulmont.com/cuba/menu.xsd">
     <menu id="Ingresos" insertBefore="administration">
         <item screen="mgweb_TblEventoDetalle.browse"/>
+        <item screen="mgweb_RematesPagosScreen"/>
     </menu>
     <menu id="Egresos" insertBefore="administration">
         <item screen="mgweb_TblFacturasCompra.browse"/>
