@@ -16,7 +16,7 @@
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
     <parameter name="factura_id" class="java.lang.Integer"/>
     <queryString language="SQL">
-		<![CDATA[SELECT * FROM MG.TBL_FACTURAS WHERE NRO = $P{factura_id}]]>
+		<![CDATA[SELECT * FROM PUBLIC.TBL_FACTURAS WHERE NRO = $P{factura_id}]]>
     </queryString>
     <field name="nro" class="java.lang.Integer"/>
     <field name="fechahora" class="java.time.LocalDateTime"/>

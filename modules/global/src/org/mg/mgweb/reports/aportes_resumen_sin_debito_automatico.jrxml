@@ -19,7 +19,7 @@
     <parameter name="subreportObject" class="net.sf.jasperreports.engine.JasperReport"/>
     <queryString language="SQL">
 		<![CDATA[SELECT e.ID, e.APELLIDOS, e.NOMBRES
-FROM MG.TBL_ENTIDADES e LEFT JOIN TBL_MIEMBROS_CATEGORIAS_DE_PAGO cp ON e.ID_MIEMBROS_CATEGORIA_DE_PAGO = cp.ID
+FROM PUBLIC.TBL_ENTIDADES e LEFT JOIN TBL_MIEMBROS_CATEGORIAS_DE_PAGO cp ON e.ID_MIEMBROS_CATEGORIA_DE_PAGO = cp.ID
 WHERE cp.DESCRIPCION LIKE '%Sin Debito Automatico%'
 ORDER BY e.APELLIDOS, e.NOMBRES]]>
     </queryString>

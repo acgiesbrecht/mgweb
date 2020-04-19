@@ -12,7 +12,7 @@
                                        EXTRACT(YEAR FROM ev.FECHA) AS ano,
                                        SUM(CAST(ed.monto*(CAST(ev.PORCENTAJE_APORTE AS FLOAT)/100) AS INTEGER)) AS montoAporte,
                                        SUM(ed.monto - CAST(ed.monto*(CAST(ev.PORCENTAJE_APORTE AS FLOAT)/100) AS INTEGER)) AS montoDonacion
-                                     FROM MG.TBL_EVENTO_DETALLE ed LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
+                                     FROM PUBLIC.TBL_EVENTO_DETALLE ed LEFT JOIN PUBLIC.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID WHERE ev.ID_EVENTO_TIPO = 3
                                        group by EXTRACT(MONTH FROM ev.FECHA), EXTRACT(YEAR FROM ev.FECHA), ed.id_entidad
                         UNION ALL
                         SELECT p.id_entidad,
@@ -20,7 +20,7 @@
                                         EXTRACT(YEAR FROMp.fechahora_COMPROMISO) AS ano,
                                         -SUM(p.MONTO_APORTE) AS montoAporte,
                                         -SUM(p.MONTO_DONACION) AS montoDonacion
-                                        FROM MG.TBL_TRANSFERENCIAS p WHERE p.ID_EVENTO_TIPO = 3
+                                        FROM PUBLIC.TBL_TRANSFERENCIAS p WHERE p.ID_EVENTO_TIPO = 3
                                         group by EXTRACT(YEAR FROMp.FECHAHORA_COMPROMISO), EXTRACT(MONTH FROMp.FECHAHORA_COMPROMISO), p.id_entidad
                         UNION ALL
                         SELECT p.id_entidad,
@@ -28,8 +28,8 @@
                                EXTRACT(YEAR FROMp.fechahora_COMPROMISO) AS ano,
                                -SUM(p.MONTO_APORTE) AS montoAporte,
                                -SUM(p.MONTO_DONACION) AS montoDonacion
-                               FROM MG.TBL_RECIBOS p WHERE p.ID_EVENTO_TIPO = 3
-                               group by EXTRACT(YEAR FROMp.FECHAHORA_COMPROMISO), EXTRACT(MONTH FROMp.FECHAHORA_COMPROMISO), p.id_entidad) DETALLE LEFT JOIN MG.TBL_ENTIDADES e ON DETALLE.ID_ENTIDAD = e.ID
+                               FROM PUBLIC.TBL_RECIBOS p WHERE p.ID_EVENTO_TIPO = 3
+                               group by EXTRACT(YEAR FROMp.FECHAHORA_COMPROMISO), EXTRACT(MONTH FROMp.FECHAHORA_COMPROMISO), p.id_entidad) DETALLE LEFT JOIN PUBLIC.TBL_ENTIDADES e ON DETALLE.ID_ENTIDAD = e.ID
                         GROUP BY e.ID, e.CTACTE, e.APELLIDOS, e.NOMBRES, DETALLE.ano, DETALLE.mes) d
                         WHERE MONTODONACION + MONTOAPORTE > 0
                         ORDER BY APELLIDOS, NOMBRES]]>

@@ -36,4 +36,8 @@ public interface InformesService {
                       Object datasource,
                       Map parameters);*/
 
+    Map<String, Object> generarTransferencia(Integer id);
+
+    Map<String, Object> generarRecibo(Integer id);
+
 }

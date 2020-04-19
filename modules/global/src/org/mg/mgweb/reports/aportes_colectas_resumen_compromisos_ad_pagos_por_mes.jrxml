@@ -22,7 +22,7 @@
         EXTRACT(MONTH FROM rd.FECHA) AS mes,
         EXTRACT(YEAR FROM rd.FECHA) AS ano
     from (SELECT * FROM tbl_evento_detalle ed
-            LEFT JOIN MG.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID
+            LEFT JOIN PUBLIC.TBL_EVENTOS ev ON ed.ID_EVENTO = ev.ID
             WHERE (ev.ID_EVENTO_TIPO = 2 OR ev.ID_EVENTO_TIPO = 3)
             AND EXTRACT(YEAR FROM ev.fecha) = $P{pAno} AND EXTRACT(MONTH FROM ev.fecha) = $P{pMes}) rd
     LEFT JOIN tbl_entidades m ON rd.id_entidad = m.id

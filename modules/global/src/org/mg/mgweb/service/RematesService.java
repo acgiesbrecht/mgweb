@@ -10,4 +10,10 @@ public interface RematesService {
 
     List<TblEntidades> getEntidadesConSaldo(TblEventos evento);
 
+    Long getPagosTotal(TblEventos evento, TblEntidades entidad);
+
+    Long getPagosAnteriores(TblEventos evento, TblEntidades entidad);
+
+    String getFechasCuotas(TblEventos evento);
+
 }

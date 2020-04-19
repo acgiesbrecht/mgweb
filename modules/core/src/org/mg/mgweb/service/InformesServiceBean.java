@@ -209,4 +209,30 @@ public class InformesServiceBean implements InformesService {
         }
     }
 
+    public Map<String, Object> generarTransferencia(Integer id){
+        Map parameters = new HashMap();
+        parameters.put("transferencia_id", id);
+        parameters.put("logo", resources.getResourceAsStream("org/mg/mgweb/reports/cclogo200.png"));
+        parameters.put("logo2", resources.getResourceAsStream("org/mg/mgweb/reports/cclogo200.png"));
+        parameters.put("logo3", resources.getResourceAsStream("org/mg/mgweb/reports/cclogo200.png"));
+        parameters.put("reportScreenCaption", "transferencia-" + id.toString());
+
+        return generarInforme("transferencia",
+                InformesService.ReportFileFormatEnum.PDF,
+                parameters,
+                null,
+                false);
+    }
+
+    public Map<String, Object> generarRecibo(Integer id){
+        Map parameters = new HashMap();
+        parameters.put("recibo_id", id);
+
+        return generarInforme("recibo",
+                InformesService.ReportFileFormatEnum.PDF,
+                parameters,
+                null,
+                false);
+    }
+
 }
