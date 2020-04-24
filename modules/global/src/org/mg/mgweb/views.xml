@@ -10,7 +10,10 @@
         <property name="idUser" view="_minimal"/>
     </view>
     <view entity="mgweb_TblEventos" name="tblEventos-view" extends="_local">
-        <property name="idCentroDeCosto" view="_minimal"/>
+        <property name="idCentroDeCosto" view="_minimal">
+            <property name="idCuentaContableCtaCtePorDefecto" view="_minimal"/>
+            <property name="idCuentaContableEfectivoPorDefecto" view="_minimal"/>
+        </property>
         <property name="idEventoTipo" view="_minimal"/>
         <property name="idUser" view="_minimal"/>
         <property name="porcentajeDonacion"/>

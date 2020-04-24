@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="tblRecibosesTable"
+        messagesPack="org.mg.mgweb.web.admin.tblrecibos">
+    <data readOnly="true">
+        <collection id="tblRecibosesDc"
+                    class="org.mg.mgweb.entity.TblRecibos"
+                    view="tblRecibos-view">
+            <loader id="tblRecibosesDl">
+                <query>
+                    <![CDATA[select e from mgweb_TblRecibos e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="tblRecibosesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="tblRecibosesTable"
+                dataLoader="tblRecibosesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="tblRecibosesTable"
+                    width="100%"
+                    dataContainer="tblRecibosesDc">
+            <actions>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="imprimir" invoke="imprimir" trackSelection="true"/>
+            </actions>
+            <columns>
+                <column id="id"/>
+                <column id="fechahoraCompromiso" collapsed="true"/>
+                <column id="fechahora"/>
+                <column id="idEntidad"/>
+                <column id="idEvento"/>
+                <column id="concepto"/>
+                <column id="montoAporte"/>
+                <column id="montoDonacion"/>
+                <column id="idEventoTipo" collapsed="true"/>
+                <column id="idUser" collapsed="true"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="editBtn" action="tblRecibosesTable.edit"/>
+                <button id="removeBtn" action="tblRecibosesTable.remove"/>
+                <button id="imprimirBtn" action="tblRecibosesTable.imprimir" caption="Imprimir"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

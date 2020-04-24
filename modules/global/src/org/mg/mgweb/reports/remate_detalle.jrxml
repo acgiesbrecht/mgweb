@@ -33,16 +33,9 @@ ORDER BY ed.fechahora]]>
 	<field name="ID_EVENTO_TIPO" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="ID_USER" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="ID_GRUPO" class="java.lang.Integer">
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
 	<field name="ID_CENTRO_DE_COSTO" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="COLUMN_9" class="java.lang.Integer"/>
 	<field name="FECHAHORA" class="java.sql.Timestamp">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -64,9 +57,7 @@ ORDER BY ed.fechahora]]>
 	<field name="ID_FORMA_DE_PAGO_PREFERIDA" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="COLUMN_17" class="java.lang.Integer"/>
 	<field name="DESC_CATEGORIA" class="java.lang.String"/>
-	<field name="COLUMN_19" class="java.lang.Integer"/>
 	<field name="NOMBRES" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -91,7 +82,6 @@ ORDER BY ed.fechahora]]>
 	<field name="IS_MIEMBRO_ACTIVO" class="java.lang.Boolean">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="COLUMN_28" class="java.lang.Integer"/>
 	<field name="APORTE_MENSUAL" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
@@ -122,7 +112,6 @@ ORDER BY ed.fechahora]]>
 	<field name="ID_MIEMBROS_ALERGIA" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="COLUMN_39" class="java.lang.Integer"/>
 	<variable name="sum_monto" class="java.lang.Integer" calculation="Sum">
 		<variableExpression><![CDATA[$F{MONTO}]]></variableExpression>
 	</variable>
@@ -215,7 +204,7 @@ ORDER BY ed.fechahora]]>
 					<rightPen lineWidth="0.4" lineStyle="Solid" lineColor="#000000"/>
 				</box>
 				<textElement verticalAlignment="Middle"/>
-				<textFieldExpression><![CDATA[(new org.mg.mgweb.datatypes.CcmDatatype).format($F{CTACTE})]]></textFieldExpression>
+				<textFieldExpression><![CDATA[(new org.mg.mgweb.datatypes.CcmDatatype()).format($F{CTACTE})]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0">
 				<reportElement x="360" y="0" width="110" height="20" uuid="2fdea32c-4bdd-48d4-95f2-60e5e5b7e274"/>

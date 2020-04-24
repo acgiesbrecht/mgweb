@@ -1,6 +1,7 @@
 package org.mg.mgweb.web.ingresos.tbleventodetalle;
 
 import com.haulmont.cuba.core.entity.IdProxy;
+import com.haulmont.cuba.core.global.CommitContext;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.core.global.Resources;
@@ -12,6 +13,7 @@ import com.haulmont.cuba.gui.export.ExportFormat;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.model.DataContext;
+import com.haulmont.cuba.gui.model.InstanceContainer;
 import com.haulmont.cuba.gui.screen.*;
 import com.haulmont.cuba.security.global.UserSession;
 import org.mg.mgweb.entity.*;
@@ -73,6 +75,8 @@ public class RematesPagosScreen extends Screen {
     private CollectionContainer<TblEventoDetalle> tblEventoDetallesDc;
     @Inject
     private GroupBoxLayout groupBoxPago;
+    @Inject
+    private InstanceContainer<TblCuentasContablesPorDefecto> cuentasContablesPorDefectoDc;
 
     @Subscribe("lookupFieldEvento")
     public void onLookupFieldEventoValueChange(HasValue.ValueChangeEvent<TblEventos> event) {
@@ -156,6 +160,54 @@ public class RematesPagosScreen extends Screen {
                     generarTransferencia(cuota);
                 }
             }
+        }
+
+        if (textFieldImporteRecibo.getValue() > 0) {
+            TblRecibos recibo = dataContext.create(TblRecibos.class);
+            recibo.setFechahora(dateFieldPago.getValue().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+            recibo.setFechahoraCompromiso(recibo.getFechahora());
+            recibo.setIdEntidad(lookupFieldEntidad.getValue());
+            recibo.setConcepto(lookupFieldEvento.getValue().getDescripcion());
+            recibo.setMontoAporte(textFieldImporteRecibo.getValue() * (lookupFieldEvento.getValue().getPorcentajeAporte().longValue() / 100));
+            recibo.setMontoDonacion(textFieldImporteRecibo.getValue() - recibo.getMontoAporte());
+            recibo.setIdEventoTipo(lookupFieldEvento.getValue().getIdEventoTipo());
+            recibo.setIdEvento(lookupFieldEvento.getValue());
+            recibo.setIdUser(userSession.getUser());
+
+            List<TblAsientosTemporales> tblAsientosTemporalesList = new ArrayList<>();
+            TblAsientosTemporales asientoTemporalAporte = dataContext.create(TblAsientosTemporales.class);
+            asientoTemporalAporte.setFacturado(false);
+            asientoTemporalAporte.setFechahora(recibo.getFechahora());
+            asientoTemporalAporte.setIdCentroDeCostoDebe(tblEventoDetallesDc.getItems().get(0).getTblAsientos().get(0).getIdCentroDeCostoHaber());
+            asientoTemporalAporte.setIdCentroDeCostoHaber(tblEventoDetallesDc.getItems().get(0).getTblAsientos().get(0).getIdCentroDeCostoDebe());
+            asientoTemporalAporte.setIdCuentaContableDebe(tblEventoDetallesDc.getItems().get(0).getTblAsientos().get(0).getIdCentroDeCostoHaber().getIdCuentaContableCtaCtePorDefecto());
+            asientoTemporalAporte.setIdCuentaContableHaber(cuentasContablesPorDefectoDc.getItem().getIdCuentaACobrar());
+            asientoTemporalAporte.setEsAporte(true);
+            asientoTemporalAporte.setMonto(recibo.getMontoAporte());
+            tblAsientosTemporalesList.add(asientoTemporalAporte);
+
+            TblAsientosTemporales asientoTemporalDonacion = dataContext.create(TblAsientosTemporales.class);
+            asientoTemporalDonacion.setFacturado(false);
+            asientoTemporalDonacion.setFechahora(recibo.getFechahora());
+            asientoTemporalDonacion.setIdCentroDeCostoDebe(tblEventoDetallesDc.getItems().get(0).getTblAsientos().get(0).getIdCentroDeCostoHaber());
+            asientoTemporalDonacion.setIdCentroDeCostoHaber(tblEventoDetallesDc.getItems().get(0).getTblAsientos().get(0).getIdCentroDeCostoDebe());
+            asientoTemporalDonacion.setIdCuentaContableDebe(tblEventoDetallesDc.getItems().get(0).getTblAsientos().get(0).getIdCentroDeCostoHaber().getIdCuentaContableCtaCtePorDefecto());
+            asientoTemporalDonacion.setIdCuentaContableHaber(cuentasContablesPorDefectoDc.getItem().getIdCuentaACobrar());
+            asientoTemporalDonacion.setEsAporte(false);
+            asientoTemporalDonacion.setMonto(recibo.getMontoDonacion());
+            tblAsientosTemporalesList.add(asientoTemporalDonacion);
+
+            recibo.setTblAsientosTemporales(tblAsientosTemporalesList);
+
+            dataContext.commit();
+            recibo = dataContext.find(recibo);
+            if (recibo.getId().get() > 0) {
+                Map params = informesService.generarRecibo(recibo.getId().get());
+                exportDisplay.show(new ByteArrayDataProvider((byte[]) params.get("reportParam")),
+                        params.get("fileName").toString(),
+                        ExportFormat.getByExtension("pdf"));
+            }
+
         }
 
         cancelar();

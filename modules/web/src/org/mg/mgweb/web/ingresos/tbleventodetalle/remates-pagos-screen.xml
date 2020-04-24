@@ -23,10 +23,18 @@
                 </query>
             </loader>
         </collection>
+        <instance id="cuentasContablesPorDefectoDc"
+                  class="org.mg.mgweb.entity.TblCuentasContablesPorDefecto"
+                  view="tblCuentasContablesPorDefecto-view">
+            <loader id="cuentasContablesPorDefectoDl">
+                <query><![CDATA[select e from mgweb_TblCuentasContablesPorDefecto e where e.id = 1]]></query>
+            </loader>
+        </instance>
     </data>
     <facets>
         <dataLoadCoordinator auto="false">
             <refresh loader="tblEventosDl" onScreenEvent="Init"/>
+            <refresh loader="cuentasContablesPorDefectoDl" onScreenEvent="Init"/>
         </dataLoadCoordinator>
     </facets>
     <layout>
@@ -44,55 +52,60 @@
                              nullOptionVisible="false"
                              width="450"/>
             </hbox>
-            <filter id="filter" applyTo="table" dataLoader="tblEventoDetallesDl">
-                <properties include=".*"/>
-            </filter>
-            <groupTable id="table" width="100%" dataContainer="tblEventoDetallesDc">
-                <actions>
-                    <action id="create" type="create" enable="false"/>
-                    <action id="edit" type="edit"/>
-                    <action id="remove" type="remove"/>
-                </actions>
-                <columns>
-                    <column id="fechahora"/>
-                    <column id="observacion"/>
-                    <column id="monto" align="RIGHT"/>
-                </columns>
-                <rowsCount/>
-                <buttonsPanel id="buttonsPanel"
-                              alwaysVisible="true">
-                    <button id="createBtn" action="table.create"/>
-                    <button id="editBtn" action="table.edit"/>
-                    <button id="removeBtn" action="table.remove"/>
-                </buttonsPanel>
-            </groupTable>
-
-            <groupBox caption="Pago" id="groupBoxPago" visible="false">
-                <vbox spacing="true">
-                    <hbox spacing="true">
-                        <radioButtonGroup id="radioButtonGroupTerminoPago" orientation="horizontal"  align="MIDDLE_LEFT"/>
-                        <dateField id="dateFieldPago" resolution="DAY" visible="false" align="MIDDLE_LEFT"/>
-                        <label id="labelFechasCuotas" visible="false"  align="MIDDLE_LEFT"/>
-                    </hbox>
-                    <hbox spacing="true">
-                        <textField id="textFieldPagosTotal" caption="Total a Pagar" width="150" datatype="long"
-                                   editable="false"/>
-                        <textField id="textFieldPagosAnteriores" caption="Pagos Anteriores" width="150" datatype="long"
-                                   editable="false"/>
-                        <textField id="textFieldPagosSaldo" caption="Saldo a Pagar" width="150" datatype="long"
-                                   editable="false"/>
-                    </hbox>
-                    <hbox spacing="true">
+            <hbox spacing="true" height="100%">
+                <vbox spacing="true" width="50%">
+                    <filter id="filter" applyTo="table" dataLoader="tblEventoDetallesDl">
+                        <properties include=".*"/>
+                    </filter>
+                    <groupTable id="table" dataContainer="tblEventoDetallesDc" width="600">
+                        <actions>
+                            <action id="create" type="create" enable="false"/>
+                            <action id="edit" type="edit"/>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                        <columns>
+                            <column id="fechahora"/>
+                            <column id="observacion"/>
+                            <column id="monto" align="RIGHT"/>
+                        </columns>
+                        <rowsCount/>
+                        <buttonsPanel id="buttonsPanel"
+                                      alwaysVisible="true">
+                            <button id="createBtn" action="table.create"/>
+                            <button id="editBtn" action="table.edit"/>
+                            <button id="removeBtn" action="table.remove"/>
+                        </buttonsPanel>
+                    </groupTable>
+                </vbox>
+                <groupBox caption="Pago" id="groupBoxPago" visible="false">
+                    <vbox spacing="true">
+                        <hbox spacing="true">
+                            <radioButtonGroup id="radioButtonGroupTerminoPago" orientation="horizontal"
+                                              align="MIDDLE_LEFT"/>
+                            <dateField id="dateFieldPago" resolution="DAY" visible="false" align="MIDDLE_LEFT"/>
+                            <label id="labelFechasCuotas" visible="false" align="MIDDLE_LEFT"/>
+                        </hbox>
+                        <hbox spacing="true">
+                            <textField id="textFieldPagosTotal" caption="Total a Pagar" width="150" datatype="long"
+                                       editable="false"/>
+                            <textField id="textFieldPagosAnteriores" caption="Pagos Anteriores" width="150"
+                                       datatype="long"
+                                       editable="false"/>
+                            <textField id="textFieldPagosSaldo" caption="Saldo a Pagar" width="150" datatype="long"
+                                       editable="false"/>
+                        </hbox>
+                        <hbox spacing="true">
                             <textField id="textFieldImporteTransferencia" caption="Transferencia" width="150"
                                        datatype="long"/>
                             <textField id="textFieldImporteRecibo" caption="Efectivo" width="150" datatype="long"/>
                         </hbox>
-                    <buttonsPanel spacing="true">
-                        <button caption="Procesar" invoke="procesar" primary="true"/>
-                        <button caption="Cancelar" invoke="cancelar"/>
-                    </buttonsPanel>
-                </vbox>
-            </groupBox>
+                        <buttonsPanel spacing="true">
+                            <button caption="Procesar" invoke="procesar" primary="true"/>
+                            <button caption="Cancelar" invoke="cancelar"/>
+                        </buttonsPanel>
+                    </vbox>
+                </groupBox>
+            </hbox>
         </vbox>
     </layout>
 </window>

@@ -5,7 +5,7 @@
     <property name="com.jaspersoft.studio.data.defaultdataadapter" value="RematePG"/>
     <parameter name="recibo_id" class="java.lang.Integer"/>
     <queryString language="SQL">
-		<![CDATA[SELECT r.*, i.nombre as iglesia_nombre, i.RUC_SIN_DV as iglesia_ruc FROM RECIBO r, TBL_IGLESIA i WHERE r.id = $P{recibo_id}]]>
+        <![CDATA[SELECT * FROM RECIBO WHERE id = $P{recibo_id}]]>
     </queryString>
     <field name="id" class="java.lang.Integer"/>
     <field name="fechahora" class="java.sql.Date"/>
@@ -302,7 +302,7 @@
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Times New Roman" size="12" isBold="true"/>
                 </textElement>
-                <textFieldExpression><![CDATA["RUC: "+$F{iglesia_ruc}+"-"+(new org.mg.mgweb.service.RucServiceBean()).Pa_Calcular_Dv_11_A($F{iglesia_ruc}.toString(), 11)]]></textFieldExpression>
+                <textFieldExpression><![CDATA["RUC: " + (new org.mg.mgweb.service.RucServiceBean()).getRucEntero($F{iglesia_ruc})]]></textFieldExpression>
             </textField>
             <textField pattern="">
                 <reportElement x="25" y="298" width="375" height="20" uuid="6b95288c-fdd2-42d8-b274-19caca308a8f"/>
@@ -328,7 +328,7 @@
                 <textElement textAlignment="Left" verticalAlignment="Middle">
                     <font fontName="Times New Roman" size="12" isBold="true"/>
                 </textElement>
-                <textFieldExpression><![CDATA["RUC: "+$F{iglesia_ruc}+"-"+(new org.mg.mgweb.service.RucServiceBean()).Pa_Calcular_Dv_11_A($F{iglesia_ruc}.toString(), 11)]]></textFieldExpression>
+                <textFieldExpression><![CDATA["RUC: " + (new org.mg.mgweb.service.RucServiceBean()).getRucEntero($F{iglesia_ruc})]]></textFieldExpression>
             </textField>
             <staticText>
                 <reportElement x="317" y="299" width="220" height="20" uuid="7dc34559-49b8-406d-9783-3a2bbf4c9a70"/>

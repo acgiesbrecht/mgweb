@@ -1,5 +1,6 @@
 package org.mg.mgweb.web.beans;
 
+import com.haulmont.cuba.core.entity.IdProxy;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Window;
@@ -19,7 +20,9 @@ public class OpenConfiguracionEditorBean {
     private DataManager dataManager;
 
     public void openConfiguracionEditor(){
-        TblConfiguraciones configuraciones = dataManager.load(TblConfiguraciones.class).one();
+        TblConfiguraciones configuraciones = dataManager.load(TblConfiguraciones.class)
+                .id(IdProxy.of(1))
+                .one();
         AppUI ui = AppUI.getCurrent();
         Window window = ui.getTopLevelWindow();
         if (window != null) {

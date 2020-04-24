@@ -228,4 +228,4 @@ CREATE VIEW TRANSFERENCIA AS
     FROM TBL_TRANSFERENCIAS t, TBL_ENTIDADES d, TBL_IGLESIA i, TBL_EVENTOS e, TBL_CENTROS_DE_COSTO cdc
     WHERE t.ID_ENTIDAD = d.ID
           AND t.ID_EVENTO = e.ID AND cdc.ID = e.ID_CENTRO_DE_COSTO^
-CREATE VIEW MG.RECIBO AS SELECT p.id, p.fechahora, d.nombres || d.apellidos AS nombre, p.concepto, p.monto_aporte + p.monto_donacion AS monto FROM TBL_RECIBOS p, TBL_ENTIDADES d WHERE ((p.ID_ENTIDAD = d.id))^
+CREATE OR REPLACE VIEW public.recibo AS SELECT r.id, r.fechahora, e.nombres::text || e.apellidos::text AS nombre, r.concepto, r.monto_aporte + r.monto_donacion AS monto, i.nombre AS iglesia_nombre, i.ruc_sin_dv AS iglesia_ruc FROM tbl_recibos r, tbl_entidades e, tbl_iglesia i WHERE r.id_entidad = e.id^

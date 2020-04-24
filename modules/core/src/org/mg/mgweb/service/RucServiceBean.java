@@ -54,8 +54,12 @@ public class RucServiceBean implements RucService {
         return String.valueOf(Pa_Calcular_Dv_11_A(base, 11)).equals(dv);
     }
 
+    public String getRucEntero(Integer rucSinDv) {
+        return rucSinDv + "-" + Pa_Calcular_Dv_11_A(rucSinDv.toString(), 11);
+    }
+
     public String getRucEntero(String rucSinDv) {
-        return rucSinDv + "-" + String.valueOf(Pa_Calcular_Dv_11_A(rucSinDv, 11));
+        return rucSinDv + "-" + Pa_Calcular_Dv_11_A(rucSinDv, 11);
     }
 
     public String getDVfromRUC(String ruc) {

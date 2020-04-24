@@ -18,4 +18,4 @@ INSERT INTO TBL_CONFIGURACIONES (ID,
                                 FRECUENCIA_COBRO_COLECTAS,
                                 MODO_IMPRESION_TRANSFERENCIAS)
                              VALUES
-                                (1, 2020, 'factura', 'autofactura', 'nota_de_credito', 1, 1)^
+                                (1, 2016, 'factura', 'autofactura', 'nota_de_credito', 1, 1)^

@@ -108,7 +108,7 @@ public class InformesServiceBean implements InformesService {
                 try (Connection connection = getConnection()) {
                     jasperPrint = JasperFillManager.fillReport(report, parameters, connection);
                 } catch (Exception e) {
-                    throw new RuntimeException();
+                    throw new RuntimeException(e);
                 }
             } else {
                 jasperPrint = JasperFillManager.fillReport(report, parameters, datasource);
@@ -227,6 +227,7 @@ public class InformesServiceBean implements InformesService {
     public Map<String, Object> generarRecibo(Integer id){
         Map parameters = new HashMap();
         parameters.put("recibo_id", id);
+        parameters.put("reportScreenCaption", "recibo-" + id.toString());
 
         return generarInforme("recibo",
                 InformesService.ReportFileFormatEnum.PDF,

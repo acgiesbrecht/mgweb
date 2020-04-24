@@ -15,5 +15,7 @@
         <item screen="mgweb_TblEntidades.browse"/>
         <item screen="mgweb_TblEventos.browse"/>
         <item caption="Configuraciones" bean="mgweb_OpenConfiguracionEditorBean" beanMethod="openConfiguracionEditor"/>
+        <item screen="mgweb_TblTransferencias.browse"/>
+        <item screen="mgweb_TblRecibos.browse"/>
     </menu>
 </menu-config>

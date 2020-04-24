@@ -9,6 +9,8 @@ public interface RucService {
 
     String getRucEntero(String rucSinDv);
 
+    String getRucEntero(Integer rucSinDv);
+
     String getDVfromRUC(String ruc);
 
     String getRUCsinDVfromRUC(String ruc);

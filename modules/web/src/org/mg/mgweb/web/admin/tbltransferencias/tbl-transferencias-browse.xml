@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://browseCaption"
+        focusComponent="tblTransferenciasesTable"
+        messagesPack="org.mg.mgweb.web.admin.tbltransferencias">
+    <data readOnly="true">
+        <collection id="tblTransferenciasesDc"
+                    class="org.mg.mgweb.entity.TblTransferencias"
+                    view="tblTransferencias-view">
+            <loader id="tblTransferenciasesDl">
+                <query>
+                    <![CDATA[select e from mgweb_TblTransferencias e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="tblTransferenciasesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="tblTransferenciasesTable"
+                dataLoader="tblTransferenciasesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="tblTransferenciasesTable"
+                    width="100%"
+                    dataContainer="tblTransferenciasesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+                <action id="generar" invoke="imprimir" trackSelection="true"/>
+            </actions>
+            <columns>
+                <column id="id"/>
+                <column id="fechahoraCompromiso" collapsed="true"/>
+                <column id="fechahora"/>
+                <column id="idEntidad"/>
+                <column id="concepto"/>
+                <column id="idEvento"/>
+                <column id="idEventoDetalle" collapsed="true"/>
+                <column id="idEventoTipo" collapsed="true"/>
+                <column id="montoAporte"/>
+                <column id="montoDonacion"/>
+                <column id="cobrado"/>
+                <column id="seqPago" collapsed="true"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="editBtn" action="tblTransferenciasesTable.edit"/>
+                <button id="removeBtn" action="tblTransferenciasesTable.remove"/>
+                <button id="imprimirBtn" action="tblTransferenciasesTable.imprimir" caption="Imprimir"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
